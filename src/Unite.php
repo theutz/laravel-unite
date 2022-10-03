@@ -12,6 +12,9 @@ class Unite
 
     private mixed $unit;
 
+    /**
+     * Primary interface for object creation
+     */
     public function make(mixed $quantity, string $unit): self
     {
         $unite = new self;
@@ -22,6 +25,10 @@ class Unite
         return $unite;
     }
 
+    /**
+     * Parses a string representation of a measurement,
+     * and uses that parsed representation to instatiate.
+     */
     public function parse(string $str): self
     {
         $unite = new self;
@@ -34,11 +41,17 @@ class Unite
         return $this->make($matches[1], $matches[2]);
     }
 
+    /**
+     * Returns the quantity without the unit
+     */
     public function quantity(): BigDecimal
     {
         return $this->quantity;
     }
 
+    /**
+     * Returns the unit without the quantity
+     */
     public function unit(): mixed
     {
         return $this->unit;
