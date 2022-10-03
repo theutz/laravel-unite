@@ -1,8 +1,8 @@
 <?php
 
+use Brick\Math\BigDecimal;
 use Theutz\Unite\Exceptions\ParseError;
 use Theutz\Unite\Facades\Unite;
-use Brick\Math\BigDecimal;
 
 test('creation', function () {
     expect(Unite::make(200, 'g'))
