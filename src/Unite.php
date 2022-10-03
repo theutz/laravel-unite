@@ -2,11 +2,13 @@
 
 namespace Theutz\Unite;
 
+use Brick\Math\BigDecimal;
+
 class Unite
 {
     const VALID_AMOUNT = '/^(\d+\.?\d*)\s*(\D+[2,3]?)$/';
 
-    private mixed $quantity;
+    private BigDecimal $quantity;
 
     private mixed $unit;
 
@@ -14,7 +16,7 @@ class Unite
     {
         $unite = new self;
 
-        $unite->quantity = $quantity;
+        $unite->quantity = BigDecimal::of($quantity);
         $unite->unit = $unit;
 
         return $unite;
@@ -29,14 +31,12 @@ class Unite
             throw new Exceptions\ParseError("{$str} is not a valid input");
         }
 
-        $unite->quantity = $matches[1];
-        $unite->unit = $matches[2];
-
-        return $unite;
+        return $this->make($matches[1], $matches[2]);
     }
 
     public function __toString(): string
     {
         return "{$this->quantity} {$this->unit}";
     }
+
 }
