@@ -5,7 +5,8 @@ namespace Theutz\Unite\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static self make(mixed $amount, mixed $unit)
+ * @method static Theutz\Unite\Unite make(mixed $quantity, mixed $unit)
+ * @method static Theutz\Unite\Unite parse(string $amount)
  *
  * @see \Theutz\Unite\Unite
  */
