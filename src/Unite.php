@@ -4,6 +4,8 @@ namespace Theutz\Unite;
 
 class Unite
 {
+    const VALID_AMOUNT = '/^(\d+\.?\d*)\s*(\D+[2,3]?)$/';
+
     private mixed $quantity;
 
     private mixed $unit;
@@ -23,8 +25,8 @@ class Unite
         $unite = new self;
         $matches = [];
 
-        if (!preg_match('/^(\d+\.?\d*)\s*(\D+[2,3]?)$/', $str, $matches)) {
-            throw new \Exception("{$str} is not a valid input");
+        if (!preg_match(self::VALID_AMOUNT, $str, $matches)) {
+            throw new Exceptions\ParseError("{$str} is not a valid input");
         }
 
         $unite->quantity = $matches[1];

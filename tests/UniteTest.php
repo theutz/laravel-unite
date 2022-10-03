@@ -1,6 +1,7 @@
 <?php
 
 use Theutz\Unite\Facades\Unite;
+use Theutz\Unite\Exceptions\ParseError;
 
 test('creation', function () {
     expect(Unite::make(200, 'g'))->toEqual('200 g');
@@ -22,7 +23,7 @@ it('parses successfully', function ($str, $expected) {
 test('parse errors', function ($str) {
     Unite::parse($str);
 })
-->throws(Exception::class)
+->throws(ParseError::class)
 ->with([
     '200 30 g',
     'g',
