@@ -27,16 +27,25 @@ class Unite
         $unite = new self;
         $matches = [];
 
-        if (!preg_match(self::VALID_AMOUNT, $str, $matches)) {
+        if (! preg_match(self::VALID_AMOUNT, $str, $matches)) {
             throw new Exceptions\ParseError("{$str} is not a valid input");
         }
 
         return $this->make($matches[1], $matches[2]);
     }
 
+    public function quantity(): BigDecimal
+    {
+        return $this->quantity;
+    }
+
+    public function unit(): mixed
+    {
+        return $this->unit;
+    }
+
     public function __toString(): string
     {
         return "{$this->quantity} {$this->unit}";
     }
-
 }
