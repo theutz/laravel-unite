@@ -1,17 +1,16 @@
 <?php
 
-use Brick\Math\BigDecimal;
 use Theutz\Unite\Exceptions\ParseError;
 use Theutz\Unite\Facades\Unite;
 
 test('`make` method')
     ->expect(fn () => Unite::make(200, 'g'))
-    ->quantity->toEqual(BigDecimal::of(200))
+    ->quantity->toEqual(200)
     ->unit->toEqual('g');
 
 test('`parse` method', function ($str, $quantity, $unit) {
     expect(Unite::parse($str))
-        ->quantity->toEqual(BigDecimal::of($quantity))
+        ->quantity->toEqual($quantity)
         ->unit->toEqual($unit);
 })->with([
     ['203 g', 203, 'g'],

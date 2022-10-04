@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Brick\Math\BigDecimal;
 
 /**
- * @property-read BigDecimal $quantity
+ * @property-read string $quantity
  * @property-read string $unit
  */
 class Unite
@@ -46,9 +46,11 @@ class Unite
 
     public function __get(string $name)
     {
-        if (in_array($name, ['quantity', 'unit'])) {
-            return $this->$name;
-        }
+        return match ($name) {
+            'quantity' => (string) $this->quantity,
+            'unit' => $this->unit,
+            default => null
+        };
     }
 
     public function __toString(): string
