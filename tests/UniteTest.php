@@ -1,5 +1,7 @@
 <?php
 
+use Theutz\Unite\Exceptions\InvalidQuantityException;
+use Theutz\Unite\Exceptions\InvalidUnitException;
 use Theutz\Unite\Exceptions\ParseException;
 use Theutz\Unite\Facades\Unite;
 
@@ -29,27 +31,28 @@ it('successfully parses', function ($str, $quantity, $unit) {
     ['2.4e-10 km2', 2.4E-10, 'km2'],
 ]);
 
-it('throws parse errors', function ($str) {
+it('throws invalid unit exceptions', function ($str) {
     Unite::parse($str);
-})->throws(ParseException::class, 'The given unit is invalid')
+})->throws(InvalidUnitException::class)
     ->with([
         '200 30 g',
         '200 km4',
         '1084 g 13',
     ]);
 
+it('throws invalid quantity exceptions', function ($str) {
+    Unite::parse($str);
+})->throws(InvalidQuantityException::class)
+    ->with([
+        '2.4-10 km2',
+    ]);
+
 it('throws when there are no spaces', function ($str) {
     Unite::parse($str);
 })
-    ->throws(ParseException::class, 'Please separate the quantity and unit with a space character.')
+    ->throws(ParseException::class)
     ->with([
         '205g',
         'g',
     ]);
 
-it('throws when the number is invalid', function ($str) {
-    Unite::parse($str);
-})->throws(ParseException::class)
-    ->with([
-        '2.4-10 km2',
-    ]);

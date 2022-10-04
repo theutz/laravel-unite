@@ -3,6 +3,9 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
+use Brick\Math\Exception\NumberFormatException;
+use Theutz\Unite\Exceptions\InvalidQuantityException;
+use Theutz\Unite\Exceptions\InvalidUnitException;
 use Theutz\Unite\Exceptions\ParseException;
 
 /**
@@ -43,19 +46,29 @@ class Unite
     {
         try {
             [$quantity, $unit] = explode(' ', $str, 2);
-        } catch (\Exception $e) {
-            throw new ParseException('Please separate the quantity and unit with a space character.');
-        }
 
-        if (! preg_match($this::VALID_UNIT, $unit)) {
-            throw new ParseException('The given unit is invalid.');
-        }
+            if (!$this->isUnitValid($unit)) {
+                throw new InvalidUnitException($unit);
+            }
 
-        try {
             return $this->make($quantity, $unit);
-        } catch (\Brick\Math\Exception\NumberFormatException $e) {
-            throw new ParseException($e->getMessage());
+        } catch (NumberFormatException $e) {
+            if (isset($quantity)) {
+                throw new InvalidQuantityException($quantity);
+            } else {
+                throw $e;
+            }
+        } catch (\Exception $e) {
+            if (str($e->getMessage())->test('/^Undefined array key 1$/')) {
+                throw new ParseException("'$str' is not a valid amount.");
+            }
+            throw $e;
         }
+    }
+
+    public function isUnitValid(string $unit): bool
+    {
+        return preg_match($this::VALID_UNIT, $unit);
     }
 
     public function __get(string $name)
