@@ -2,7 +2,6 @@
 
 namespace Theutz\Unite;
 
-use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 
 /**
@@ -11,7 +10,7 @@ use Brick\Math\BigNumber;
  */
 class Unite
 {
-    const VALID_AMOUNT = '/^(\d+\.?\d*)\s*(\D+[2,3]?)$/';
+    const VALID_AMOUNT = '/^(\d+\.?\d*?[eE]?\d*)\s*(\D+[2,3]?)$/';
 
     private BigNumber $quantity;
 

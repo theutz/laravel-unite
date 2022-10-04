@@ -25,6 +25,7 @@ test('`parse` method', function ($str, $quantity, $unit) {
     ['187 km3', 187, 'km3'],
     ['220.3g', 220.3, 'g'],
     ['181 fl oz', 181, 'fl oz'],
+    ['2.5e10 cm3', 2.5e10, 'cm3']
 ]);
 
 it('throws parse errors')
@@ -35,4 +36,3 @@ it('throws parse errors')
         '1084 g 13',
     ])
     ->expect(fn ($str) => Unite::parse($str))->throws(ParseError::class);
-
