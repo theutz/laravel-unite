@@ -34,15 +34,15 @@ enum BaseUnit
     case Yard = 'yd';
     case Mile = 'mi';
 
-    case Inch2 = 'in2';
-    case Foot2 = 'ft2';
-    case Yard2 = 'yd2';
-    case Mile2 = 'mi2';
+    case Inch2 = 'sq in';
+    case Foot2 = 'sq ft';
+    case Yard2 = 'sq yd';
+    case Mile2 = 'sq mi';
     case Acre = 'acre';
 
-    case Inch3 = 'in3';
-    case Foot3 = 'ft3';
-    case Yard3 = 'yd3';
+    case Inch3 = 'cu in';
+    case Foot3 = 'cu ft';
+    case Yard3 = 'cu yd';
     case Mile3 = 'mi3';
 
     case Teaspoon = 'tsp';
@@ -61,6 +61,8 @@ enum BaseUnit
     case Pound = 'lb';
     case Ton = 'ton';
     case LongTon = 'long ton';
+
+    case Farenheit = 'F';
 
     // Imperial System
     case Chain = 'ch';
