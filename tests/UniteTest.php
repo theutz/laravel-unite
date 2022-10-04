@@ -1,9 +1,9 @@
 <?php
 
-use Theutz\Unite\Exceptions\ParseError;
+use Theutz\Unite\Exceptions\ParseException;
 use Theutz\Unite\Facades\Unite;
 
-test('`make` method', function ($quantity, $unit) {
+it('successfully creates', function ($quantity, $unit) {
     expect(Unite::make($quantity, $unit))
         ->quantity->toEqual($quantity)
         ->unit->toEqual($unit);
@@ -14,25 +14,42 @@ test('`make` method', function ($quantity, $unit) {
         [4.034e20, 'kg'],
     ]);
 
-test('`parse` method', function ($str, $quantity, $unit) {
+it('successfully parses', function ($str, $quantity, $unit) {
     expect(Unite::parse($str))
         ->quantity->toEqual($quantity)
         ->unit->toEqual($unit);
 })->with([
     ['203 g', 203, 'g'],
-    ['205g', 205, 'g'],
     ['210 km2', 210, 'km2'],
     ['187 km3', 187, 'km3'],
-    ['220.3g', 220.3, 'g'],
+    ['220.3 g', 220.3, 'g'],
     ['181 fl oz', 181, 'fl oz'],
-    ['2.5e10 cm3', 2.5e10, 'cm3']
+    ['2.5e10 cm3', 2.5e10, 'cm3'],
+    ['2.5E10 cm3', 2.5e10, 'cm3'],
+    ['2.4e-10 km2', 2.4E-10, 'km2'],
 ]);
 
-it('throws parse errors')
+it('throws parse errors', function ($str) {
+    Unite::parse($str);
+})->throws(ParseException::class, 'The given unit is invalid')
     ->with([
         '200 30 g',
-        'g',
         '200 km4',
         '1084 g 13',
-    ])
-    ->expect(fn ($str) => Unite::parse($str))->throws(ParseError::class);
+    ]);
+
+it('throws when there are no spaces', function ($str) {
+    Unite::parse($str);
+})
+    ->throws(ParseException::class, 'Please separate the quantity and unit with a space character.')
+    ->with([
+        '205g',
+        'g',
+    ]);
+
+it('throws when the number is invalid', function ($str) {
+    Unite::parse($str);
+})->throws(ParseException::class)
+    ->with([
+        '2.4-10 km2',
+    ]);

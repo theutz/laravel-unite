@@ -3,6 +3,7 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
+use Theutz\Unite\Exceptions\ParseException;
 
 /**
  * @property-read string $quantity
@@ -10,8 +11,6 @@ use Brick\Math\BigNumber;
  */
 class Unite
 {
-    const VALID_AMOUNT = '/^(\d+\.?\d*?[eE]?\d*)\s*(\D+[2,3]?)$/';
-
     private BigNumber $quantity;
 
     private mixed $unit;
@@ -35,13 +34,21 @@ class Unite
      */
     public function parse(string $str): self
     {
-        $matches = [];
-
-        if (! preg_match(self::VALID_AMOUNT, $str, $matches)) {
-            throw new Exceptions\ParseError("{$str} is not a valid input");
+        try {
+            [$quantity, $unit] = explode(' ', $str, 2);
+        } catch (\Exception $e) {
+            throw new ParseException('Please separate the quantity and unit with a space character.');
         }
 
-        return $this->make($matches[1], $matches[2]);
+        if (! preg_match('/^\w\D*[23]?$/', $unit)) {
+            throw new ParseException('The given unit is invalid.');
+        }
+
+        try {
+            return $this->make($quantity, $unit);
+        } catch (\Brick\Math\Exception\NumberFormatException $e) {
+            throw new ParseException($e->getMessage());
+        }
     }
 
     public function __get(string $name)

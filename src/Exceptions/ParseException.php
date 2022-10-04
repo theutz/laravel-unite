@@ -2,6 +2,6 @@
 
 namespace Theutz\Unite\Exceptions;
 
-class ParseError extends \Exception
+class ParseException extends \RuntimeException
 {
 }
