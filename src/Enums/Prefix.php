@@ -2,26 +2,26 @@
 
 namespace Theutz\Unite\Enums;
 
-enum Prefix: int
+enum Prefix: string
 {
-    case Yotta;
-    case Zetta;
-    case Exa;
-    case Peta;
-    case Tera;
-    case Giga;
-    case Mega;
-    case Kilo;
-    case Hecto;
-    case Deka;
-    case Deci;
-    case Centi;
-    case Milli;
-    case Micro;
-    case Nano;
-    case Pico;
-    case Femto;
-    case Atto;
-    case Zepto;
-    case Yocto;
+    case Yotta = 'Y';
+    case Zetta = 'Z';
+    case Exa = 'E';
+    case Peta = 'P';
+    case Tera = 'T';
+    case Giga = 'G';
+    case Mega = 'M';
+    case Kilo = 'k';
+    case Hecto = 'h';
+    case Deka = 'da';
+    case Deci = 'de';
+    case Centi = 'c';
+    case Milli = 'm';
+    case Micro = 'μ';
+    case Nano = 'n';
+    case Pico = 'p';
+    case Femto = 'f';
+    case Atto = 'a';
+    case Zepto = 'z';
+    case Yocto = 'y';
 }

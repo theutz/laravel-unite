@@ -38,6 +38,8 @@ it('throws invalid unit exceptions', function ($str) {
         '200 30 g',
         '200 km4',
         '1084 g 13',
+        '100 wg',
+        '100 kIo',
     ]);
 
 it('throws invalid quantity exceptions', function ($str) {

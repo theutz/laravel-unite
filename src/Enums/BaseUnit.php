@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Enums;
 
-enum BaseUnit
+enum BaseUnit: string
 {
     case Acre = 'acre';
     case Ampere = 'A';
@@ -25,14 +25,16 @@ enum BaseUnit
     case Furlong = 'fur';
     case Gallon = 'gal';
     case Gill = 'gil';
+    case Gram = 'g';
     case Hour = 'h';
     case Inch = 'in';
     case Kelvin = 'K';
-    case Kilogram = 'kg';
     case League = 'lea';
     case Liter = 'L';
     case LongTon = 'long ton';
     case Meter = 'm';
+    case MeterSquared = 'm2';
+    case MeterCubed = 'm3';
     case Mile = 'mi';
     case MillimeterOfMercury = 'mmHg';
     case Minute = 'min';

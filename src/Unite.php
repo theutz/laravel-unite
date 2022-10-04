@@ -4,6 +4,9 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
+use Theutz\Unite\Enums\BaseUnit;
+use Theutz\Unite\Enums\Prefix;
+use Theutz\Unite\Enums\System;
 use Theutz\Unite\Exceptions\InvalidQuantityException;
 use Theutz\Unite\Exceptions\InvalidUnitException;
 use Theutz\Unite\Exceptions\ParseException;
@@ -23,7 +26,34 @@ class Unite
 
     private BigNumber $quantity;
 
-    private mixed $unit;
+    private BaseUnit $baseUnit;
+
+    private ?Prefix $prefix;
+
+    private System $system = System::SI;
+
+    /**
+     * @return array{0: Enums\Prefix|null, 1: Enums\BaseUnit}
+     */
+    private static function parseUnit(string $unit): array
+    {
+        $unit = str($unit);
+
+        if (! is_null($baseUnit = BaseUnit::tryFrom($unit))) {
+            return [null, $baseUnit];
+        }
+
+        try {
+            $baseUnit = collect(BaseUnit::cases())
+                ->firstOrFail(fn ($u) => $unit->endsWith($u->value));
+            $prefix = collect(Prefix::cases())
+                ->firstOrFail(fn ($p) => $unit->startsWith($p->value));
+        } catch (\Exception $e) {
+            throw new InvalidUnitException($unit);
+        }
+
+        return [$prefix, $baseUnit];
+    }
 
     /**
      * Primary interface for object creation
@@ -33,7 +63,10 @@ class Unite
         $unite = new self;
 
         $unite->quantity = BigNumber::of($quantity);
-        $unite->unit = $unit;
+
+        [$prefix, $baseUnit] = self::parseUnit($unit);
+        $unite->prefix = $prefix;
+        $unite->baseUnit = $baseUnit;
 
         return $unite;
     }
@@ -75,7 +108,7 @@ class Unite
     {
         return match ($name) {
             'quantity' => (string) $this->quantity,
-            'unit' => $this->unit,
+            'unit' => "{$this->prefix?->value}{$this->baseUnit->value}",
             default => null
         };
     }
