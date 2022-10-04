@@ -4,15 +4,12 @@ use Brick\Math\BigDecimal;
 use Theutz\Unite\Exceptions\ParseError;
 use Theutz\Unite\Facades\Unite;
 
-test('creation', function () {
-    expect(Unite::make(200, 'g'))
-        ->quantity->toEqual(BigDecimal::of(200))
-        ->unit->toEqual('g');
-});
+test('`make` method')
+    ->expect(fn () => Unite::make(200, 'g'))
+    ->quantity->toEqual(BigDecimal::of(200))
+    ->unit->toEqual('g');
 
-it('parses successfully', function ($str, $quantity, $unit) {
-    $result = Unite::parse($str);
-
+test('`parse` method', function ($str, $quantity, $unit) {
     expect(Unite::parse($str))
         ->quantity->toEqual(BigDecimal::of($quantity))
         ->unit->toEqual($unit);
@@ -25,12 +22,12 @@ it('parses successfully', function ($str, $quantity, $unit) {
     ['181 fl oz', 181, 'fl oz'],
 ]);
 
-it('throws parse errors', function ($str) {
-    Unite::parse($str);
-})->throws(ParseError::class)
+it('throws parse errors')
     ->with([
         '200 30 g',
         'g',
         '200 km4',
         '1084 g 13',
-    ]);
+    ])
+    ->expect(fn ($str) => Unite::parse($str))->throws(ParseError::class);
+
