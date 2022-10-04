@@ -4,7 +4,6 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Commands\UniteCommand;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -18,8 +17,6 @@ class UniteServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-unite')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-unite_table')
-            ->hasCommand(UniteCommand::class);
+            ->hasTranslations();
     }
 }
