@@ -11,6 +11,13 @@ use Theutz\Unite\Exceptions\ParseException;
  */
 class Unite
 {
+    /**
+     * - Must start with a word character
+     * - Can only contain word characters and spaces
+     *   - EXCEPT the final character, which can be 2 or 3 (to represent units of area or volume)
+     */
+    const VALID_UNIT = '/^\w\D*[23]?$/';
+
     private BigNumber $quantity;
 
     private mixed $unit;
@@ -40,7 +47,7 @@ class Unite
             throw new ParseException('Please separate the quantity and unit with a space character.');
         }
 
-        if (! preg_match('/^\w\D*[23]?$/', $unit)) {
+        if (! preg_match($this::VALID_UNIT, $unit)) {
             throw new ParseException('The given unit is invalid.');
         }
 
