@@ -55,4 +55,3 @@ it('throws when there are no spaces', function ($str) {
         '205g',
         'g',
     ]);
-

@@ -47,7 +47,7 @@ class Unite
         try {
             [$quantity, $unit] = explode(' ', $str, 2);
 
-            if (!$this->isUnitValid($unit)) {
+            if (! $this->isUnitValid($unit)) {
                 throw new InvalidUnitException($unit);
             }
 
