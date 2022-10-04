@@ -4,6 +4,10 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
 
+/**
+ * @property-read BigDecimal $quantity
+ * @property-read string $unit
+ */
 class Unite
 {
     const VALID_AMOUNT = '/^(\d+\.?\d*)\s*(\D+[2,3]?)$/';
@@ -31,7 +35,6 @@ class Unite
      */
     public function parse(string $str): self
     {
-        $unite = new self;
         $matches = [];
 
         if (! preg_match(self::VALID_AMOUNT, $str, $matches)) {
@@ -41,20 +44,11 @@ class Unite
         return $this->make($matches[1], $matches[2]);
     }
 
-    /**
-     * Returns the quantity without the unit
-     */
-    public function quantity(): BigDecimal
+    public function __get(string $name)
     {
-        return $this->quantity;
-    }
-
-    /**
-     * Returns the unit without the quantity
-     */
-    public function unit(): mixed
-    {
-        return $this->unit;
+        if (in_array($name, ['quantity', 'unit'])) {
+            return $this->$name;
+        }
     }
 
     public function __toString(): string
