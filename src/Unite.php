@@ -3,6 +3,7 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
+use Brick\Math\BigNumber;
 
 /**
  * @property-read string $quantity
@@ -12,18 +13,18 @@ class Unite
 {
     const VALID_AMOUNT = '/^(\d+\.?\d*)\s*(\D+[2,3]?)$/';
 
-    private BigDecimal $quantity;
+    private BigNumber $quantity;
 
     private mixed $unit;
 
     /**
      * Primary interface for object creation
      */
-    public function make(mixed $quantity, string $unit): self
+    public function make(BigNumber|float|int|string $quantity, string $unit): self
     {
         $unite = new self;
 
-        $unite->quantity = BigDecimal::of($quantity);
+        $unite->quantity = BigNumber::of($quantity);
         $unite->unit = $unit;
 
         return $unite;

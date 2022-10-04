@@ -3,10 +3,16 @@
 use Theutz\Unite\Exceptions\ParseError;
 use Theutz\Unite\Facades\Unite;
 
-test('`make` method')
-    ->expect(fn () => Unite::make(200, 'g'))
-    ->quantity->toEqual(200)
-    ->unit->toEqual('g');
+test('`make` method', function ($quantity, $unit) {
+    expect(Unite::make($quantity, $unit))
+        ->quantity->toEqual($quantity)
+        ->unit->toEqual($unit);
+})
+    ->with([
+        [200, 'g'],
+        ['1/3', 'lb'],
+        [4.034e20, 'kg'],
+    ]);
 
 test('`parse` method', function ($str, $quantity, $unit) {
     expect(Unite::parse($str))
