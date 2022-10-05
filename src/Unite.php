@@ -3,24 +3,23 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Contracts\Manager;
-use Theutz\Unite\Contracts\Parser;
-use Theutz\Unite\Contracts\Unite as Contract;
+use Theutz\Unite\Concerns\Manager\ManagerInterface;
+use Theutz\Unite\Concerns\Parser\ParserInterface;
 use Theutz\Unite\DTOs\Unit;
 use Theutz\Unite\DTOs\Value;
 
-class Unite implements Contract
+class Unite implements UniteInterface
 {
     public function __construct(
-        private Parser $parser,
-        private Manager $manager,
+        private ParserInterface $parser,
+        private ManagerInterface $manager,
     ) {
     }
 
     public function make(
         BigNumber|float|int|string $quantity,
         Unit|string $unit
-    ): Manager {
+    ): ManagerInterface {
         $value = new Value(
             quantity: $this->parser->parseQuantity($quantity),
             unit: $this->parser->parseUnit($unit)
@@ -31,7 +30,7 @@ class Unite implements Contract
         return $this->manager;
     }
 
-    public function parse(string $str): Manager
+    public function parse(string $str): ManagerInterface
     {
         $value = $this->parser->parse($str);
 

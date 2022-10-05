@@ -1,12 +1,12 @@
 <?php
 
-namespace Theutz\Unite\Contracts;
+namespace Theutz\Unite\Concerns\Parser;
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\DTOs\Unit;
 use Theutz\Unite\DTOs\Value;
 
-interface Parser
+interface ParserInterface
 {
     public function parse(string $str): Value;
 

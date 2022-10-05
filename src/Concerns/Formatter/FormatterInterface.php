@@ -1,10 +1,10 @@
 <?php
 
-namespace Theutz\Unite\Contracts;
+namespace Theutz\Unite\Concerns\Formatter;
 
 use Theutz\Unite\DTOs\Value;
 
-interface Formatter
+interface FormatterInterface
 {
     public function value(Value $value): string;
 

@@ -2,10 +2,9 @@
 
 namespace Theutz\Unite\Concerns\Formatter;
 
-use Theutz\Unite\Contracts\Formatter as Contract;
 use Theutz\Unite\DTOs\Value;
 
-class Formatter implements Contract
+class Formatter implements FormatterInterface
 {
     public function value(Value $value): string
     {

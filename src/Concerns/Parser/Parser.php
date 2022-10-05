@@ -5,13 +5,12 @@ namespace Theutz\Unite\Concerns\Parser;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
-use Theutz\Unite\Contracts\Parser as Contract;
 use Theutz\Unite\DTOs\Unit;
 use Theutz\Unite\DTOs\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
 
-class Parser implements Contract
+class Parser implements ParserInterface
 {
     public function parse(string $str): Value
     {

@@ -1,11 +1,12 @@
 <?php
 
-namespace Theutz\Unite\Contracts;
+namespace Theutz\Unite\Concerns\Manager;
 
 use Theutz\Unite\DTOs\Value;
 
-interface Manager
+interface ManagerInterface
 {
     public function setValue(Value $value): void;
+
     public function __toString(): string;
 }

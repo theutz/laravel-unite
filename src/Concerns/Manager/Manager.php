@@ -2,8 +2,7 @@
 
 namespace Theutz\Unite\Concerns\Manager;
 
-use Theutz\Unite\Contracts\Formatter;
-use Theutz\Unite\Contracts\Manager as Contract;
+use Theutz\Unite\Concerns\Formatter\FormatterInterface;
 use Theutz\Unite\DTOs\Value;
 
 /**
@@ -12,11 +11,11 @@ use Theutz\Unite\DTOs\Value;
  * @property-read string $prefix
  * @property-read string $baseUnit
  */
-class Manager implements Contract
+class Manager implements ManagerInterface
 {
     private Value $value;
 
-    public function __construct(private Formatter $formatter)
+    public function __construct(private FormatterInterface $formatter)
     {
     }
 

@@ -7,15 +7,15 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Concerns\Formatter\Formatter;
 use Theutz\Unite\Concerns\Manager\Manager;
 use Theutz\Unite\Concerns\Parser\Parser;
-use Theutz\Unite\Contracts\Formatter as FormatterContract;
-use Theutz\Unite\Contracts\Parser as ParserContract;
-use Theutz\Unite\Contracts\Manager as ManagerContract;
+use Theutz\Unite\Concerns\Formatter\FormatterInterface;
+use Theutz\Unite\Concerns\Parser\ParserInterface;
+use Theutz\Unite\Concerns\Manager\ManagerInterface;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
     public $bindings = [
-        ParserContract::class => Parser::class,
-        ManagerContract::class => Manager::class
+        ParserInterface::class => Parser::class,
+        ManagerInterface::class => Manager::class
     ];
 
     public function configurePackage(Package $package): void
@@ -33,7 +33,7 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->app->singleton(FormatterContract::class, function () {
+        $this->app->singleton(FormatterInterface::class, function () {
             return new Formatter;
         });
     }
