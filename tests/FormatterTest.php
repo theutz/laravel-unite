@@ -2,7 +2,7 @@
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Formatter\Formatter;
-use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\Concerns\Unit\UnitDto;
 use Theutz\Unite\DTOs\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
@@ -12,7 +12,7 @@ beforeEach(function () {
     $this->quantity = BigNumber::of(200);
     $this->prefix = Prefix::Kilo;
     $this->baseUnit = BaseUnit::Gram;
-    $this->unit = new Unit($this->prefix, $this->baseUnit);
+    $this->unit = new UnitDto($this->prefix, $this->baseUnit);
     $this->value = new Value($this->quantity, $this->unit);
 });
 

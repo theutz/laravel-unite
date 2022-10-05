@@ -5,7 +5,7 @@ namespace Theutz\Unite\Concerns\Parser;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
-use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\Concerns\Unit\UnitDto;
 use Theutz\Unite\DTOs\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
@@ -35,20 +35,20 @@ class Parser implements ParserInterface
         }
     }
 
-    public function parseUnit(Unit|string $unit): Unit
+    public function parseUnit(UnitDto|string $unit): UnitDto
     {
-        if ($unit instanceof Unit) {
+        if ($unit instanceof UnitDto) {
             return $unit;
         }
 
         if ($baseUnit = BaseUnit::tryFrom($unit)) {
-            return new Unit(prefix: null, baseUnit: $baseUnit);
+            return new UnitDto(prefix: null, baseUnit: $baseUnit);
         }
 
         $baseUnit = $this->extractBaseUnit($unit);
         $prefix = $this->extractPrefix($unit, $baseUnit);
 
-        return new Unit(prefix: $prefix, baseUnit: $baseUnit);
+        return new UnitDto(prefix: $prefix, baseUnit: $baseUnit);
     }
 
     private function extractPrefix(string $unit, BaseUnit $baseUnit)

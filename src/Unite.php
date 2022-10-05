@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Manager\ManagerInterface;
 use Theutz\Unite\Concerns\Parser\ParserInterface;
-use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\Concerns\Unit\UnitDto;
 use Theutz\Unite\DTOs\Value;
 
 class Unite implements UniteInterface
@@ -18,7 +18,7 @@ class Unite implements UniteInterface
 
     public function make(
         BigNumber|float|int|string $quantity,
-        Unit|string $unit
+        UnitDto|string $unit
     ): ManagerInterface {
         $value = new Value(
             quantity: $this->parser->parseQuantity($quantity),
