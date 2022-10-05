@@ -36,8 +36,12 @@ class Parser implements Contract
         }
     }
 
-    public function parseUnit(string $unit): Unit
+    public function parseUnit(Unit|string $unit): Unit
     {
+        if ($unit instanceof Unit) {
+            return $unit;
+        }
+
         if ($baseUnit = BaseUnit::tryFrom($unit)) {
             return new Unit(prefix: null, baseUnit: $baseUnit);
         }

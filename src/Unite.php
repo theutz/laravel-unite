@@ -3,8 +3,8 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Contracts\Parser;
 use Theutz\Unite\Contracts\Formatter;
+use Theutz\Unite\Contracts\Parser;
 use Theutz\Unite\Contracts\Unite as Contract;
 use Theutz\Unite\DTOs\Unit;
 
@@ -28,8 +28,8 @@ class Unite implements Contract
     {
         $unite = app(self::class);
 
-        $unite->quantity = BigNumber::of($quantity);
-        $unite->unit = is_string($unit) ? $this->parser->parseUnit($unit) : $unit;
+        $unite->quantity = $this->parser->parseQuantity($quantity);
+        $unite->unit = $this->parser->parseUnit($unit);
 
         return $unite;
     }

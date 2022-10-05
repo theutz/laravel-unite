@@ -10,7 +10,7 @@ interface Parser
 {
     public function parse(string $str): Value;
 
-    public function parseUnit(string $unit): Unit;
+    public function parseUnit(Unit|string $unit): Unit;
 
     public function parseQuantity(BigNumber|int|float|string $quantity): BigNumber;
 }
