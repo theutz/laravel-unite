@@ -21,22 +21,9 @@ class Manager implements ManagerInterface
 
     public function __set(string $name, $args)
     {
-        switch ($name) {
-            case 'value':
-                if (! isset($this->value)) {
-                    $this->value = $args;
-                }
-                break;
+        if (in_array($name, get_class_methods($this))) {
+            $this->$name($args);
         }
-    }
-
-    public function setValue(Value $value): void
-    {
-        if (isset($this->value)) {
-            throw new ReadonlyValueException('Value can only be set once.');
-        }
-
-        $this->value = $value;
     }
 
     public function __get(string $name)
@@ -50,4 +37,14 @@ class Manager implements ManagerInterface
     {
         return $this->formatter->value($this->value);
     }
+
+    private function value(Value $value): void
+    {
+        if (isset($this->value)) {
+            throw new ReadonlyValueException('Value can only be set once.');
+        }
+
+        $this->value = $value;
+    }
+
 }

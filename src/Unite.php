@@ -25,7 +25,7 @@ class Unite implements UniteInterface
             unit: $this->parser->parseUnit($unit)
         );
 
-        $this->manager->setValue($value);
+        $this->manager->value = $value;
 
         return $this->manager;
     }

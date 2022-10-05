@@ -4,9 +4,10 @@ namespace Theutz\Unite\Concerns\Manager;
 
 use Theutz\Unite\DTOs\Value;
 
+/**
+ * @property-write Value $value;
+ */
 interface ManagerInterface
 {
-    public function setValue(Value $value): void;
-
     public function __toString(): string;
 }

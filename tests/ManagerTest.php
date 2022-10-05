@@ -14,6 +14,6 @@ it("doesn't allow the value to be set twice", function () {
     $unit = new Unit(null, BaseUnit::Gram);
     $value = new Value(BigNumber::of(200), $unit);
 
-    expect(fn () => $manager->setValue($value))->not->toThrow(\Exception::class);
-    expect(fn () => $manager->setValue($value))->toThrow(ReadonlyValueException::class);
+    expect(fn () => $manager->value = $value)->not->toThrow(\Exception::class);
+    expect(fn () => $manager->value = $value)->toThrow(ReadonlyValueException::class);
 });
