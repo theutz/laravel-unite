@@ -13,7 +13,6 @@ class UniteServiceProvider extends PackageServiceProvider
 {
     public $bindings = [
         ParserContract::class => Parser::class,
-        FormatterContract::class => Formatter::class,
     ];
 
     public function configurePackage(Package $package): void
@@ -27,5 +26,12 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile()
             ->hasTranslations();
+    }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton(FormatterContract::class, function () {
+            return new Formatter;
+        });
     }
 }
