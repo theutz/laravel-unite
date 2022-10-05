@@ -2,9 +2,9 @@
 
 namespace Theutz\Unite\Contracts;
 
+use Brick\Math\BigNumber;
 use Theutz\Unite\DTOs\Unit;
 use Theutz\Unite\DTOs\Value;
-use Brick\Math\BigNumber;
 
 interface Parser
 {
