@@ -4,12 +4,12 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
-use Theutz\Unite\Enums\BaseUnit;
-use Theutz\Unite\Enums\Prefix;
-use Theutz\Unite\Enums\System;
 use Theutz\Unite\Concerns\Parser\InvalidQuantityException;
 use Theutz\Unite\Concerns\Parser\InvalidUnitException;
 use Theutz\Unite\Concerns\Parser\ParseException;
+use Theutz\Unite\Contracts\Parser;
+use Theutz\Unite\Enums\BaseUnit;
+use Theutz\Unite\Enums\Prefix;
 
 /**
  * @property-read string $quantity
@@ -17,13 +17,6 @@ use Theutz\Unite\Concerns\Parser\ParseException;
  */
 class Unite
 {
-    /**
-     * - Must start with a word character
-     * - Can only contain word characters and spaces
-     *   - EXCEPT the final character, which can be 2 or 3 (to represent units of area or volume)
-     */
-    const VALID_UNIT = '/^\w\D*[23]?$/';
-
     private BigNumber $quantity;
 
     private BaseUnit $baseUnit;
@@ -53,12 +46,16 @@ class Unite
         return [$prefix, $baseUnit];
     }
 
+    public function __construct(private Parser $parser)
+    {
+    }
+
     /**
      * Primary interface for object creation
      */
     public function make(BigNumber|float|int|string $quantity, string $unit): self
     {
-        $unite = new self;
+        $unite = new self($this->parser);
 
         $unite->quantity = BigNumber::of($quantity);
 
@@ -78,7 +75,7 @@ class Unite
         try {
             [$quantity, $unit] = explode(' ', $str, 2);
 
-            if (! $this->isUnitValid($unit)) {
+            if (! $this->parser->isUnitValid($unit)) {
                 throw new InvalidUnitException($unit);
             }
 
@@ -95,11 +92,6 @@ class Unite
             }
             throw $e;
         }
-    }
-
-    public function isUnitValid(string $unit): bool
-    {
-        return preg_match($this::VALID_UNIT, $unit);
     }
 
     public function __get(string $name)

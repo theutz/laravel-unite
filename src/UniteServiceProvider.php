@@ -4,9 +4,15 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Theutz\Unite\Contracts\Parser as ParserContract;
+use Theutz\Unite\Concerns\Parser\Parser;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
+    public $bindings = [
+        ParserContract::class => Parser::class
+    ];
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -19,4 +25,5 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
+
 }
