@@ -1,8 +1,8 @@
 <?php
 
-use Theutz\Unite\Exceptions\InvalidQuantityException;
-use Theutz\Unite\Exceptions\InvalidUnitException;
-use Theutz\Unite\Exceptions\ParseException;
+use Theutz\Unite\Concerns\Parser\InvalidQuantityException;
+use Theutz\Unite\Concerns\Parser\InvalidUnitException;
+use Theutz\Unite\Concerns\Parser\ParseException;
 use Theutz\Unite\Facades\Unite;
 
 it('successfully creates', function ($quantity, $unit) {

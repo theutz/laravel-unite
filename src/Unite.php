@@ -7,9 +7,9 @@ use Brick\Math\Exception\NumberFormatException;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
 use Theutz\Unite\Enums\System;
-use Theutz\Unite\Exceptions\InvalidQuantityException;
-use Theutz\Unite\Exceptions\InvalidUnitException;
-use Theutz\Unite\Exceptions\ParseException;
+use Theutz\Unite\Concerns\Parser\InvalidQuantityException;
+use Theutz\Unite\Concerns\Parser\InvalidUnitException;
+use Theutz\Unite\Concerns\Parser\ParseException;
 
 /**
  * @property-read string $quantity
@@ -29,8 +29,6 @@ class Unite
     private BaseUnit $baseUnit;
 
     private ?Prefix $prefix;
-
-    private System $system = System::SI;
 
     /**
      * @return array{0: Enums\Prefix|null, 1: Enums\BaseUnit}

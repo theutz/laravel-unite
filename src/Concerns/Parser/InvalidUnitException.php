@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite\Exceptions;
+namespace Theutz\Unite\Concerns\Parser;
 
 class InvalidUnitException extends ParseException
 {
