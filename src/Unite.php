@@ -19,9 +19,7 @@ class Unite
 {
     private BigNumber $quantity;
 
-    private BaseUnit $baseUnit;
-
-    private ?Prefix $prefix;
+    private Unit $unit;
 
     public function __construct(private Parser $parser)
     {
@@ -35,10 +33,7 @@ class Unite
         $unite = new self($this->parser);
 
         $unite->quantity = BigNumber::of($quantity);
-
-        $unit = $this->parser->parseUnit($unit);
-        $unite->prefix = $unit->prefix;
-        $unite->baseUnit = $unit->baseUnit;
+        $unite->unit = $this->parser->parseUnit($unit);
 
         return $unite;
     }
@@ -75,13 +70,13 @@ class Unite
     {
         return match ($name) {
             'quantity' => (string) $this->quantity,
-            'unit' => "{$this->prefix?->value}{$this->baseUnit->value}",
+            'unit' => "{$this->unit->prefix?->value}{$this->unit->baseUnit->value}",
             default => null
         };
     }
 
     public function __toString(): string
     {
-        return "{$this->quantity} {$this->unit}";
+        return "{$this->quantity} {$this->unit->prefix?->value}{$this->unit->baseUnit->value}";
     }
 }

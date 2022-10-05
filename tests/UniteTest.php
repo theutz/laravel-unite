@@ -31,6 +31,12 @@ it('successfully parses', function ($str, $quantity, $unit) {
     ['2.4e-10 km2', 2.4E-10, 'km2'],
 ]);
 
+it('can be cast to string', function ($str) {
+    expect(Unite::parse($str))->toEqual($str);
+})->with([
+    '200 g',
+]);
+
 it('throws invalid unit exceptions', function ($str) {
     Unite::parse($str);
 })->throws(InvalidUnitException::class)
