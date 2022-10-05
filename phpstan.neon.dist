@@ -7,7 +7,21 @@ parameters:
         - src
         - config
         - database
+        - tests
     tmpDir: build/phpstan
+    ignoreErrors:
+        -
+            message: '#Undefined variable: \$this#'
+            paths:
+                - tests/*
+        -
+            message: '#Access to an undefined property Pest\\Expectation\|Pest\\Support\\Extendable::\$[\w\-_]#'
+            paths:
+                - tests/*
+        -
+            message: '#Call to an undefined method Pest\\Expectation<Closure>::throws\(\)#'
+            paths:
+                - tests/*
     #checkOctaneCompatibility: true
     #checkModelProperties: true
     checkMissingIterableValueType: false
