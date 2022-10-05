@@ -10,8 +10,10 @@ use Theutz\Unite\DTOs\Unit;
 use Theutz\Unite\DTOs\Value;
 
 /**
- * @property-read BigNumber $quantity
- * @property-read Unit $unit
+ * @property-read string $quantity
+ * @property-read string $unit
+ * @property-read string $prefix
+ * @property-read string $baseUnit
  */
 class Unite implements Contract
 {
@@ -39,11 +41,9 @@ class Unite implements Contract
 
     public function __get(string $name)
     {
-        return match ($name) {
-            'quantity' => $this->formatter->quantity($this->value),
-            'unit' => $this->formatter->unit($this->value),
-            default => null
-        };
+        if (in_array($name, get_class_methods($this->formatter))) {
+            return $this->formatter->$name($this->value);
+        }
     }
 
     public function parse(string $str): Unite
