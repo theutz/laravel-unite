@@ -4,13 +4,16 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Theutz\Unite\Concerns\Formatter\Formatter;
 use Theutz\Unite\Concerns\Parser\Parser;
+use Theutz\Unite\Contracts\Formatter as FormatterContract;
 use Theutz\Unite\Contracts\Parser as ParserContract;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
     public $bindings = [
         ParserContract::class => Parser::class,
+        FormatterContract::class => Formatter::class,
     ];
 
     public function configurePackage(Package $package): void

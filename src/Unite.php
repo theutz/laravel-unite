@@ -4,6 +4,7 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\Contracts\Parser;
+use Theutz\Unite\Contracts\Formatter;
 use Theutz\Unite\Contracts\Unite as Contract;
 use Theutz\Unite\DTOs\Unit;
 
@@ -18,7 +19,8 @@ class Unite implements Contract
     private Unit $unit; // @phpstan-ignore-line
 
     public function __construct(
-        private Parser $parser
+        private Parser $parser,
+        private Formatter $formatter
     ) {
     }
 
