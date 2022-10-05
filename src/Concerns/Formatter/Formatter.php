@@ -11,6 +11,7 @@ class Formatter implements Contract
     {
         $quantity = $this->quantity($value);
         $unit = $this->unit($value);
+
         return "{$quantity} {$unit}";
     }
 
@@ -23,6 +24,7 @@ class Formatter implements Contract
     {
         $prefix = $this->prefix($value);
         $baseUnit = $this->baseUnit($value);
+
         return "{$prefix}{$baseUnit}";
     }
 
