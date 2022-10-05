@@ -7,6 +7,7 @@ use Theutz\Unite\Contracts\Formatter;
 use Theutz\Unite\Contracts\Parser;
 use Theutz\Unite\Contracts\Unite as Contract;
 use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\DTOs\Value;
 
 /**
  * @property-read BigNumber $quantity
@@ -14,9 +15,7 @@ use Theutz\Unite\DTOs\Unit;
  */
 class Unite implements Contract
 {
-    private BigNumber $quantity; // @phpstan-ignore-line
-
-    private Unit $unit; // @phpstan-ignore-line
+    private Value $value;
 
     public function __construct(
         private Parser $parser,
@@ -24,12 +23,16 @@ class Unite implements Contract
     ) {
     }
 
-    public function make(BigNumber|float|int|string $quantity, Unit|string $unit): Unite
-    {
+    public function make(
+        BigNumber|float|int|string $quantity,
+        Unit|string $unit
+    ): Unite {
         $unite = app(self::class);
 
-        $unite->quantity = $this->parser->parseQuantity($quantity);
-        $unite->unit = $this->parser->parseUnit($unit);
+        $unite->value = new Value(
+            quantity: $this->parser->parseQuantity($quantity),
+            unit: $this->parser->parseUnit($unit)
+        );
 
         return $unite;
     }
@@ -37,8 +40,8 @@ class Unite implements Contract
     public function __get(string $name)
     {
         return match ($name) {
-            'quantity' => (string) $this->quantity,
-            'unit' => "{$this->unit->prefix?->value}{$this->unit->baseUnit->value}",
+            'quantity' => (string) $this->value->quantity,
+            'unit' => "{$this->value->unit->prefix?->value}{$this->value->unit->baseUnit->value}",
             default => null
         };
     }
@@ -52,6 +55,6 @@ class Unite implements Contract
 
     public function __toString(): string
     {
-        return "{$this->quantity} {$this->unit->prefix?->value}{$this->unit->baseUnit->value}";
+        return "{$this->quantity} {$this->value->unit->prefix?->value}{$this->value->unit->baseUnit->value}";
     }
 }
