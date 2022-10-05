@@ -1,7 +1,8 @@
 <?php
 
+use Theutz\Unite\Concerns\Parser\InvalidBaseUnitException;
 use Theutz\Unite\Concerns\Parser\InvalidQuantityException;
-use Theutz\Unite\Concerns\Parser\InvalidUnitException;
+use Theutz\Unite\Concerns\Parser\InvalidUnitPrefixException;
 use Theutz\Unite\Concerns\Parser\ParseException;
 use Theutz\Unite\Facades\Unite;
 
@@ -37,15 +38,25 @@ it('can be cast to string', function ($str) {
     '200 g',
 ]);
 
-it('throws invalid unit exceptions', function ($str) {
+it('throws invalid base unit exceptions', function ($str) {
     Unite::parse($str);
-})->throws(InvalidUnitException::class)
+})->throws(InvalidBaseUnitException::class)
     ->with([
-        '200 30 g',
         '200 km4',
         '1084 g 13',
-        '100 wg',
         '100 kIo',
+        '30 fl ozy',
+    ]);
+
+it('throws invalid unit prefix exceptions', function ($str) {
+    Unite::parse($str);
+})->throws(InvalidUnitPrefixException::class)
+    ->with([
+        '200 30 g',
+        '100 wg',
+        '20 fl ozs',
+        '20 floz',
+        '20 3oz',
     ]);
 
 it('throws invalid quantity exceptions', function ($str) {
