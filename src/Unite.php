@@ -15,7 +15,7 @@ use Theutz\Unite\DTOs\Value;
  */
 class Unite implements Contract
 {
-    private Value $value;
+    private Value $value; // @phpstan-ignore-line
 
     public function __construct(
         private Parser $parser,
@@ -40,8 +40,8 @@ class Unite implements Contract
     public function __get(string $name)
     {
         return match ($name) {
-            'quantity' => (string) $this->value->quantity,
-            'unit' => "{$this->value->unit->prefix?->value}{$this->value->unit->baseUnit->value}",
+            'quantity' => $this->formatter->quantity($this->value),
+            'unit' => $this->formatter->unit($this->value),
             default => null
         };
     }
@@ -55,6 +55,6 @@ class Unite implements Contract
 
     public function __toString(): string
     {
-        return "{$this->quantity} {$this->value->unit->prefix?->value}{$this->value->unit->baseUnit->value}";
+        return $this->formatter->value($this->value);
     }
 }
