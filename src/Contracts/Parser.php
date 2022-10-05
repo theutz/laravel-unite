@@ -2,8 +2,8 @@
 
 namespace Theutz\Unite\Contracts;
 
-use Theutz\Unite\Value;
-use Theutz\Unite\Unit;
+use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\DTOs\Value;
 
 interface Parser
 {

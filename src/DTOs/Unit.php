@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\DTOs;
 
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;

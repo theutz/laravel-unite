@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\DTOs;
 
 use Brick\Math\BigNumber;
 

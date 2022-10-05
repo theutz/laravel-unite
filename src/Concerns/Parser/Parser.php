@@ -6,10 +6,10 @@ use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
 use Theutz\Unite\Contracts\Parser as Contract;
+use Theutz\Unite\DTOs\Unit;
+use Theutz\Unite\DTOs\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
-use Theutz\Unite\Unit;
-use Theutz\Unite\Value;
 
 class Parser implements Contract
 {
