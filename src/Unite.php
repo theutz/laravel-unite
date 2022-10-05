@@ -23,29 +23,6 @@ class Unite
 
     private ?Prefix $prefix;
 
-    /**
-     * @return array{0: Enums\Prefix|null, 1: Enums\BaseUnit}
-     */
-    private static function parseUnit(string $unit): array
-    {
-        $unit = str($unit);
-
-        if (! is_null($baseUnit = BaseUnit::tryFrom($unit))) {
-            return [null, $baseUnit];
-        }
-
-        try {
-            $baseUnit = collect(BaseUnit::cases())
-                ->firstOrFail(fn ($u) => $unit->endsWith($u->value));
-            $prefix = collect(Prefix::cases())
-                ->firstOrFail(fn ($p) => $unit->startsWith($p->value));
-        } catch (\Exception $e) {
-            throw new InvalidUnitException($unit);
-        }
-
-        return [$prefix, $baseUnit];
-    }
-
     public function __construct(private Parser $parser)
     {
     }
@@ -59,7 +36,7 @@ class Unite
 
         $unite->quantity = BigNumber::of($quantity);
 
-        [$prefix, $baseUnit] = self::parseUnit($unit);
+        [$prefix, $baseUnit] = $this->parser->parseUnit($unit);
         $unite->prefix = $prefix;
         $unite->baseUnit = $baseUnit;
 

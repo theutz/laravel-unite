@@ -7,5 +7,8 @@ use Theutz\Unite\Value;
 interface Parser
 {
     public function parse(string $str): Value;
+
     public function isUnitValid(string $str): bool;
+
+    public function parseUnit(string $unit): array;
 }
