@@ -7,25 +7,23 @@ use Theutz\Unite\Contracts\Parser;
 use Theutz\Unite\Contracts\Unite as Contract;
 
 /**
- * @property-read string $quantity
- * @property-read string $unit
+ * @property-read BigNumber $quantity
+ * @property-read Unit $unit
  */
 class Unite implements Contract
 {
-    private BigNumber $quantity;
+    private BigNumber $quantity; // @phpstan-ignore-line
 
-    private Unit $unit;
+    private Unit $unit; // @phpstan-ignore-line
 
-    public function __construct(private Parser $parser)
-    {
+    public function __construct(
+        private Parser $parser
+    ) {
     }
 
-    /**
-     * Primary interface for object creation
-     */
-    public function make(BigNumber|float|int|string $quantity, Unit|string $unit): self
+    public function make(BigNumber|float|int|string $quantity, Unit|string $unit): Unite
     {
-        $unite = new self($this->parser);
+        $unite = app(self::class);
 
         $unite->quantity = BigNumber::of($quantity);
         $unite->unit = is_string($unit) ? $this->parser->parseUnit($unit) : $unit;
@@ -42,11 +40,7 @@ class Unite implements Contract
         };
     }
 
-    /**
-     * Parses a string representation of a measurement,
-     * and uses that parsed representation to instatiate.
-     */
-    public function parse(string $str): self
+    public function parse(string $str): Unite
     {
         $value = $this->parser->parse($str);
 

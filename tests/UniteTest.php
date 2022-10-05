@@ -7,9 +7,10 @@ use Theutz\Unite\Concerns\Parser\ParseException;
 use Theutz\Unite\Facades\Unite;
 
 it('successfully creates', function ($quantity, $unit) {
-    expect(Unite::make($quantity, $unit))
-        ->quantity->toEqual($quantity)
-        ->unit->toEqual($unit);
+    $result = Unite::make($quantity, $unit);
+
+    expect($result->quantity)->toEqual($quantity);
+    expect($result->unit)->toEqual($unit);
 })
     ->with([
         [200, 'g'],
@@ -18,9 +19,10 @@ it('successfully creates', function ($quantity, $unit) {
     ]);
 
 it('successfully parses', function ($str, $quantity, $unit) {
-    expect(Unite::parse($str))
-        ->quantity->toEqual($quantity)
-        ->unit->toEqual($unit);
+    $result = Unite::parse($str);
+
+    expect($result->quantity)->toEqual($quantity);
+    expect($result->unit)->toEqual($unit);
 })->with([
     ['203 g', 203, 'g'],
     ['210 km2', 210, 'km2'],
@@ -33,7 +35,9 @@ it('successfully parses', function ($str, $quantity, $unit) {
 ]);
 
 it('can be cast to string', function ($str) {
-    expect(Unite::parse($str))->toEqual($str);
+    $result = Unite::parse($str);
+
+    expect($result)->toEqual($str);
 })->with([
     '200 g',
 ]);
