@@ -33,7 +33,7 @@ class Manager implements ManagerInterface
     public function setValue(Value $value): void
     {
         if (isset($this->value)) {
-            throw new \RuntimeException('Value can only be set once.');
+            throw new ReadonlyValueException('Value can only be set once.');
         }
 
         $this->value = $value;
