@@ -36,9 +36,9 @@ class Unite
 
         $unite->quantity = BigNumber::of($quantity);
 
-        [$prefix, $baseUnit] = $this->parser->parseUnit($unit);
-        $unite->prefix = $prefix;
-        $unite->baseUnit = $baseUnit;
+        $unit = $this->parser->parseUnit($unit);
+        $unite->prefix = $unit->prefix;
+        $unite->baseUnit = $unit->baseUnit;
 
         return $unite;
     }

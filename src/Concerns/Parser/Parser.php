@@ -5,6 +5,7 @@ namespace Theutz\Unite\Concerns\Parser;
 use Theutz\Unite\Contracts\Parser as Contract;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
+use Theutz\Unite\Unit;
 use Theutz\Unite\Value;
 
 class Parser implements Contract
@@ -25,15 +26,12 @@ class Parser implements Contract
         return preg_match($this::VALID_UNIT, $unit);
     }
 
-    /**
-     * @return array{0: Prefix|null, 1: BaseUnit}
-     */
-    public function parseUnit(string $unit): array
+    public function parseUnit(string $unit): Unit
     {
         $unit = str($unit);
 
         if (! is_null($baseUnit = BaseUnit::tryFrom($unit))) {
-            return [null, $baseUnit];
+            return new Unit(prefix: null, baseUnit: $baseUnit);
         }
 
         try {
@@ -45,6 +43,6 @@ class Parser implements Contract
             throw new InvalidUnitException($unit);
         }
 
-        return [$prefix, $baseUnit];
+        return new Unit(prefix: $prefix, baseUnit:$baseUnit);
     }
 }

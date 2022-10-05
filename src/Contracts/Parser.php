@@ -3,6 +3,7 @@
 namespace Theutz\Unite\Contracts;
 
 use Theutz\Unite\Value;
+use Theutz\Unite\Unit;
 
 interface Parser
 {
@@ -10,5 +11,5 @@ interface Parser
 
     public function isUnitValid(string $str): bool;
 
-    public function parseUnit(string $unit): array;
+    public function parseUnit(string $unit): Unit;
 }
