@@ -6,7 +6,7 @@ use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Manager\ManagerInterface;
 use Theutz\Unite\Concerns\Parser\ParserInterface;
 use Theutz\Unite\Concerns\Unit\UnitDto;
-use Theutz\Unite\DTOs\Value;
+use Theutz\Unite\Concerns\Value\ValueDto;
 
 class Unite implements UniteInterface
 {
@@ -20,7 +20,7 @@ class Unite implements UniteInterface
         BigNumber|float|int|string $quantity,
         UnitDto|string $unit
     ): ManagerInterface {
-        $value = new Value(
+        $value = new ValueDto(
             quantity: $this->parser->parseQuantity($quantity),
             unit: $this->parser->parseUnit($unit)
         );

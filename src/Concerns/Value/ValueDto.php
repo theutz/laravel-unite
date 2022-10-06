@@ -1,11 +1,11 @@
 <?php
 
-namespace Theutz\Unite\DTOs;
+namespace Theutz\Unite\Concerns\Value;
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Unit\UnitDto;
 
-class Value
+class ValueDto
 {
     public function __construct(
         public readonly BigNumber $quantity,

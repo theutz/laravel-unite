@@ -2,10 +2,10 @@
 
 namespace Theutz\Unite\Concerns\Manager;
 
-use Theutz\Unite\DTOs\Value;
+use Theutz\Unite\Concerns\Value\ValueDto;
 
 /**
- * @property-write Value $value;
+ * @property-write ValueDto $value;
  */
 interface ManagerInterface
 {

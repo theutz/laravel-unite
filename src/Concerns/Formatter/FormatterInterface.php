@@ -2,17 +2,17 @@
 
 namespace Theutz\Unite\Concerns\Formatter;
 
-use Theutz\Unite\DTOs\Value;
+use Theutz\Unite\Concerns\Value\ValueDto;
 
 interface FormatterInterface
 {
-    public function value(Value $value): string;
+    public function value(ValueDto $value): string;
 
-    public function quantity(Value $value): string;
+    public function quantity(ValueDto $value): string;
 
-    public function unit(Value $value): string;
+    public function unit(ValueDto $value): string;
 
-    public function baseUnit(Value $value): string;
+    public function baseUnit(ValueDto $value): string;
 
-    public function prefix(Value $value): string;
+    public function prefix(ValueDto $value): string;
 }
