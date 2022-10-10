@@ -4,8 +4,8 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Concerns\Formatter\Formatter;
-use Theutz\Unite\Concerns\Formatter\FormatterInterface;
+use Theutz\Unite\Formatter\Formatter;
+use Theutz\Unite\Formatter\FormatterInterface;
 use Theutz\Unite\Concerns\Manager\Manager;
 use Theutz\Unite\Concerns\Manager\ManagerInterface;
 use Theutz\Unite\Concerns\Parser\Parser;

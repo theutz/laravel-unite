@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite\Concerns\Formatter;
+namespace Theutz\Unite\Formatter;
 
 use Theutz\Unite\Concerns\Value\ValueDto;
 

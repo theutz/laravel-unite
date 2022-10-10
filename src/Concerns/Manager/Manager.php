@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Concerns\Manager;
 
-use Theutz\Unite\Concerns\Formatter\FormatterInterface;
+use Theutz\Unite\Formatter\FormatterInterface;
 use Theutz\Unite\Concerns\Value\ValueDto;
 
 /**
