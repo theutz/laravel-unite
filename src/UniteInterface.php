@@ -3,7 +3,7 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Concerns\Manager\ManagerInterface;
+use Theutz\Unite\Manager\ManagerInterface;
 
 interface UniteInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Formatter\Formatter;
-use Theutz\Unite\Concerns\Manager\Manager;
-use Theutz\Unite\Concerns\Manager\ReadonlyValueException;
 use Theutz\Unite\Concerns\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
+use Theutz\Unite\Formatter\Formatter;
+use Theutz\Unite\Manager\Manager;
+use Theutz\Unite\Manager\ReadonlyValueException;
 
 it("doesn't allow the value to be set twice", function () {
     $formatter = new Formatter;

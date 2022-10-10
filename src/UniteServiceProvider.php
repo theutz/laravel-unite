@@ -6,8 +6,8 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Formatter\Formatter;
 use Theutz\Unite\Formatter\FormatterInterface;
-use Theutz\Unite\Concerns\Manager\Manager;
-use Theutz\Unite\Concerns\Manager\ManagerInterface;
+use Theutz\Unite\Manager\Manager;
+use Theutz\Unite\Manager\ManagerInterface;
 use Theutz\Unite\Concerns\Parser\Parser;
 use Theutz\Unite\Concerns\Parser\ParserInterface;
 
