@@ -34,6 +34,6 @@ class Formatter implements FormatterInterface
 
     public function prefix(ValueDto $value): string
     {
-        return $value->unit->prefix?->value ?? '';
+        return $value->prefix?->value ?? '';
     }
 }

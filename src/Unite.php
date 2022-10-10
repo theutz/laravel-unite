@@ -3,6 +3,7 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigNumber;
+use Theutz\Unite\Concerns\Formatter\FormatterInterface;
 use Theutz\Unite\Concerns\Manager\ManagerInterface;
 use Theutz\Unite\Concerns\Parser\ParserInterface;
 use Theutz\Unite\Concerns\Value\ValueDto;
@@ -11,6 +12,7 @@ class Unite implements UniteInterface
 {
     public function __construct(
         private ParserInterface $parser,
+        private FormatterInterface $formatter,
         private ManagerInterface $manager,
     ) {
     }
@@ -33,6 +35,6 @@ class Unite implements UniteInterface
     {
         $value = $this->parser->parse($str);
 
-        return $this->make($value->quantity, "{$value->prefix->value}{$value->baseUnit->value}");
+        return $this->make($value->quantity, $this->formatter->unit($value));
     }
 }
