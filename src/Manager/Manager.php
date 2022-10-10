@@ -3,7 +3,7 @@
 namespace Theutz\Unite\Manager;
 
 use Theutz\Unite\Formatter\FormatterInterface;
-use Theutz\Unite\Value\ValueDto;
+use Theutz\Unite\Value;
 
 /**
  * @property-read string $quantity
@@ -13,7 +13,7 @@ use Theutz\Unite\Value\ValueDto;
  */
 class Manager implements ManagerInterface
 {
-    private ValueDto $value;
+    private Value $value;
 
     public function __construct(private FormatterInterface $formatter)
     {
@@ -38,7 +38,7 @@ class Manager implements ManagerInterface
         return $this->formatter->value($this->value);
     }
 
-    private function value(ValueDto $value): void
+    private function value(Value $value): void
     {
         if (isset($this->value)) {
             throw new ReadonlyValueException('Value can only be set once.');
