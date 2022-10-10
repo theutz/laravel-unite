@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Formatter;
 
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 
 class Formatter implements FormatterInterface
 {

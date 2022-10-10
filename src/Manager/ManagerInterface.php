@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Manager;
 
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 
 /**
  * @property-write ValueDto $value;

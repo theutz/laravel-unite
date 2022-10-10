@@ -5,7 +5,7 @@ namespace Theutz\Unite\Parser;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
 

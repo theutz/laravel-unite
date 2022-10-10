@@ -3,7 +3,7 @@
 namespace Theutz\Unite\Parser;
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 
 interface ParserInterface
 {

@@ -1,7 +1,7 @@
 <?php
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Formatter\Formatter;
 use Theutz\Unite\Manager\Manager;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite\Concerns\Value;
+namespace Theutz\Unite\Value;
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\Enums\BaseUnit;

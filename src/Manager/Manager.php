@@ -3,7 +3,7 @@
 namespace Theutz\Unite\Manager;
 
 use Theutz\Unite\Formatter\FormatterInterface;
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value\ValueDto;
 
 /**
  * @property-read string $quantity
