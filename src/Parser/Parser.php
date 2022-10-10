@@ -5,9 +5,9 @@ namespace Theutz\Unite\Parser;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
-use Theutz\Unite\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
+use Theutz\Unite\Value;
 
 class Parser implements ParserInterface
 {

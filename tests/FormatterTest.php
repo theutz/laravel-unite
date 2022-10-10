@@ -1,10 +1,10 @@
 <?php
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Value;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
 use Theutz\Unite\Formatter\Formatter;
+use Theutz\Unite\Value;
 
 beforeEach(function () {
     $this->sut = new Formatter;
