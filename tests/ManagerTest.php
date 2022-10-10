@@ -4,7 +4,6 @@ use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Formatter\Formatter;
 use Theutz\Unite\Concerns\Manager\Manager;
 use Theutz\Unite\Concerns\Manager\ReadonlyValueException;
-use Theutz\Unite\Concerns\Unit\UnitDto;
 use Theutz\Unite\Concerns\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
 
