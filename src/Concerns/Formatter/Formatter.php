@@ -29,11 +29,11 @@ class Formatter implements FormatterInterface
 
     public function baseUnit(ValueDto $value): string
     {
-        return $value->unit->baseUnit->value;
+        return $value->baseUnit->value;
     }
 
     public function prefix(ValueDto $value): string
     {
-        return $value->unit->prefix?->value ?? '';
+        return $value->prefix?->value ?? '';
     }
 }

@@ -3,13 +3,15 @@
 namespace Theutz\Unite\Concerns\Value;
 
 use Brick\Math\BigNumber;
-use Theutz\Unite\Concerns\Unit\UnitDto;
+use Theutz\Unite\Enums\BaseUnit;
+use Theutz\Unite\Enums\Prefix;
 
 class ValueDto
 {
     public function __construct(
         public readonly BigNumber $quantity,
-        public readonly UnitDto $unit
+        public readonly ?Prefix $prefix,
+        public readonly BaseUnit $baseUnit
     ) {
     }
 }
