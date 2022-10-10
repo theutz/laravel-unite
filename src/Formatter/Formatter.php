@@ -1,12 +1,12 @@
 <?php
 
-namespace Theutz\Unite\Concerns\Formatter;
+namespace Theutz\Unite\Formatter;
 
-use Theutz\Unite\Concerns\Value\ValueDto;
+use Theutz\Unite\Value;
 
 class Formatter implements FormatterInterface
 {
-    public function value(ValueDto $value): string
+    public function value(Value $value): string
     {
         $quantity = $this->quantity($value);
         $unit = $this->unit($value);
@@ -14,12 +14,12 @@ class Formatter implements FormatterInterface
         return "{$quantity} {$unit}";
     }
 
-    public function quantity(ValueDto $value): string
+    public function quantity(Value $value): string
     {
         return (string) $value->quantity;
     }
 
-    public function unit(ValueDto $value): string
+    public function unit(Value $value): string
     {
         $prefix = $this->prefix($value);
         $baseUnit = $this->baseUnit($value);
@@ -27,12 +27,12 @@ class Formatter implements FormatterInterface
         return "{$prefix}{$baseUnit}";
     }
 
-    public function baseUnit(ValueDto $value): string
+    public function baseUnit(Value $value): string
     {
         return $value->baseUnit->value;
     }
 
-    public function prefix(ValueDto $value): string
+    public function prefix(Value $value): string
     {
         return $value->prefix?->value ?? '';
     }

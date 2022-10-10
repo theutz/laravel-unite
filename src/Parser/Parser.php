@@ -1,17 +1,17 @@
 <?php
 
-namespace Theutz\Unite\Concerns\Parser;
+namespace Theutz\Unite\Parser;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\NumberFormatException;
 use Illuminate\Support\ItemNotFoundException;
-use Theutz\Unite\Concerns\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
+use Theutz\Unite\Value;
 
 class Parser implements ParserInterface
 {
-    public function parse(string $str): ValueDto
+    public function parse(string $str): Value
     {
         if (count($parts = explode(separator: ' ', string: $str, limit: 2)) !== 2) {
             throw new ParseException('The quantity and unit must be separated by a space.');
@@ -19,7 +19,7 @@ class Parser implements ParserInterface
 
         [$quantity, $unit] = $parts;
 
-        return new ValueDto(
+        return new Value(
             $this->parseQuantity($quantity),
             ...$this->parseUnit($unit)
         );

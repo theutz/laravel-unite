@@ -1,10 +1,10 @@
 <?php
 
-use Theutz\Unite\Concerns\Parser\InvalidBaseUnitException;
-use Theutz\Unite\Concerns\Parser\InvalidQuantityException;
-use Theutz\Unite\Concerns\Parser\InvalidUnitPrefixException;
-use Theutz\Unite\Concerns\Parser\ParseException;
 use Theutz\Unite\Facades\Unite;
+use Theutz\Unite\Parser\InvalidBaseUnitException;
+use Theutz\Unite\Parser\InvalidQuantityException;
+use Theutz\Unite\Parser\InvalidUnitPrefixException;
+use Theutz\Unite\Parser\ParseException;
 
 it('successfully creates', function ($quantity, $unit) {
     expect(Unite::make($quantity, $unit))

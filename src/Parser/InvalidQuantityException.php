@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite\Concerns\Parser;
+namespace Theutz\Unite\Parser;
 
 class InvalidQuantityException extends ParseException
 {
