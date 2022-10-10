@@ -46,5 +46,4 @@ class Manager implements ManagerInterface
 
         $this->value = $value;
     }
-
 }

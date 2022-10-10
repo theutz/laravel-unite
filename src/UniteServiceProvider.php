@@ -5,17 +5,17 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Concerns\Formatter\Formatter;
-use Theutz\Unite\Concerns\Manager\Manager;
-use Theutz\Unite\Concerns\Parser\Parser;
 use Theutz\Unite\Concerns\Formatter\FormatterInterface;
-use Theutz\Unite\Concerns\Parser\ParserInterface;
+use Theutz\Unite\Concerns\Manager\Manager;
 use Theutz\Unite\Concerns\Manager\ManagerInterface;
+use Theutz\Unite\Concerns\Parser\Parser;
+use Theutz\Unite\Concerns\Parser\ParserInterface;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
     public $bindings = [
         ParserInterface::class => Parser::class,
-        ManagerInterface::class => Manager::class
+        ManagerInterface::class => Manager::class,
     ];
 
     public function configurePackage(Package $package): void
