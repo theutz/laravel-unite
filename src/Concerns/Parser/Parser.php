@@ -21,8 +21,8 @@ class Parser implements ParserInterface
         [$quantity, $unit] = $parts;
 
         return new ValueDto(
-            quantity: $this->parseQuantity($quantity),
-            unit: $this->parseUnit($unit)
+            $this->parseQuantity($quantity),
+            ...$this->parseUnit($unit)
         );
     }
 
@@ -35,20 +35,19 @@ class Parser implements ParserInterface
         }
     }
 
-    public function parseUnit(UnitDto|string $unit): UnitDto
+    /**
+     * @return array{0: ?\Theutz\Unite\Enums\Prefix, 1: \Theutz\Unite\Enums\BaseUnit}
+     */
+    public function parseUnit(string $unit): array
     {
-        if ($unit instanceof UnitDto) {
-            return $unit;
-        }
-
         if ($baseUnit = BaseUnit::tryFrom($unit)) {
-            return new UnitDto(prefix: null, baseUnit: $baseUnit);
+            return [null, $baseUnit];
         }
 
         $baseUnit = $this->extractBaseUnit($unit);
         $prefix = $this->extractPrefix($unit, $baseUnit);
 
-        return new UnitDto(prefix: $prefix, baseUnit: $baseUnit);
+        return [$prefix, $baseUnit];
     }
 
     private function extractPrefix(string $unit, BaseUnit $baseUnit)

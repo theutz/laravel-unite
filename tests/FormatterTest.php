@@ -2,7 +2,6 @@
 
 use Brick\Math\BigNumber;
 use Theutz\Unite\Concerns\Formatter\Formatter;
-use Theutz\Unite\Concerns\Unit\UnitDto;
 use Theutz\Unite\Concerns\Value\ValueDto;
 use Theutz\Unite\Enums\BaseUnit;
 use Theutz\Unite\Enums\Prefix;
@@ -12,8 +11,7 @@ beforeEach(function () {
     $this->quantity = BigNumber::of(200);
     $this->prefix = Prefix::Kilo;
     $this->baseUnit = BaseUnit::Gram;
-    $this->unit = new UnitDto($this->prefix, $this->baseUnit);
-    $this->value = new ValueDto($this->quantity, $this->unit);
+    $this->value = new ValueDto($this->quantity, $this->prefix, $this->baseUnit);
 });
 
 it('formats the value', function () {
