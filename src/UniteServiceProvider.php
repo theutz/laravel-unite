@@ -8,8 +8,8 @@ use Theutz\Unite\Formatter\Formatter;
 use Theutz\Unite\Formatter\FormatterInterface;
 use Theutz\Unite\Manager\Manager;
 use Theutz\Unite\Manager\ManagerInterface;
-use Theutz\Unite\Concerns\Parser\Parser;
-use Theutz\Unite\Concerns\Parser\ParserInterface;
+use Theutz\Unite\Parser\Parser;
+use Theutz\Unite\Parser\ParserInterface;
 
 class UniteServiceProvider extends PackageServiceProvider
 {

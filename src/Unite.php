@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Brick\Math\BigNumber;
 use Theutz\Unite\Formatter\FormatterInterface;
 use Theutz\Unite\Manager\ManagerInterface;
-use Theutz\Unite\Concerns\Parser\ParserInterface;
+use Theutz\Unite\Parser\ParserInterface;
 use Theutz\Unite\Concerns\Value\ValueDto;
 
 class Unite implements UniteInterface
