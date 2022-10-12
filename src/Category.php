@@ -10,8 +10,15 @@ enum Category: string
     public function validationRules()
     {
         return match ($this) {
-            self::Unit => ['id' => 'required|string', 'to' => 'required|array'],
-            self::Prefix => ['id' => 'required|string']
+            self::Unit => [
+                'array:id,to',
+                'distinct:id',
+                '*.id' => 'required|string',
+                '*.to' => 'required|array',
+            ],
+            self::Prefix => [
+                '*.id' => 'required|string',
+            ]
         };
     }
 }

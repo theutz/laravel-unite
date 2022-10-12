@@ -29,8 +29,6 @@ class Loader
 
     private function validate(Category $category, array $data)
     {
-        foreach ($data as $definiton) {
-            Validator::make($definiton, $category->validationRules())->validate();
-        }
+        Validator::make($data, $category->validationRules())->validate();
     }
 }

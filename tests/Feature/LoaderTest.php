@@ -32,14 +32,14 @@ it('throws exception on all categories', function ($category, $data) {
 it('throws a validation exception for units', function ($data) {
     $this->mock(
         Yaml::class,
-        fn (MockInterface $mock) => $mock->allows([
-            'parseFile' => [$data],
-        ])
+        fn (MockInterface $mock) => $mock
+            ->allows(['parseFile' => $data])
     );
 
     app(Loader::class)->load(Category::Unit);
 })
     ->throws(ValidationException::class)
     ->with([
-        [['id' => 'gram', 'to' => []]],
+        [[['id' => 'g', 'to' => []]]],
+        [[['id' => 'g'], ['id' => 'g']]]
     ]);
