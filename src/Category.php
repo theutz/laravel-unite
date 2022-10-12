@@ -12,9 +12,8 @@ enum Category: string
         return match ($this) {
             self::Unit => [
                 'array:id,to',
-                'distinct:id',
-                '*.id' => 'required|string',
-                '*.to' => 'required|array',
+                '*.id' => 'required|string|distinct',
+                '*.to' => 'present|array',
             ],
             self::Prefix => [
                 '*.id' => 'required|string',
