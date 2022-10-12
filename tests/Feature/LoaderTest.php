@@ -14,19 +14,32 @@ it('loads valid definitions', function ($category) {
     expect($result)->toBeArray();
 })->with('categories');
 
-it('throws a validation exception', function ($category, $key, $value) {
-    $this->mock(Yaml::class, function (MockInterface $mock) use ($key, $value) {
-        $mock->allows([
-            'parseFile' => [[$key => $value]],
-        ]);
-    });
+it('throws exception on all categories', function ($category, $data) {
+    $this->mock(
+        Yaml::class,
+        fn (MockInterface $mock) => $mock
+            ->allows(['parseFile' => [$data]])
+    );
 
-    $sut = app(Loader::class);
-
-    $result = $sut->load($category);
+    app(Loader::class)->load($category);
 })->throws(ValidationException::class)
     ->with('categories')
     ->with([
-        ['id', null],
-        ['id', 123],
+        [['id', null]],
+        [['id', 123]],
+    ]);
+
+it('throws a validation exception for units', function ($data) {
+    $this->mock(
+        Yaml::class,
+        fn (MockInterface $mock) => $mock->allows([
+            'parseFile' => [$data],
+        ])
+    );
+
+    app(Loader::class)->load(Category::Unit);
+})
+    ->throws(ValidationException::class)
+    ->with([
+        [['id' => 'gram', 'to' => []]],
     ]);
