@@ -4,9 +4,12 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Theutz\Unite\Models\Unit;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
+    public $singletons = [Unit::class];
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -19,4 +22,5 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
+
 }

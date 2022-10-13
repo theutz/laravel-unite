@@ -1,0 +1,14 @@
+<?php
+
+namespace Theutz\Unite\Models;
+
+it('is a singleton', function () {
+    $a = app(Unit::class);
+    $b = app(Unit::class);
+
+    expect($a)->toBe($b);
+});
+
+it('can return all', function () {
+    expect(Unit::all())->not->toBeEmpty();
+});
