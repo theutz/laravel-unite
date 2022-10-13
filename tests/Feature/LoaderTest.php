@@ -14,24 +14,15 @@ it('loads valid definitions', function ($category) {
     expect($result)->toBeArray();
 })->with('categories');
 
-it('throws a validation exception for units', function ($data, $message) {
+it('throws with invalid data', function ($category) {
     $this->mock(
         Yaml::class,
         fn (MockInterface $mock) => $mock
-            ->allows(['parseFile' => $data])
+            ->allows(['parseFile' => [123]])
     );
 
     $sut = app(Loader::class);
 
-    expect(fn () => $sut->load(Category::Unit))
-        ->toThrow(ValidationException::class, $message);
-})
-    ->with([
-        'missing to' => [[
-            ['id' => 'g', 'to' => null],
-        ], 'must be an array'],
-        'repeated ids' => [[
-            ['id' => 'g', 'to' => []],
-            ['id' => 'g', 'to' => []],
-        ], 'has a duplicate value'],
-    ]);
+    expect(fn () => $sut->load($category))
+        ->toThrow(ValidationException::class);
+})->with('categories');

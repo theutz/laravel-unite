@@ -17,7 +17,7 @@ class Loader
         $path = $this->makePath($category);
         $data = $this->yml->parseFile($path);
 
-        $this->validate($category, $data);
+        $this->validate($data);
 
         return $data;
     }
@@ -27,8 +27,8 @@ class Loader
         return __DIR__.'/../resources/unite/'.$category->value.'.yaml';
     }
 
-    private function validate(Category $category, array $data)
+    private function validate(array $data)
     {
-        Validator::make($data, $category->validationRules())->validate();
+        Validator::make($data, ['array'])->validate();
     }
 }
