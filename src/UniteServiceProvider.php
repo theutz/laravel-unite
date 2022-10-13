@@ -5,10 +5,11 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Models\Unit;
+use Theutz\Unite\Models\Prefix;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
-    public $singletons = [Unit::class];
+    public $singletons = [Unit::class, Prefix::class];
 
     public function configurePackage(Package $package): void
     {

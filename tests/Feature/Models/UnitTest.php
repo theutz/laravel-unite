@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite\Models;
+use Theutz\Unite\Models\Unit;
 
 it('is a singleton', function () {
     $a = app(Unit::class);
