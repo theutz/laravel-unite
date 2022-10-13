@@ -4,7 +4,6 @@ namespace Theutz\Unite\Models;
 
 use Illuminate\Support\Collection;
 use Theutz\Unite\Category;
-use Theutz\Unite\Loader;
 
 /**
  * {@inheritDoc}

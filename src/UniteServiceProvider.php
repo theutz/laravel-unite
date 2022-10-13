@@ -4,8 +4,8 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Models\Unit;
 use Theutz\Unite\Models\Prefix;
+use Theutz\Unite\Models\Unit;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -23,5 +23,4 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
-
 }
