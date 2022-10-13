@@ -12,3 +12,8 @@ it('is a singleton', function () {
 it('can return all', function () {
     expect(Prefix::all())->not->toBeEmpty();
 });
+
+it('can pluck ids', function () {
+    expect(Prefix::pluck('id')->all())->toContain('kilo', 'deka', 'yotta');
+    expect(Prefix::pluck('abbr')->all())->toContain('k', 'd', 'Y');
+});

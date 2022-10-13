@@ -22,7 +22,9 @@ abstract class Model
     {
         if (! isset($this->data)) {
             $data = $this->loader->load($this->category());
-            $this->data = collect($data);
+            $collection = collect($data);
+
+            $this->data = $this->coerce($collection);
         }
 
         return $this->data;
@@ -33,6 +35,16 @@ abstract class Model
         $instance = app(static::class);
 
         return $instance->data()->$name($args);
+    }
+
+    /**
+     * Override this function if you wish to change
+     * the default shape of the data. Otherwise,
+     * this function is a noop;
+     */
+    protected function coerce(Collection $collection): Collection
+    {
+        return $collection;
     }
 
     abstract protected function category(): Category;

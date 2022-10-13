@@ -12,3 +12,7 @@ it('is a singleton', function () {
 it('can return all', function () {
     expect(Unit::all())->not->toBeEmpty();
 });
+
+it('can pluck ids', function () {
+    expect(Unit::pluck('id')->all())->toContain('g', 'oz');
+});

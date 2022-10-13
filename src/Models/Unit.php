@@ -15,4 +15,11 @@ class Unit extends Model
     {
         return Category::Unit;
     }
+
+    protected function coerce(Collection $collection): Collection
+    {
+        return $collection
+            ->map(fn ($item, $key) => ['id' => $key, ...$item])
+            ->values();
+    }
 }

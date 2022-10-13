@@ -29,7 +29,7 @@ deka:
   abbr: da
   factor: 1
 deci:
-  abbr: de
+  abbr: d
   factor: -1
 centi:
   abbr: c
