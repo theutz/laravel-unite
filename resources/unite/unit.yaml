@@ -1,4 +1,5 @@
 g:
+  prefixable: true
   to:
     oz: 0.0352739907
 oz:

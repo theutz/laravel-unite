@@ -29,6 +29,6 @@ class Loader
 
     private function validate(array $data)
     {
-        Validator::make($data, ['array'])->validate();
+        Validator::make($data, ['array', "*" => 'array'])->validate();
     }
 }
