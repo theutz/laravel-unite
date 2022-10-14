@@ -23,6 +23,11 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
+        $this->registerModels();
+    }
+
+     private function registerModels(): void
+    {
         foreach ($this->app->make(Finder::class)->find() as $className) {
             $this->app->singleton($className);
         }
