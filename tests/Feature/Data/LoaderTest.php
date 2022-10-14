@@ -12,7 +12,7 @@ it('loads valid definitions', function ($category) {
     $result = $sut->load($category);
 
     expect($result)->toBeArray();
-})->with('categories');
+})->with('models');
 
 it('throws with invalid data', function ($category) {
     $this->mock(
@@ -25,4 +25,4 @@ it('throws with invalid data', function ($category) {
 
     expect(fn () => $sut->load($category))
         ->toThrow(ValidationException::class);
-})->with('categories');
+})->with('models');
