@@ -11,8 +11,4 @@ use Theutz\Unite\Data\Model;
  */
 class Unit extends Model
 {
-    protected function category(): Category
-    {
-        return Category::Unit;
-    }
 }

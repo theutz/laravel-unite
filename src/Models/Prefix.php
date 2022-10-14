@@ -11,8 +11,4 @@ use Theutz\Unite\Data\Model;
  */
 class Prefix extends Model
 {
-    protected function category(): Category
-    {
-        return Category::Prefix;
-    }
 }

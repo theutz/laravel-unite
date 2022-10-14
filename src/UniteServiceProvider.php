@@ -4,7 +4,7 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Composer\ClassMapGenerator\ClassMapGenerator;
+use Theutz\Unite\Data\Finder;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -23,13 +23,7 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->registerModels();
-    }
-
-    private function registerModels() {
-        $map = ClassMapGenerator::createMap(__DIR__.'/Models');
-
-        foreach ($map as $className => $path) {
+        foreach ($this->app->make(Finder::class)->find() as $className) {
             $this->app->singleton($className);
         }
     }

@@ -10,8 +10,4 @@ use Theutz\Unite\Data\Model;
  */
 class Kind extends Model
 {
-    protected function category(): Category
-    {
-        return Category::Kind;
-    }
 }
