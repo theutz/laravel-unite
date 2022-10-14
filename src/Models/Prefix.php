@@ -14,11 +14,4 @@ class Prefix extends Model
     {
         return Category::Prefix;
     }
-
-    protected function coerce(Collection $collection): Collection
-    {
-        return $collection
-            ->map(fn ($item, $key) => ['id' => $key, ...$item])
-            ->values();
-    }
 }

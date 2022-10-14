@@ -14,11 +14,4 @@ class System extends Model
     {
         return Category::System;
     }
-
-    protected function coerce(Collection $collection): Collection
-    {
-        return $collection
-            ->map(fn ($item, $key) => ['id' => $key, ...$item])
-            ->values();
-    }
 }

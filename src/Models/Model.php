@@ -44,7 +44,14 @@ abstract class Model
      */
     protected function coerce(Collection $collection): Collection
     {
-        return $collection;
+        return $this->createIdFromKey($collection);
+    }
+
+    protected function createIdFromKey(Collection $collection): Collection
+    {
+        return $collection
+            ->map(fn ($item, $key) => ['id' => $key, ...$item])
+            ->values();
     }
 
     abstract protected function category(): Category;
