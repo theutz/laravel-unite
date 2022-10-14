@@ -4,13 +4,10 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Models\Prefix;
-use Theutz\Unite\Models\Unit;
+use Theutz\Unite\Data\Finder;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
-    public $singletons = [Unit::class, Prefix::class];
-
     public function configurePackage(Package $package): void
     {
         /*
@@ -23,4 +20,16 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
+
+    public function packageRegistered()
+    {
+        $this->registerModels();
+    }
+
+     private function registerModels(): void
+     {
+         foreach ($this->app->make(Finder::class)->find() as $className) {
+             $this->app->singleton($className);
+         }
+     }
 }

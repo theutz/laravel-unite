@@ -1,7 +1,77 @@
+acre:
+  kind: area
+  system:
+    - uscs
+    - imperial
+  to:
+    m2: 4.046873e3
+# A:
+# bar:
+# cd:
+# C:
+# ch:
+# cu ft:
+# cu in:
+# cu mi:
+# cu yd:
+# cp:
+# d:
+# dry gal:
+# dry pt:
+# dry qt:
+# F:
+# fl oz:
+# ft:
+# fur:
+# gal:
+# gil:
 g:
-  prefixable: true
+  kind: mass
+  system:
+    - metric
   to:
-    oz: 0.0352739907
+    oz: 3.52739907e-2
+# h:
+# in:
+# K:
+# lea:
+# L:
+# long ton:
+# m:
+m2:
+  kind: area
+  system:
+    - metric
+  to:
+    acre: 2.471054e-4
+# m3:
+# mi:
+# mmHg:
+# min:
+# mol:
+# N:
 oz:
+  kind: mass
+  system:
+    - uscs
+    - imperial
   to:
-    g: 28.3495
+    g: 2.83495e1
+# perch:
+# pt:
+# lb:
+# qt:
+# rad:
+# rood:
+# s:
+# sq ft:
+# sq in:
+# sq mi:
+# sq yd:
+# st:
+# tbsp:
+# tsp:
+# ton:
+# V:
+# W:
+# yd:

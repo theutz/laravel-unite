@@ -7,6 +7,6 @@ use Theutz\Unite\Data\Model;
 /**
  * {@inheritDoc}
  */
-class Prefix extends Model
+class System extends Model
 {
 }

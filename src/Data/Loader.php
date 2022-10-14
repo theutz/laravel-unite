@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\Data;
 
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Yaml\Yaml;
@@ -12,9 +12,9 @@ class Loader
     ) {
     }
 
-    public function load(Category $category): array
+    public function load(Model $model): array
     {
-        $path = $this->makePath($category);
+        $path = $this->makePath($model);
         $data = $this->yml->parseFile($path);
 
         $this->validate($data);
@@ -22,9 +22,11 @@ class Loader
         return $data;
     }
 
-    private function makePath(Category $category): string
+    private function makePath(Model $model): string
     {
-        return __DIR__.'/../resources/unite/'.$category->value.'.yaml';
+        $filename = str($model::class)->classBasename()->lower();
+
+        return __DIR__.'/../../resources/unite/'.$filename.'.yaml';
     }
 
     private function validate(array $data)

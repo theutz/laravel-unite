@@ -1,8 +1,8 @@
 <?php
 
-use Theutz\Unite\Category;
+use Theutz\Unite\Data\Finder;
 
-$categories = collect(Category::cases())
-    ->mapWithKeys(fn ($item) => [$item->value => $item]);
+$categories = collect(app(Finder::class)->find())
+    ->mapWithKeys(fn ($className) => [class_basename($className) => app($className)]);
 
 dataset('categories', $categories);

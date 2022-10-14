@@ -1,10 +1,8 @@
 <?php
 
-namespace Theutz\Unite\Models;
+namespace Theutz\Unite\Data;
 
 use Illuminate\Support\Collection;
-use Theutz\Unite\Category;
-use Theutz\Unite\Loader;
 
 /**
  * @mixin Collection
@@ -21,7 +19,7 @@ abstract class Model
     protected function data(): Collection
     {
         if (! isset($this->data)) {
-            $data = $this->loader->load($this->category());
+            $data = $this->loader->load($this);
             $collection = collect($data);
 
             $this->data = $this->coerce($collection);
@@ -44,8 +42,13 @@ abstract class Model
      */
     protected function coerce(Collection $collection): Collection
     {
-        return $collection;
+        return $this->createIdFromKey($collection);
     }
 
-    abstract protected function category(): Category;
+    protected function createIdFromKey(Collection $collection): Collection
+    {
+        return $collection
+            ->map(fn ($item, $key) => ['id' => $key, ...$item])
+            ->values();
+    }
 }
