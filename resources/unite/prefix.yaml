@@ -1,0 +1,60 @@
+yotta:
+  abbr: Y
+  factor: 24
+zetta:
+  abbr: Z
+  factor: 21
+exa:
+  abbr: E
+  factor: 18
+peta:
+  abbr: P
+  factor: 15
+tera:
+  abbr: T
+  factor: 12
+giga:
+  abbr: G
+  factor: 9
+mega:
+  abbr: M
+  factor: 6
+kilo:
+  abbr: k
+  factor: 3
+hecto:
+  abbr: h
+  factor: 2
+deka:
+  abbr: da
+  factor: 1
+deci:
+  abbr: d
+  factor: -1
+centi:
+  abbr: c
+  factor: -2
+milli:
+  abbr: m
+  factor: -6
+micro:
+  abbr: μ
+  factor: -9
+nano:
+  abbr: n
+  factor: -12
+pico:
+  abbr: p
+  factor: -15
+femto:
+  abbr: f
+  factor: -18
+atto:
+  abbr: a
+  factor: -21
+zepto:
+  abbr: z
+  factor: -24
+yocto:
+  abbr: y
+  factor: -24
