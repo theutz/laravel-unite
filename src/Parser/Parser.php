@@ -2,6 +2,8 @@
 
 namespace Theutz\Unite\Parser;
 
+use Theutz\Unite\Models\Unit;
+
 class Parser
 {
     /**
@@ -28,5 +30,19 @@ class Parser
             ->values()
             ->map(fn ($i) => (string) str($i)->trim())
             ->all();
+    }
+
+    /**
+     * @return array{?string, string}
+     */
+    public function splitPrefixAndUnit(string $string): array
+    {
+        $unit = Unit::pluck('id')
+            ->map(fn ($key) => __($key))
+            ->firstOrFail(fn ($name) => str($string)->endsWith($name));
+
+        $prefix = str($string)->remove($unit);
+
+        return [(string) $prefix, $unit];
     }
 }
