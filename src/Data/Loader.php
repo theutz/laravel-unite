@@ -1,9 +1,10 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\Data;
 
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Yaml\Yaml;
+use Theutz\Unite\Category;
 
 class Loader
 {
@@ -24,7 +25,7 @@ class Loader
 
     private function makePath(Category $category): string
     {
-        return __DIR__.'/../resources/unite/'.$category->value.'.yaml';
+        return __DIR__.'/../../resources/unite/'.$category->value.'.yaml';
     }
 
     private function validate(array $data)

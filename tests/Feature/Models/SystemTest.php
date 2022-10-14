@@ -14,5 +14,5 @@ it('can return all', function () {
 });
 
 it('can pluck ids', function () {
-    expect(System::pluck('id')->all())->toContain('metric', 'imperial', 'us');
+    expect(System::pluck('id')->all())->toContain('metric', 'imperial', 'uscs');
 });

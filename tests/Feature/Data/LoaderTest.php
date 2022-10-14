@@ -1,6 +1,6 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\Data;
 
 use Illuminate\Validation\ValidationException;
 use Mockery\MockInterface;

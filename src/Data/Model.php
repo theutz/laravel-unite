@@ -1,10 +1,10 @@
 <?php
 
-namespace Theutz\Unite\Models;
+namespace Theutz\Unite\Data;
 
 use Illuminate\Support\Collection;
 use Theutz\Unite\Category;
-use Theutz\Unite\Loader;
+use Theutz\Unite\Data\Loader;
 
 /**
  * @mixin Collection
