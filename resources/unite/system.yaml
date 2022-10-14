@@ -1,0 +1,9 @@
+metric:
+  defaults:
+    mass: g
+us:
+  defaults:
+    mass: lb
+imperial:
+  defaults:
+    mass: lb
