@@ -4,20 +4,10 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Models\Prefix;
-use Theutz\Unite\Models\System;
-use Theutz\Unite\Models\Unit;
-use Theutz\Unite\Models\Kind;
+use Composer\ClassMapGenerator\ClassMapGenerator;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
-    public $singletons = [
-        Unit::class,
-        Prefix::class,
-        System::class,
-        Kind::class
-    ];
-
     public function configurePackage(Package $package): void
     {
         /*
@@ -29,5 +19,18 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile()
             ->hasTranslations();
+    }
+
+    public function packageRegistered()
+    {
+        $this->registerModels();
+    }
+
+    private function registerModels() {
+        $map = ClassMapGenerator::createMap(__DIR__.'/Models');
+
+        foreach ($map as $className => $path) {
+            $this->app->singleton($className);
+        }
     }
 }
