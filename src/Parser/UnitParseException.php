@@ -2,10 +2,10 @@
 
 namespace Theutz\Unite\Parser;
 
-class UnitParseException extends \RuntimeException
+class UnitParseException extends ParseException
 {
-    public function __construct($unit)
+    public function __construct($string)
     {
-        parent::__construct("{$unit} is an invalid unit.");
+        $this->message = "{$string} has an invalid unit.";
     }
 }

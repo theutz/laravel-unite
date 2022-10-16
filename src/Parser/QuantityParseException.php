@@ -2,10 +2,10 @@
 
 namespace Theutz\Unite\Parser;
 
-class QuantityParseException extends \RuntimeException
+class QuantityParseException extends ParseException
 {
     public function __construct($quantity)
     {
-        parent::__construct("{$quantity} is an invalid quantity.");
+        $this->message = "{$quantity} has an invalid quantity.";
     }
 }

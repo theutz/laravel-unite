@@ -32,7 +32,7 @@ abstract class Model
     {
         $instance = app(static::class);
 
-        return $instance->data()->$name($args);
+        return $instance->data()->$name(...$args);
     }
 
     /**

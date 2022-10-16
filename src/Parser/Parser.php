@@ -2,7 +2,9 @@
 
 namespace Theutz\Unite\Parser;
 
+use Illuminate\Support\Str;
 use Theutz\Unite\Formatters\Decimal;
+use Theutz\Unite\Models\Prefix;
 use Theutz\Unite\Models\Unit;
 
 class Parser
@@ -83,5 +85,25 @@ class Parser
         }
 
         return $unit;
+    }
+
+    /**
+     * @throws PrefixParseException
+     */
+    public function extractPrefix(string $string, string $unit): ?string
+    {
+        $prefix = Str::remove($unit, $string);
+
+        if (blank($prefix)) {
+            return null;
+        }
+
+        $found = Prefix::firstWhere('abbr', $prefix);
+
+        if (! $found) {
+            throw new PrefixParseException($string);
+        }
+
+        return $prefix;
     }
 }

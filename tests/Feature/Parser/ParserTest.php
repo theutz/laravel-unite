@@ -2,6 +2,7 @@
 
 use Theutz\Unite\Parser\ParseException;
 use Theutz\Unite\Parser\Parser;
+use Theutz\Unite\Parser\PrefixParseException;
 use Theutz\Unite\Parser\QuantityParseException;
 use Theutz\Unite\Parser\UnitParseException;
 
@@ -60,3 +61,23 @@ it('throws a UnitParseException', function ($str) {
     expect($action)->toThrow(UnitParseException::class);
 })
     ->with(['kbz']);
+
+it('can extract the prefix', function ($str, $unit, $expected) {
+    $sut = app(Parser::class);
+    $result = $sut->extractPrefix($str, $unit);
+    expect($result)->toEqual($expected);
+})
+    ->only()
+    ->with([
+        ['kg', 'g', 'k'],
+        ['oz', 'oz', null],
+    ]);
+
+it('throws a PrefixParseException', function ($str, $unit) {
+    $sut = app(Parser::class);
+    $action = fn () => $sut->extractPrefix($str, $unit);
+    expect($action)->toThrow(PrefixParseException::class);
+})
+    ->with([
+        ['vg', 'g'],
+    ]);
