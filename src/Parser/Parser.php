@@ -22,6 +22,8 @@ class Parser
 
     /**
      * @return array{string, string}
+     *
+     * @throws ParseException
      */
     public function splitQuantityAndUnit(string $string): array
     {
@@ -30,40 +32,56 @@ class Parser
         preg_match('/^(.*?)(\D+)$/', $string, $matches);
 
         [$quantity, $unit] = collect($matches)
-        ->whenEmpty(fn () => throw new ParseException($string))
+            ->whenEmpty(fn () => throw new ParseException($string))
             ->slice(1)
             ->values()
             ->map(fn ($i) => (string) str($i)->trim())
             ->all();
 
         return [
-            $this->validateQuantity($quantity),
+            $this->parseQuantity($quantity),
             $unit,
         ];
     }
 
     /**
      * @return array{?string, string}
+     *
+     * @throws UnitParseException
      */
     public function splitPrefixAndUnit(string $string): array
     {
-        $unit = Unit::pluck('id')
-            ->map(fn ($key) => __($key))
-            ->firstOrFail(fn ($name) => str($string)->endsWith($name));
+        $unit = $this->parseUnit($string);
+        $prefix = (string) str($string)->remove($unit);
 
-        $prefix = str($string)->remove($unit);
-
-        return [(string) $prefix, $unit];
+        return [$prefix, $unit];
     }
 
     /**
      * @throws QuantityParseException
      */
-    private function validateQuantity(string $quantity): string
+    public function parseQuantity(string $quantity): string
     {
-        if ($this->numfmt->parse($quantity)) {
+        if ($parsed = $this->numfmt->parse($quantity)) {
             return $quantity;
         }
+
         throw new QuantityParseException($quantity);
+    }
+
+    /**
+     * @throws UnitParseException
+     */
+    public function parseUnit(string $string): string
+    {
+        $unit = Unit::pluck('id')
+            ->map(fn ($key) => __($key))
+            ->first(fn ($name) => str($string)->endsWith($name));
+
+        if (! $unit) {
+            throw new UnitParseException($string);
+        }
+
+        return $unit;
     }
 }
