@@ -15,11 +15,14 @@ class Parser
     }
 
     /**
-     * @return array{string, string}
+     * @return array{string, ?string, string}
      */
     public function parse(string $string): array
     {
-        return ['', ''];
+        [$quantity, $unit] = $this->splitQuantityAndUnit($string);
+        [$prefix, $unit] = $this->splitPrefixAndUnit($unit);
+
+        return [$quantity, $prefix, $unit];
     }
 
     /**
@@ -54,7 +57,7 @@ class Parser
     public function splitPrefixAndUnit(string $string): array
     {
         $unit = $this->parseUnit($string);
-        $prefix = (string) str($string)->remove($unit);
+        $prefix = $this->extractPrefix($string, $unit);
 
         return [$prefix, $unit];
     }

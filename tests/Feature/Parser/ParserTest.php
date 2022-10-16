@@ -6,6 +6,16 @@ use Theutz\Unite\Parser\PrefixParseException;
 use Theutz\Unite\Parser\QuantityParseException;
 use Theutz\Unite\Parser\UnitParseException;
 
+it('can parse', function ($str, $expected) {
+    $sut = app(Parser::class);
+    $result = $sut->parse($str);
+    expect($result)->toEqual($expected);
+})
+    ->with([
+        ['200 kg', [200, 'k', 'g']],
+        ['53.04e10 oz', [53.04e10, null, 'oz']],
+    ]);
+
 it('can split the quantity and unit', function ($string, $expected) {
     $sut = app(Parser::class);
     $result = $sut->splitQuantityAndUnit($string);
@@ -27,7 +37,7 @@ it('can split the unit and prefix', function ($string, $expected) {
         ['oz', [null, 'oz']],
     ]);
 
-it('throws with junk data', function ($string) {
+it('throws a ParseException', function ($string) {
     $sut = app(Parser::class);
     $action = fn () => $sut->splitQuantityAndUnit($string);
     expect($action)->toThrow(ParseException::class);
@@ -36,7 +46,7 @@ it('throws with junk data', function ($string) {
         '1bw280',
     ]);
 
-it('throws with invalid quantity', function ($string) {
+it('throws a QuantityParseException', function ($string) {
     $sut = app(Parser::class);
     $action = fn () => $sut->parseQuantity($string);
     expect($action)->toThrow(QuantityParseException::class);
@@ -67,7 +77,6 @@ it('can extract the prefix', function ($str, $unit, $expected) {
     $result = $sut->extractPrefix($str, $unit);
     expect($result)->toEqual($expected);
 })
-    ->only()
     ->with([
         ['kg', 'g', 'k'],
         ['oz', 'oz', null],
