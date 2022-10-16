@@ -2,18 +2,22 @@
 
 namespace Theutz\Unite\Parser;
 
+use Theutz\Unite\Formatters\Decimal;
 use Theutz\Unite\Models\Unit;
 
 class Parser
 {
+    public function __construct(
+        private Decimal $numfmt
+    ) {
+    }
+
     /**
      * @return array{string, string}
      */
     public function parse(string $string): array
     {
-        [$quantity, $unit] = $this->splitQuantityAndUnit($string);
-
-        return [$quantity, $unit];
+        return ['', ''];
     }
 
     /**
@@ -23,13 +27,19 @@ class Parser
     {
         $matches = [];
 
-        preg_match('/^(.*?)(\D*)$/', $string, $matches);
+        preg_match('/^(.*?)(\D+)$/', $string, $matches);
 
-        return collect($matches)
+        [$quantity, $unit] = collect($matches)
+        ->whenEmpty(fn () => throw new ParseException($string))
             ->slice(1)
             ->values()
             ->map(fn ($i) => (string) str($i)->trim())
             ->all();
+
+        return [
+            $this->validateQuantity($quantity),
+            $unit,
+        ];
     }
 
     /**
@@ -44,5 +54,16 @@ class Parser
         $prefix = str($string)->remove($unit);
 
         return [(string) $prefix, $unit];
+    }
+
+    /**
+     * @throws QuantityParseException
+     */
+    private function validateQuantity(string $quantity): string
+    {
+        if ($this->numfmt->parse($quantity)) {
+            return $quantity;
+        }
+        throw new QuantityParseException($quantity);
     }
 }

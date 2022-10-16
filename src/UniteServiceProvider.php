@@ -2,9 +2,11 @@
 
 namespace Theutz\Unite;
 
+use NumberFormatter;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Data\Finder;
+use Theutz\Unite\Formatters\Decimal;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -23,6 +25,10 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
+        $this->app->bind(Decimal::class, function ($app) {
+            return new Decimal($app->getLocale(), NumberFormatter::DECIMAL);
+        });
+
         $this->registerModels();
     }
 
