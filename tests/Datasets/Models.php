@@ -2,7 +2,7 @@
 
 use Theutz\Unite\Data\Finder;
 
-$categories = collect(app(Finder::class)->find())
+$models = collect(app(Finder::class)->find())
     ->mapWithKeys(fn ($className) => [class_basename($className) => app($className)]);
 
-dataset('categories', $categories);
+dataset('models', $models);
