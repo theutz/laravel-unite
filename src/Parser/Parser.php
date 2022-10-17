@@ -5,7 +5,6 @@ namespace Theutz\Unite\Parser;
 use Illuminate\Support\Str;
 use NumberFormatter;
 use Theutz\Unite\Intl\NumberFormatterBuilder;
-use Theutz\Unite\Intl\NumberParser;
 use Theutz\Unite\Models\Prefix;
 use Theutz\Unite\Models\Unit;
 

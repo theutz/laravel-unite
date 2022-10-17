@@ -1,3 +1,20 @@
-#! /bin/sh
+#!/usr/bin/env bash
 
-vendor/bin/pint
+set -eo pipefail
+
+CHANGED_FILES=$(git diff --name-only --cached --diff-filter=ACMR)
+
+get_pattern_files() {
+    pattern=$(echo "$*" | sed "s/ /\$\\\|/g")
+    echo "$CHANGED_FILES" | { grep "$pattern" || true; }
+}
+
+PHP_FILES=$(get_pattern_files .php)
+
+if [[ -n "$PHP_FILES" ]]
+then
+    vendor/bin/pint "$PHP_FILES"
+    git add "$PHP_FILES"
+fi
+
+
