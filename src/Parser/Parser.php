@@ -3,14 +3,14 @@
 namespace Theutz\Unite\Parser;
 
 use Illuminate\Support\Str;
-use Theutz\Unite\Formatters\Decimal;
+use Theutz\Unite\Intl\NumberParser;
 use Theutz\Unite\Models\Prefix;
 use Theutz\Unite\Models\Unit;
 
 class Parser
 {
     public function __construct(
-        private Decimal $numfmt
+        private NumberParser $numberParser
     ) {
     }
 
@@ -67,7 +67,7 @@ class Parser
      */
     public function parseQuantity(string $quantity): string
     {
-        if ($parsed = $this->numfmt->parse($quantity)) {
+        if ($parsed = $this->numberParser->parse($quantity)) {
             return $quantity;
         }
 
