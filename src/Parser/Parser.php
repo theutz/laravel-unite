@@ -3,15 +3,20 @@
 namespace Theutz\Unite\Parser;
 
 use Illuminate\Support\Str;
+use NumberFormatter;
+use Theutz\Unite\Intl\NumberFormatterBuilder;
 use Theutz\Unite\Intl\NumberParser;
 use Theutz\Unite\Models\Prefix;
 use Theutz\Unite\Models\Unit;
 
 class Parser
 {
+    private NumberFormatter $numberParser;
+
     public function __construct(
-        private NumberParser $numberParser
+        NumberFormatterBuilder $numberFormatBuilder
     ) {
+        $this->numberParser = $numberFormatBuilder->build();
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Theutz\Unite\Intl;
 
 use NumberFormatter;
 
-class NumberParser
+class NumberFormatterBuilder
 {
     public function __construct(
         private string $locale
@@ -22,11 +22,6 @@ class NumberParser
             $this->style,
             $this->pattern
         );
-    }
-
-    public function parse(string $str): float|int|bool
-    {
-        return $this->build()->parse($str);
     }
 
     public function locale(string $locale): self

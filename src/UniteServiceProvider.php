@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Data\Finder;
-use Theutz\Unite\Intl\NumberParser;
+use Theutz\Unite\Intl\NumberFormatterBuilder;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -24,7 +24,7 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->app->when(NumberParser::class)
+        $this->app->when(NumberFormatterBuilder::class)
             ->needs('$locale')
             ->giveConfig('app.locale');
 
