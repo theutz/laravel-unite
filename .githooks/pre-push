@@ -3,3 +3,5 @@
 set -eo pipefail
 
 vendor/bin/phpstan
+
+vendor/bin/pest
