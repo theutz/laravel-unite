@@ -10,10 +10,10 @@ parameters:
         - tests
     tmpDir: build/phpstan
     ignoreErrors:
-        -
-            message: '#Undefined variable: \$this#'
-            paths:
-                - tests/*
+        #-
+        #    message: '#Undefined variable: \$this#'
+        #    paths:
+        #        - tests/*
         # -
         #     message: '#Access to an undefined property Pest\\Expectation\|Pest\\Support\\Extendable::\$[\w\-_]#'
         #     paths:
