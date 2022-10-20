@@ -5,7 +5,7 @@ set -eo pipefail
 CHANGED_FILES=$(git diff --name-only --cached --diff-filter=ACMR)
 
 get_pattern_files() {
-    pattern=$(echo "$*" | sed "s/ /\$\\\|/g")
+    pattern=$(echo "$*" | sed "s/ /\$\\\|/g" | tr '\n' ' ')
     echo "$CHANGED_FILES" | { grep "$pattern" || true; }
 }
 
