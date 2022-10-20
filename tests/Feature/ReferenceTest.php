@@ -21,8 +21,8 @@ test('config has key', function ($key) {
         'prefixes',
         'systems',
         'kinds',
-        'conversions',
-        'default-units',
-        'has-prefixes',
-        'system-unit',
+        'default-unit-for-system-and-kind',
+        'unit-has-prefixes',
+        'unit-belongs-to-systems',
+        'unit-converts-to',
     ]);

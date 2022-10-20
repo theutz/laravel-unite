@@ -125,16 +125,14 @@ return [
     ],
 
     /**
-     * A list of units and the respecitve systems to which they belong,
-     * separated by a dash. Some units may belong to multiple systems.
+     * A map between units and a comma-separated list of measurement systems to which
+     * they belong.
      */
-    'system-unit' => [
-        'acre-uk',
-        'acre-us',
-        'g-si',
-        'm2-si',
-        'oz-uk',
-        'oz-us',
+    'unit-belongs-to-systems' => [
+        'acre' => 'uk,us',
+        'g' => 'si',
+        'm2' => 'si',
+        'oz' => 'us,uk',
     ],
 
     /**
@@ -144,13 +142,13 @@ return [
      * By default, all units in the Metric system will have prefixes
      * generated.
      */
-    'has-prefixes' => [],
+    'unit-has-prefixes' => [],
 
     /**
      * A list of conversion factors/formulas between units.
      *
-     * The key represents a dash-separated representation of the units we're converting
-     * from and to, i.e., `{from}-{to}`.
+     * The key is an arrow-separated representation of the units we're converting
+     * from and to, i.e., `{from} -> {to}`.
      *
      * If the value is numeric, it represents a linear factor to multiply the
      * `from` value by in order to convert to the `to` unit.
@@ -158,24 +156,24 @@ return [
      * If the value is a string, it representts a formula to apply to the `from`
      * value to arrive at the `to` unit. The `from` value is represented by `x`.
      */
-    'conversions' => [
-        'acre-m2' => 4.046873e3,
-        'C-F' => '(x * 1.8) + 32',
-        'F-C' => '(x - 32) / 1.8',
-        'g-oz' => 3.52739907e-2,
-        'm2-acre' => 2.471054e-4,
-        'oz-g' => 2.83495e1,
+    'unit-converts-to' => [
+        'acre -> m2' => 4.046873e3,
+        'C -> F' => '(x * 1.8) + 32',
+        'F -> C' => '(x - 32) / 1.8',
+        'g -> oz' => 3.52739907e-2,
+        'm2 -> acre' => 2.471054e-4,
+        'oz -> g' => 2.83495e1,
     ],
 
     /**
      * A list of default units by system and kind.
      *
      * The keys are a dash-separated concatenation of the measurement system and
-     * the measurement kind, i.e., `{system}-{kind}`.
+     * the measurement kind, i.e., `{system} > {kind}`.
      *
      * The values should correlate to a key from the `units` config.
      */
-    'default-units' => [
-        'metric-mass' => 'g',
+    'default-unit-for-system-and-kind' => [
+        'metric > mass' => 'g',
     ],
 ];
