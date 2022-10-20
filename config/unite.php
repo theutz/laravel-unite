@@ -156,7 +156,7 @@ return [
      * If the value is a string, it representts a formula to apply to the `from`
      * value to arrive at the `to` unit. The `from` value is represented by `x`.
      */
-    'unit-converts-to' => [
+    'conversions' => [
         'acre -> m2' => 4.046873e3,
         'C -> F' => '(x * 1.8) + 32',
         'F -> C' => '(x - 32) / 1.8',

@@ -28,4 +28,15 @@ class Reference
 
         return collect($units);
     }
+
+    public function conversions(): Collection
+    {
+        return collect($this->config('conversions'))
+            ->map(function ($factor, $key) {
+                [$from, $to] = str($key)->explode(' -> ');
+
+                return compact('from', 'to', 'factor');
+            })
+            ->values();
+    }
 }
