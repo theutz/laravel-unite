@@ -19,4 +19,9 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton(Reference::class);
+    }
 }
