@@ -2,22 +2,30 @@
 
 namespace Theutz\Unite;
 
-use Illuminate\Config\Repository;
+use Illuminate\Support\Collection;
 
 class Reference
 {
     const CONFIG_PREFIX = 'unite.';
 
-    public function config(array|string|null $key = null, mixed $default = null): mixed
+    public function config(string $key): mixed
     {
-        if (is_string($key)) {
-            $key = self::CONFIG_PREFIX . $key;
-        }
+        $key = self::CONFIG_PREFIX.$key;
 
-        if (is_array($key)) {
-            $key = array_map(fn ($k) => self::CONFIG_PREFIX . $k, $key);
-        }
+        return config($key);
+    }
 
-        return config($key, $default);
+    public function units(): Collection
+    {
+        $systems = collect($this->config('unit-belongs-to-systems'))
+            ->map(fn ($item) => ['systems' => str($item)->explode(',')]);
+
+        $units = collect($this->config('units'))
+            ->map(fn ($item) => ['kind' => $item])
+            ->mergeRecursive($systems)
+            ->map(fn ($item, $key) => ['id' => $key, ...$item])
+            ->values();
+
+        return collect($units);
     }
 }

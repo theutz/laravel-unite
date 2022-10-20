@@ -2,6 +2,8 @@
 
 namespace Theutz\Unite;
 
+use Illuminate\Support\Facades\Config;
+
 beforeEach(function () {
     $this->sut = app(Reference::class);
 });
@@ -26,3 +28,22 @@ test('config has key', function ($key) {
         'unit-belongs-to-systems',
         'unit-converts-to',
     ]);
+
+it('returns units', function () {
+    Config::shouldReceive('get')
+        ->withSomeOfArgs('unite.units')
+        ->andReturn(['g' => 'mass']);
+    Config::shouldReceive('get')
+        ->withSomeOfArgs('unite.unit-belongs-to-systems')
+        ->andReturn(['g' => 'si']);
+
+    $result = $this->sut->units();
+
+    expect($result)->toEqual(collect([
+        [
+            'id' => 'g',
+            'kind' => 'mass',
+            'systems' => collect(['si']),
+        ],
+    ]));
+});
