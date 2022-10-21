@@ -10,7 +10,7 @@ class Reference
 
     public function config(string $key): mixed
     {
-        $key = self::CONFIG_PREFIX.$key;
+        $key = self::CONFIG_PREFIX . $key;
 
         return config($key);
     }
@@ -37,6 +37,23 @@ class Reference
 
                 return compact('from', 'to', 'factor');
             })
+            ->values();
+    }
+
+    public function systems(): Collection
+    {
+        return collect($this->config('systems'));
+    }
+
+    public function kinds(): Collection
+    {
+        return collect($this->config('kinds'));
+    }
+
+    public function prefixes(): Collection
+    {
+        return collect($this->config('prefixes'))
+            ->map(fn ($item, $key) => ['id' => $key, 'magnitude' => $item])
             ->values();
     }
 }

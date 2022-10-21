@@ -16,6 +16,15 @@ beforeEach(function () {
     Config::shouldReceive('get')
         ->withSomeOfArgs('unite.conversions')
         ->andReturn(['g -> oz' => 3, 'oz -> g' => 1 / 3]);
+    Config::shouldReceive('get')
+        ->withSomeOfArgs('unite.systems')
+        ->andReturn(['si', 'us', 'uk']);
+    Config::shouldReceive('get')
+        ->withSomeOfArgs('unite.kinds')
+        ->andReturn(['mass']);
+    Config::shouldReceive('get')
+        ->withSomeOfArgs('unite.prefixes')
+        ->andReturn(['k' => 3]);
 
     $this->sut = app(Reference::class);
 });
@@ -55,5 +64,25 @@ it('returns conversions', function () {
     expect($result)->toEqual(collect([
         ['from' => 'g', 'to' => 'oz', 'factor' => 3],
         ['from' => 'oz', 'to' => 'g', 'factor' => 1 / 3],
+    ]));
+});
+
+it('returns systems', function () {
+    $result = $this->sut->systems();
+
+    expect($result)->toEqual(collect(['si', 'us', 'uk']));
+});
+
+it('returns kinds', function () {
+    $result = $this->sut->kinds();
+
+    expect($result)->toEqual(collect(['mass']));
+});
+
+it('returns prefixes', function () {
+    $result = $this->sut->prefixes();
+
+    expect($result)->toEqual(collect([
+        ['id' => 'k', 'magnitude' => 3],
     ]));
 });
