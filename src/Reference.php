@@ -10,30 +10,28 @@ class Reference
 
     public function config(string $key): mixed
     {
-        $key = self::CONFIG_PREFIX . $key;
+        $key = self::CONFIG_PREFIX.$key;
 
         return config($key);
     }
 
     public function units(): Collection
     {
-        $systems = collect($this->config('unit-belongs-to-systems'))
-            ->map(fn ($item) => ['systems' => str($item)->explode(',')]);
+        $systems = $this->unitToSystems()
+            ->map(fn ($item) => ['systems' => $item]);
 
-        $units = collect($this->config('units'))
+        return collect($this->config('units'))
             ->map(fn ($item) => ['kind' => $item])
             ->mergeRecursive($systems)
             ->map(fn ($item, $key) => ['id' => $key, ...$item])
             ->values();
-
-        return collect($units);
     }
 
     public function conversions(): Collection
     {
         return collect($this->config('conversions'))
             ->map(function ($factor, $key) {
-                [$from, $to] = str($key)->explode(' -> ');
+                [$from, $to] = array_map('trim', explode('->', $key));
 
                 return compact('from', 'to', 'factor');
             })
@@ -55,5 +53,11 @@ class Reference
         return collect($this->config('prefixes'))
             ->map(fn ($item, $key) => ['id' => $key, 'magnitude' => $item])
             ->values();
+    }
+
+    public function unitToSystems(): Collection
+    {
+        return collect($this->config('unit-to-systems'))
+            ->map(fn ($item) => str($item)->explode(','));
     }
 }

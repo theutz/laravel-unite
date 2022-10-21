@@ -128,7 +128,7 @@ return [
      * A map between units and a comma-separated list of measurement systems to which
      * they belong.
      */
-    'unit-belongs-to-systems' => [
+    'unit-to-systems' => [
         'acre' => 'uk,us',
         'g' => 'si',
         'm2' => 'si',

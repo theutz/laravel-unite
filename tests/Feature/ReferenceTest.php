@@ -9,13 +9,22 @@ beforeEach(function () {
 
     Config::shouldReceive('get')
         ->withSomeOfArgs('unite.units')
-        ->andReturn(['g' => 'mass']);
+        ->andReturn([
+            'g' => 'mass',
+            'oz' => 'mass',
+        ]);
     Config::shouldReceive('get')
-        ->withSomeOfArgs('unite.unit-belongs-to-systems')
-        ->andReturn(['g' => 'si']);
+        ->withSomeOfArgs('unite.unit-to-systems')
+        ->andReturn([
+            'g' => 'si',
+            'oz' => 'us,uk',
+        ]);
     Config::shouldReceive('get')
         ->withSomeOfArgs('unite.conversions')
-        ->andReturn(['g -> oz' => 3, 'oz -> g' => 1 / 3]);
+        ->andReturn([
+            'g -> oz' => 3,
+            'oz -> g' => 1 / 3,
+        ]);
     Config::shouldReceive('get')
         ->withSomeOfArgs('unite.systems')
         ->andReturn(['si', 'us', 'uk']);
@@ -42,7 +51,7 @@ test('config has key', function ($key) {
         'kinds',
         'default-unit-for-system-and-kind',
         'unit-has-prefixes',
-        'unit-belongs-to-systems',
+        'unit-to-systems',
         'conversions',
     ]);
 
@@ -54,6 +63,11 @@ it('returns units', function () {
             'id' => 'g',
             'kind' => 'mass',
             'systems' => collect(['si']),
+        ],
+        [
+            'id' => 'oz',
+            'kind' => 'mass',
+            'systems' => collect(['us', 'uk']),
         ],
     ]));
 });
@@ -84,5 +98,14 @@ it('returns prefixes', function () {
 
     expect($result)->toEqual(collect([
         ['id' => 'k', 'magnitude' => 3],
+    ]));
+});
+
+it('returns unit-to-systems', function () {
+    $result = $this->sut->unitToSystems();
+
+    expect($result)->toEqual(collect([
+        'g' => collect(['si']),
+        'oz' => collect(['us', 'uk']),
     ]));
 });
