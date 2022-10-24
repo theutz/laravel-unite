@@ -9,4 +9,5 @@ it('can convert', function ($from, $to, $expected) {
     expect($result)->toBe($expected);
 })->with([
     ['200 g', 'oz', '7.05479814 oz'],
+    ['50 oz', 'g', '1417.475 g']
 ]);

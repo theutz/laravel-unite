@@ -3,8 +3,6 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
-use Brick\Math\BigNumber;
-use Brick\Math\RoundingMode;
 
 class Unite
 {
@@ -21,11 +19,7 @@ class Unite
 
     public function to(string $unit): string
     {
-        $factor = collect(config('unite.conversions'))
-            ->filter(
-                fn ($factor, $key) => str($key)->startsWith($this->unit) &&
-                    str($key)->endsWith($unit)
-            )->firstOrFail();
+        $factor = $this->findFactor(from: $this->unit, to: $unit);
 
         $quantity = BigDecimal::of($this->quantity)->multipliedBy($factor);
         $quantity = str($quantity)->rtrim(0);
@@ -47,5 +41,13 @@ class Unite
         [, $quantity, $unit] = $matches;
 
         return array_map('trim', [$quantity, $unit]);
+    }
+
+    private function findFactor(string $from, string $to)
+    {
+        return collect(config('unite.conversions'))
+            ->filter(fn ($factor, $key) => str($key)->startsWith($from)
+                && str($key)->endsWith($to))
+            ->firstOrFail();
     }
 }
