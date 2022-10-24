@@ -3,6 +3,7 @@
 $units = [
     'g' => ['gram', 'grams'],
     'm' => ['meter', 'meters'],
+    'oz' => ['ounce', 'ounces'],
 ];
 
 $prefixes = [

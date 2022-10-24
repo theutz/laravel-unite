@@ -3,6 +3,7 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
+use RuntimeException;
 
 class Unite
 {
@@ -30,7 +31,7 @@ class Unite
     /**
      * @return array{0: string, 1: string}
      */
-    public function parse(string $string): array
+    private function parse(string $string): array
     {
         preg_match(
             pattern: '/^(.*?)(\D+)[23]?$/',
@@ -38,16 +39,34 @@ class Unite
             matches: $matches
         );
 
-        [, $quantity, $unit] = $matches;
+        [, $quantity, $unit] = array_map('trim', $matches);
 
-        return array_map('trim', [$quantity, $unit]);
+        if (count($matches) < 3) {
+            throw new RuntimeException("{$string} is not valid.");
+        }
+
+        return [$quantity, $unit];
     }
 
-    private function findFactor(string $from, string $to)
+    private function findFactor(string $from, string $to): ?string
     {
+        [$from, $to] = array_map([$this, 'getUnitKey'], [$from, $to]);
+
         return collect(config('unite.conversions'))
             ->filter(fn ($factor, $key) => str($key)->startsWith($from)
                 && str($key)->endsWith($to))
-            ->firstOrFail();
+            ->first();
+    }
+
+    private function getUnitKey(string $unit): string
+    {
+        $key = collect(config('unite.units'))
+            ->keys()
+            ->filter(function ($u) use ($unit) {
+                return $unit === $u || __("unite::units.".$unit) === $u;
+            })
+            ->first();
+
+        return $key;
     }
 }
