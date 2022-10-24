@@ -3,7 +3,8 @@
 namespace Theutz\Unite;
 
 it('can convert', function ($from, $to, $expected) {
-    $result = Unite::convert($from)->to($to);
+    $sut = app(Unite::class);
+    $result = $sut->convert($from)->to($to);
 
     expect($result)->toBe($expected);
 })->with([
