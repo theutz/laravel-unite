@@ -1,0 +1,165 @@
+A:
+  name: ampere|amperes
+  aliases:
+    - amp|amps
+acre:
+  name: acre|acres
+  aliases: []
+bar:
+  name: bar|bars
+  aliases: []
+C:
+  name: Celsius
+  aliases:
+    - degree Celsius|degrees Celsius
+cd:
+  name: candela|candelas
+  aliases: []
+ch:
+  name: chain|chains
+  aliases: []
+cu ft:
+  name: cubic feet|cubic feet
+  aliases:
+    - ° C
+    - °C
+cu in:
+  name: cubic inch|cubic inches
+  aliases: []
+cu mi:
+  name: cubic mile|cubic miles
+  aliases: []
+cu yd:
+  name: cubic yard|cubic yards
+  aliases: []
+d:
+  name: day|days
+  aliases: []
+dry pt:
+  name: dry pint|dry pints
+  aliases: []
+dry qt:
+  name: dry quart|dry quarts
+  aliases: []
+F:
+  name: Fahrenheit
+  aliases:
+    - degree Fahrenheit|degrees Fahrenheit
+    - ° F
+    - °F
+fl oz:
+  name: fluid ounce|fluid ounces
+  aliases: []
+ft:
+  name: foot|feet
+  aliases: []
+fur:
+  name: furlong|furlongs
+  aliases: []
+g:
+  name: gram|grams
+  aliases: []
+gal:
+  name: gallon|gallons
+  aliases: []
+gil:
+  name: gill|gills
+  aliases: []
+h:
+  name: hour|hours
+  aliases: []
+in:
+  name: inch|inches
+  aliases: []
+K:
+  name: Kelvin
+  aliases:
+    - degree Kelvin|degrees Kelvin
+    - ° K
+    - °K
+L:
+  name: liter|liters
+  aliases: []
+lb:
+  name: "pound|pounds"
+  aliases:
+    - lbs
+lea:
+  name: league|leagues
+  aliases: []
+long ton:
+  name: long ton|long tons
+  aliases: []
+m:
+  name: meter|meters
+  aliases: []
+m2:
+  name: meter squared|meters squared
+  aliases:
+    - square meter|square meters
+    - m²
+m3:
+  name: meter cubed|meters cubed
+  aliases:
+    - cubic meter|cubic meters
+    - m³
+mi:
+  name: mile|miles
+  aliases: []
+min:
+  name: minute|minutes
+  aliases: []
+mmHg:
+  name: millimeter of mercury|millimeters of mercury
+  aliases: []
+N:
+  name: Newton|Newtons
+  aliases: []
+oz:
+  name: ounce|ounces
+  aliases: []
+pt:
+  name: pint|pints
+  aliases: []
+qt:
+  name: quart|quarts
+  aliases: []
+rad:
+  name: radian|radians
+  aliases: []
+s:
+  name: second|seconds
+  aliases: []
+sq ft:
+  name: square foot|square feet
+  aliases: []
+sq in:
+  name: square inch|square inches
+  aliases: []
+sq mi:
+  name: square mile|square miles
+  aliases: []
+sq yd:
+  name: square yard|square yards
+  aliases: []
+st:
+  name: stere|steres
+  aliases: []
+tbsp:
+  name: tablespoon|tablespoons
+  aliases: []
+ton:
+  name: ton|tons
+  aliases: []
+tsp:
+  name: teaspoon|teaspoons
+  aliases: []
+V:
+  name: volt|volts
+  aliases: []
+W:
+  name: watt|watts
+  aliases: []
+yd:
+  name: yard|yards
+  aliases: []
