@@ -68,54 +68,7 @@ return [
     ],
 
     /**
-     * This is the canonical listing of units.
-     *
-     * The key represents the ID used thorughout the system to idenfity the unit.
-     *
-     * The value represents any long names and/or aliases that might be used to identify
-     * the unit. These will be used to dynamically generate language files for the
-     * `en` locale, and thus the (likely) fallback locale for your app.
+     * The file path where the unit definitions are stored.
      */
     'units' => __DIR__ . '/../resources/unite/units.yaml',
-
-    /**
-     * A map between units and a comma-separated list of measurement systems to which
-     * they belong.
-     */
-    'unit-to-systems' => [
-        'acre' => 'uk,us',
-        'g' => 'si',
-        'm2' => 'si',
-        'oz' => 'us,uk',
-    ],
-
-    /**
-     * A list of the units that should expect metric prefixes. This list is used
-     * to generate values in language files.
-     *
-     * By default, all units in the Metric system will have prefixes
-     * generated.
-     */
-    'unit-has-prefixes' => [],
-
-    /**
-     * A list of conversion factors/formulas between units.
-     *
-     * The key is an arrow-separated representation of the units we're converting
-     * from and to, i.e., `{from} -> {to}`.
-     *
-     * If the value is numeric, it represents a linear factor to multiply the
-     * `from` value by in order to convert to the `to` unit.
-     *
-     * If the value is a string, it representts a formula to apply to the `from`
-     * value to arrive at the `to` unit. The `from` value is represented by `x`.
-     */
-    'conversions' => [
-        'acre -> m2' => 4.046873e3,
-        'C -> F' => '(x * 1.8) + 32',
-        'F -> C' => '(x - 32) / 1.8',
-        'g -> oz' => 3.52739907e-2,
-        'm2 -> acre' => 2.471054e-4,
-        'oz -> g' => 2.83495e1,
-    ],
 ];

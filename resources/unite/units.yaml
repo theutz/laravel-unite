@@ -3,6 +3,8 @@ g:
   aliases: []
   kind: mass
   systems: [si]
+  to:
+    oz: 3.52739907e-2
 lb:
   name: "pound|pounds"
   aliases: [lbs]
@@ -12,6 +14,8 @@ oz:
   name: ounce|ounces
   aliases: []
   kind: mass
+  to:
+    g: 2.83495e1
 ton:
   name: ton|tons
   aliases: []

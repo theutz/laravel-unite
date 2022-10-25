@@ -63,7 +63,7 @@ class Unite
         $key = collect(config('unite.units'))
             ->keys()
             ->filter(function ($u) use ($unit) {
-                return $unit === $u || __('unite::units.'.$unit) === $u;
+                return $unit === $u || __('unite::units.' . $unit) === $u;
             })
             ->first();
 

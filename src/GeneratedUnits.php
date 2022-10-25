@@ -36,11 +36,11 @@ class GeneratedUnits
 
                 collect($unit['aliases'])
                     ->merge($unit['name'])
-                    ->each(function ($nameDef) use ($carry, $symbol) {
-                        str($nameDef)
+                    ->each(
+                        fn ($nameDef) => str($nameDef)
                             ->explode(self::PLURAL_SEPARATOR)
-                            ->each(fn ($name) => $carry->put($name, $symbol));
-                    });
+                            ->each(fn ($name) => $carry->put($name, $symbol))
+                    );
 
                 return $carry;
             }, collect())
