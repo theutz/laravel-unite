@@ -9,7 +9,12 @@ class Unite
 {
     private string $quantity;
 
-    private string $unit;
+    private array $unit;
+
+    public function __construct(
+        private Units $units
+    ) {
+    }
 
     public function convert(string $string): self
     {
@@ -20,7 +25,7 @@ class Unite
 
     public function to(string $unit): string
     {
-        $factor = $this->findFactor(from: $this->unit, to: $unit);
+        $factor = $this->getConversionFactor($unit);
 
         $quantity = BigDecimal::of($this->quantity)->multipliedBy($factor);
         $quantity = str($quantity)->rtrim(0);
@@ -29,7 +34,7 @@ class Unite
     }
 
     /**
-     * @return array{0: string, 1: string}
+     * @return array{0: string, 1: array}
      */
     private function parse(string $string): array
     {
@@ -45,28 +50,21 @@ class Unite
             throw new RuntimeException("{$string} is not valid.");
         }
 
-        return [$quantity, $unit];
+        return [$quantity, $this->getUnit($unit)];
     }
 
-    private function findFactor(string $from, string $to): ?string
+    private function getUnit(string $unit): array
     {
-        [$from, $to] = array_map([$this, 'getUnitKey'], [$from, $to]);
-
-        return collect(config('unite.conversions'))
-            ->filter(fn ($factor, $key) => str($key)->startsWith($from)
-                && str($key)->endsWith($to))
-            ->first();
+        return collect($this->units->all())
+            ->filter(fn ($_, $symbol) => $unit === $symbol || __('unite::units.'.$unit) === $symbol)
+            ->sole();
     }
 
-    private function getUnitKey(string $unit): string
+    private function getConversionFactor(string $unit): string
     {
-        $key = collect(config('unite.units'))
-            ->keys()
-            ->filter(function ($u) use ($unit) {
-                return $unit === $u || __('unite::units.' . $unit) === $u;
-            })
-            ->first();
+        [, $toUnit] = $this->parse($unit);
+        ['symbol' => $symbol] = $toUnit;
 
-        return $key;
+        return $this->unit['to'][$symbol];
     }
 }

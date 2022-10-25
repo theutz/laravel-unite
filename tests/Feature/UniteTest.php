@@ -11,4 +11,4 @@ it('can convert', function ($from, $to, $expected) {
     ['200 g', 'oz', '7.05479814 oz'],
     ['50 oz', 'g', '1417.475 g'],
     ['50 ounces', 'grams', '1417.475 grams'],
-])->skip();
+]);

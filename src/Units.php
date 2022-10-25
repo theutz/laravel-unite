@@ -11,11 +11,16 @@ class Units
     ) {
     }
 
+    public function all(): array
+    {
+        return collect($this->loader->units())
+            ->map(fn ($item, $key) => [...$item, 'symbol' => $key])
+            ->all();
+    }
+
     public function generateLang(): array
     {
-        $units = $this->loader->units();
-
-        return $this->toLangAliases($units);
+        return $this->toLangAliases($this->all());
     }
 
     private function toLangAliases(array $units): array

@@ -5,16 +5,15 @@
  */
 return [
 
-
     /**
      * The file path where the unit definitions are stored.
      */
-    'units' => __DIR__ . '/../resources/unite/units.yaml',
+    'units' => __DIR__.'/../resources/unite/units.yaml',
 
     /**
      * The file path where prefix definitions are stored.
      */
-    'prefixes' => __DIR__ . '/../resources/unite/prefixes.yaml',
+    'prefixes' => __DIR__.'/../resources/unite/prefixes.yaml',
 
     /**
      * The separation character used when defining plural terms. Defaults
