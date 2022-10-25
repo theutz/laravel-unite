@@ -1,3 +1,3 @@
 <?php
 
-return app(\Theutz\Unite\GeneratedUnits::class)->generate();
+return app(\Theutz\Unite\Units::class)->generate();

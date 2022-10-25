@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite;
 
-class GeneratedUnits
+class Units
 {
     const PLURAL_SEPARATOR = '|';
 
@@ -11,14 +11,14 @@ class GeneratedUnits
     ) {
     }
 
-    public function generate(): array
+    public function generateLang(): array
     {
         $units = $this->loader->units();
 
-        return $this->toAliases($units);
+        return $this->toLangAliases($units);
     }
 
-    private function toAliases(array $units): array
+    private function toLangAliases(array $units): array
     {
         return collect($units)
             ->reduce(function ($carry, $unit, $symbol) {

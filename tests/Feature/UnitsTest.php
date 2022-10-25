@@ -2,7 +2,7 @@
 
 use function Pest\Laravel\mock;
 use Symfony\Component\Yaml\Yaml;
-use Theutz\Unite\GeneratedUnits;
+use Theutz\Unite\Units;
 
 it('produces the units', function () {
     config(['unite.units' => 'filename']);
@@ -18,7 +18,7 @@ it('produces the units', function () {
         ])
         ->getMock();
 
-    $result = app(GeneratedUnits::class)->generate();
+    $result = app(Units::class)->generateLang();
 
     expect($result)->toMatchArray([
         'A' => 'ampere|amperes',
