@@ -19,4 +19,18 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasTranslations();
     }
+
+    public function packageRegistered(): void
+    {
+        $this->registerGeneratedUnits();
+    }
+
+    private function registerGeneratedUnits(): void
+    {
+        $this->app->singleton(GeneratedUnits::class);
+
+        $this->app->when(GeneratedUnits::class)
+            ->needs('$units')
+            ->giveConfig('unite.units');
+    }
 }

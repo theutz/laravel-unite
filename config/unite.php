@@ -95,7 +95,7 @@ return [
         'C' => 'Celsius;;degree Celsius|degrees Celsius',
         'cd' => 'candela|candelas',
         'ch' => 'chain|chains',
-        'cu ft' => 'cubic feet|cubic feet;;° C;°C',
+        'cu ft' => 'cubic feet|cubic feet;;° C;;°C',
         'cu in' => 'cubic inch|cubic inches',
         'cu mi' => 'cubic mile|cubic miles',
         'cu yd' => 'cubic yard|cubid yards',
