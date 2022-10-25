@@ -2,164 +2,215 @@ A:
   name: ampere|amperes
   aliases:
     - amp|amps
+  kind: electricity
 acre:
   name: acre|acres
   aliases: []
+  kind: area
 bar:
   name: bar|bars
   aliases: []
+  kind: pressure
 C:
   name: Celsius
   aliases:
     - degree Celsius|degrees Celsius
+  kind: temperature
 cd:
   name: candela|candelas
   aliases: []
+  kind: light
 ch:
   name: chain|chains
   aliases: []
+  kind: length
 cu ft:
   name: cubic feet|cubic feet
   aliases:
     - ° C
     - °C
+  kind: volume
 cu in:
   name: cubic inch|cubic inches
   aliases: []
+  kind: volume
 cu mi:
   name: cubic mile|cubic miles
   aliases: []
+  kind: volume
 cu yd:
   name: cubic yard|cubic yards
   aliases: []
+  kind: volume
 d:
   name: day|days
   aliases: []
+  kind: time
 dry pt:
   name: dry pint|dry pints
   aliases: []
+  kind: volume
 dry qt:
   name: dry quart|dry quarts
   aliases: []
+  kind: volume
 F:
   name: Fahrenheit
   aliases:
     - degree Fahrenheit|degrees Fahrenheit
     - ° F
     - °F
+  kind: temperature
 fl oz:
   name: fluid ounce|fluid ounces
   aliases: []
+  kind: volume
 ft:
   name: foot|feet
   aliases: []
+  kind: length
 fur:
   name: furlong|furlongs
   aliases: []
+  kind: length
 g:
   name: gram|grams
   aliases: []
+  kind: mass
 gal:
   name: gallon|gallons
   aliases: []
+  kind: volume
 gil:
   name: gill|gills
   aliases: []
+  kind: volume
 h:
   name: hour|hours
   aliases: []
+  kind: time
 in:
   name: inch|inches
   aliases: []
+  kind: length
 K:
   name: Kelvin
   aliases:
     - degree Kelvin|degrees Kelvin
     - ° K
     - °K
+  kind: temperature
 L:
   name: liter|liters
-  aliases: []
+  aliases:
+    - l
+  kind: liters
 lb:
   name: "pound|pounds"
   aliases:
     - lbs
+  kind: mass
 lea:
   name: league|leagues
   aliases: []
+  kind: length
 long ton:
   name: long ton|long tons
   aliases: []
+  kind: mass
 m:
   name: meter|meters
   aliases: []
+  kind: length
 m2:
   name: meter squared|meters squared
   aliases:
     - square meter|square meters
     - m²
+  kind: area
 m3:
   name: meter cubed|meters cubed
   aliases:
     - cubic meter|cubic meters
     - m³
+  kind: volume
 mi:
   name: mile|miles
   aliases: []
+  kind: length
 min:
   name: minute|minutes
   aliases: []
+  kind: time
 mmHg:
   name: millimeter of mercury|millimeters of mercury
   aliases: []
+  kind: pressure
 N:
   name: Newton|Newtons
   aliases: []
+  kind: force
 oz:
   name: ounce|ounces
   aliases: []
+  kind: mass
 pt:
   name: pint|pints
   aliases: []
+  kind: pint
 qt:
   name: quart|quarts
   aliases: []
+  kind: volume
 rad:
   name: radian|radians
   aliases: []
+  kind: angle
 s:
   name: second|seconds
   aliases: []
+  kind: time
 sq ft:
   name: square foot|square feet
   aliases: []
+  kind: area
 sq in:
   name: square inch|square inches
   aliases: []
+  kind: area
 sq mi:
   name: square mile|square miles
   aliases: []
+  kind: area
 sq yd:
   name: square yard|square yards
   aliases: []
+  kind: area
 st:
   name: stere|steres
   aliases: []
+  kind: volume
 tbsp:
   name: tablespoon|tablespoons
   aliases: []
+  kind: volume
 ton:
   name: ton|tons
   aliases: []
+  kind: mass
 tsp:
   name: teaspoon|teaspoons
   aliases: []
+  kind: volume
 V:
   name: volt|volts
   aliases: []
+  kind: electricity
 W:
   name: watt|watts
   aliases: []
+  kind: power
 yd:
   name: yard|yards
   aliases: []
+  kind: length
