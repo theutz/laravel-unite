@@ -15,7 +15,7 @@ class GeneratedUnits
 
     public function generate(): array
     {
-        return cache()->get('unite.units', function() {
+        return cache()->get('unite.units', function () {
             return $this->units();
         });
     }
