@@ -12,6 +12,12 @@ parameters:
     ignoreErrors:
         -
             message: '#Undefined variable: \$this#'
+            reportUnmatched: false
+            paths:
+                - tests/*
+        -
+            message: '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::[\w\-_]*\(\)#'
+            reportUnmatched: false
             paths:
                 - tests/*
         # -

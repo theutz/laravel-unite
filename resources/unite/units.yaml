@@ -1,0 +1,22 @@
+g:
+  name: gram|grams
+  aliases: []
+  kind: mass
+  systems: [si]
+  to:
+    oz: 3.52739907e-2
+lb:
+  name: "pound|pounds"
+  aliases: [lbs]
+  kind: mass
+  systems: [us, uk]
+oz:
+  name: ounce|ounces
+  aliases: []
+  kind: mass
+  to:
+    g: 2.83495e1
+ton:
+  name: ton|tons
+  aliases: []
+  kind: mass
