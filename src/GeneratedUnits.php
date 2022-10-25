@@ -2,34 +2,45 @@
 
 namespace Theutz\Unite;
 
+use Symfony\Component\Yaml\Yaml;
+
 class GeneratedUnits
 {
     const PLURAL_SEPARATOR = '|';
 
     public function __construct(
-        private array $units
+        private Yaml $yaml,
+        private string $units
     ) {
     }
 
     public function generate(): array
     {
-        return cache()->get('unite.units', function() {
-            return $this->units();
-        });
+        $units = $this->getUnits();
+
+        return $this->transformToAliases($units);
     }
 
-    private function units(): array
+    private function getUnits(): array
     {
-        return collect($this->units)
-            ->reduce(function ($carry, $item, $key) {
-                $names = collect($item);
-                $carry->put($key, $names->first());
+        $filepath = config('unite.units');
 
-                $names
-                    ->map(fn ($name) => str($name)
-                        ->explode(self::PLURAL_SEPARATOR))
-                    ->flatten()
-                    ->each(fn ($name) => $carry->put($name, $key));
+        return $this->yaml->parseFile($filepath);
+    }
+
+    private function transformToAliases(array $units): array
+    {
+        return collect($units)
+            ->reduce(function ($carry, $unit, $symbol) {
+                $carry->put($symbol, $unit['name']);
+
+                collect($unit['aliases'])
+                    ->merge($unit['name'])
+                    ->each(function ($nameDef) use ($carry, $symbol) {
+                        str($nameDef)
+                            ->explode(self::PLURAL_SEPARATOR)
+                            ->each(fn ($name) => $carry->put($name, $symbol));
+                    });
 
                 return $carry;
             }, collect())
