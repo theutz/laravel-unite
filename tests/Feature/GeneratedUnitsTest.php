@@ -1,12 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
 use Theutz\Unite\GeneratedUnits;
 
-it('works', function () {
-    Config::shouldReceive('get')
-        ->withSomeOfArgs('unite.units')
-        ->andReturn(['A' => 'ampere|amperes;;amp|amps']);
+it('produces the units', function () {
+    config(['unite.units' => ['A' => 'ampere|amperes;;amp|amps']]);
 
     $result = app(GeneratedUnits::class)->generate();
 
