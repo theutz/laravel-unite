@@ -2,33 +2,23 @@
 
 namespace Theutz\Unite;
 
-use Symfony\Component\Yaml\Yaml;
-
 class GeneratedUnits
 {
     const PLURAL_SEPARATOR = '|';
 
     public function __construct(
-        private Yaml $yaml,
-        private string $units
+        private Loader $loader
     ) {
     }
 
     public function generate(): array
     {
-        $units = $this->getUnits();
+        $units = $this->loader->units();
 
-        return $this->transformToAliases($units);
+        return $this->toAliases($units);
     }
 
-    private function getUnits(): array
-    {
-        $filepath = config('unite.units');
-
-        return $this->yaml->parseFile($filepath);
-    }
-
-    private function transformToAliases(array $units): array
+    private function toAliases(array $units): array
     {
         return collect($units)
             ->reduce(function ($carry, $unit, $symbol) {

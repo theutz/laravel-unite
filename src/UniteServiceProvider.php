@@ -22,15 +22,14 @@ class UniteServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->registerGeneratedUnits();
+        $this->registerLoader();
     }
 
-    private function registerGeneratedUnits(): void
+    private function registerLoader(): void
     {
-        $this->app->singleton(GeneratedUnits::class);
-
-        $this->app->when(GeneratedUnits::class)
-            ->needs('$units')
+        $this->app->singleton(Loader::class);
+        $this->app->when(Loader::class)
+            ->needs('$unitsPath')
             ->giveConfig('unite.units');
     }
 }
