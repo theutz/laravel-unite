@@ -49,7 +49,6 @@ test('config has key', function ($key) {
         'prefixes',
         'systems',
         'kinds',
-        'default-unit-for-system-and-kind',
         'unit-has-prefixes',
         'unit-to-systems',
         'conversions',
