@@ -7,8 +7,10 @@ use Theutz\Unite\Definitions\UnitDefinition;
 
 beforeEach(fn () => $this->sut = app(UnitsCollection::class));
 
+$sut = fn () => $this->sut;
+
 it('should be iterable')
-    ->expect(fn () => $this->sut)
+    ->expect($sut)
     ->toBeIterable();
 
 it('should be countable')
@@ -16,13 +18,13 @@ it('should be countable')
     ->toBeGreaterThanOrEqual(1);
 
 it('should be a collection of unit definitions')
-    ->expect(fn () => $this->sut)
+    ->expect($sut)
     ->where('symbol', 'g')
     ->sole()
     ->toBeInstanceOf(UnitDefinition::class);
 
 it('should generate prefixed units')
-    ->expect(fn () => $this->sut)
+    ->expect($sut)
     ->where('symbol', 'kg')
     ->first()
     ->toMatchObject((object) [
@@ -37,3 +39,6 @@ it('should generate prefixed units')
             ),
         ]),
     ]);
+
+// it('should generate lang entries')
+//     ->expect($sut);
