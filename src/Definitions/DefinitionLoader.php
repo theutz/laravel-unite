@@ -27,6 +27,6 @@ class DefinitionLoader
         $raw = $this->yaml->parseFile(config('unite.prefixes'));
 
         return collect($raw)
-            ->map([PrefixDefinition::class, 'make']);
+            ->map(fn ($data) => new PrefixDefinition(...$data));
     }
 }

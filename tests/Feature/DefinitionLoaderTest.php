@@ -2,15 +2,16 @@
 
 namespace Theutz\Unite;
 
-use function Pest\Laravel\mock;
-use Symfony\Component\Yaml\Yaml;
 use Theutz\Unite\Definitions\DefinitionLoader;
+use Theutz\Unite\Definitions\PrefixDefinition;
 use Theutz\Unite\Definitions\UnitDefinition;
 
-it('loads the units', function () {
-    $sut = app(DefinitionLoader::class);
+beforeEach(function () {
+    $this->sut = app(DefinitionLoader::class);
+});
 
-    $result = $sut->units();
+it('loads the units', function () {
+    $result = $this->sut->units();
 
     expect($result->firstWhere('symbol', 'g'))->toEqual(
         new UnitDefinition(
@@ -20,6 +21,18 @@ it('loads the units', function () {
             kind: 'mass',
             systems: ['si'],
             to: ['oz' => '0.0352739907']
+        )
+    );
+});
+
+it('loads the prefixes', function () {
+    $result = $this->sut->prefixes();
+
+    expect($result->firstWhere('symbol', 'k'))->toEqual(
+        new PrefixDefinition(
+            symbol: 'k',
+            name: 'kilo',
+            factor: '1e3'
         )
     );
 });
