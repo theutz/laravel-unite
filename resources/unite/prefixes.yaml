@@ -1,60 +1,60 @@
-Y:
+- symbol: Y
   name: yotta
   factor: 1e24,
-Z:
+- symbol: Z
   name: zetta
   factor: 1e21,
-E:
+- symbol: E
   name: exa
   factor: 1e18,
-P:
+- symbol: P
   name: peta
   factor: 1e15,
-T:
+- symbol: T
   name: tera
   factor: 1e12,
-G:
+- symbol: G
   name: giga
   factor: 1e9,
-M:
+- symbol: M
   name: mega
   factor: 1e6,
-k:
+- symbol: k
   name: kilo
   factor: 1e3,
-h:
+- symbol: h
   name: hecto
   factor: 1e2,
-da:
+- symbol: da
   name: deka
   factor: 1e1,
-d:
+- symbol: d
   name: deci
   factor: 1e-1,
-c:
+- symbol: c
   name: centi
   factor: 1e-2,
-m:
+- symbol: m
   name: milli
   factor: 1e-6,
-μ:
+- symbol: μ
   name: micro
   factor: 1e-9,
-n:
+- symbol: n
   name: nano
   factor: 1e-12,
-p:
+- symbol: p
   name: pico
   factor: 1e-15,
-f:
+- symbol: f
   name: femto
   factor: 1e-18,
-a:
+- symbol: a
   name: atto
   factor: 1e-21,
-z:
+- symbol: z
   name: zepto
   factor: 1e-24,
-y:
+- symbol: y
   name: yotto
   factor: 1e-24,
