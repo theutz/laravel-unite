@@ -3,13 +3,14 @@
 namespace Theutz\Unite;
 
 use Illuminate\Support\Collection;
+use Theutz\Unite\Definitions\DefinitionLoader;
 
 class Units
 {
     const PLURAL_SEPARATOR = '|';
 
     public function __construct(
-        private Loader $loader
+        private DefinitionLoader $loader
     ) {
     }
 

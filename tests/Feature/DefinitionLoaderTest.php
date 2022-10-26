@@ -4,6 +4,7 @@ namespace Theutz\Unite;
 
 use function Pest\Laravel\mock;
 use Symfony\Component\Yaml\Yaml;
+use Theutz\Unite\Definitions\DefinitionLoader;
 use Theutz\Unite\Definitions\UnitDefinition;
 
 it('loads the units', function () {
@@ -21,7 +22,7 @@ it('loads the units', function () {
         ->shouldReceive('parseFile')
         ->once()
         ->andReturn($expected);
-    $sut = app(Loader::class);
+    $sut = app(DefinitionLoader::class);
 
     $result = $sut->units();
 

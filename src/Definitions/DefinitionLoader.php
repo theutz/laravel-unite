@@ -1,12 +1,11 @@
 <?php
 
-namespace Theutz\Unite;
+namespace Theutz\Unite\Definitions;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Yaml\Yaml;
-use Theutz\Unite\Definitions\UnitDefinition;
 
-class Loader
+class DefinitionLoader
 {
     public function __construct(
         private Yaml $yaml,

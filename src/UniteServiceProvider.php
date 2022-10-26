@@ -4,6 +4,7 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Theutz\Unite\Definitions\DefinitionLoader;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -27,8 +28,8 @@ class UniteServiceProvider extends PackageServiceProvider
 
     private function registerLoader(): void
     {
-        $this->app->singleton(Loader::class);
-        $this->app->when(Loader::class)
+        $this->app->singleton(DefinitionLoader::class);
+        $this->app->when(DefinitionLoader::class)
             ->needs('$unitsPath')
             ->giveConfig('unite.units');
     }

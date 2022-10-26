@@ -10,9 +10,11 @@ class UnitDefinition
         public readonly array $aliases,
         public readonly string $kind,
         public readonly array $to
-    ) {}
+    ) {
+    }
 
-    public static function make(array $data) {
+    public static function make(array $data)
+    {
         return new static(
             symbol: $data['symbol'],
             name: $data['name'],
