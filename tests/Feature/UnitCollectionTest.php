@@ -19,3 +19,13 @@ it('should be a collection of unit definitions')
     ->where('symbol', 'g')
     ->sole()
     ->toBeInstanceOf(UnitDefinition::class);
+
+it('should generate prefixed units')
+    ->expect(fn () => $this->sut)
+    ->where('symbol', 'kg')
+    ->first()
+    ->toMatchObject((object) [
+        'symbol' => 'kg',
+        'name' => 'kilogram|kilograms',
+        'aliases' => collect()
+    ]);
