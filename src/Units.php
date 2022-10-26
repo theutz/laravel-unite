@@ -2,6 +2,8 @@
 
 namespace Theutz\Unite;
 
+use Illuminate\Support\Collection;
+
 class Units
 {
     const PLURAL_SEPARATOR = '|';
@@ -11,7 +13,7 @@ class Units
     ) {
     }
 
-    public function all(): array
+    public function all(): Collection
     {
         return $this->loader->units();
     }
@@ -21,18 +23,18 @@ class Units
         return $this->toLangAliases($this->all());
     }
 
-    private function toLangAliases(array $units): array
+    private function toLangAliases(Collection $units): array
     {
-        return collect($units)
+        return $units
             ->reduce(function ($carry, $unit) {
-                $carry->put($unit['symbol'], $unit['name']);
+                $carry->put($unit->symbol, $unit->name);
 
-                collect($unit['aliases'])
-                    ->merge($unit['name'])
+                collect($unit->aliases)
+                    ->merge($unit->name)
                     ->each(
                         fn ($nameDef) => str($nameDef)
                             ->explode(self::PLURAL_SEPARATOR)
-                            ->each(fn ($name) => $carry->put($name, $unit['symbol']))
+                            ->each(fn ($name) => $carry->put($name, $unit->symbol))
                     );
 
                 return $carry;

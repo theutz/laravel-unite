@@ -4,12 +4,13 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
 use RuntimeException;
+use Theutz\Unite\Definitions\UnitDefinition;
 
 class Unite
 {
     private string $quantity;
 
-    private array $unit;
+    private UnitDefinition $unit;
 
     public function __construct(
         private Units $units
@@ -34,7 +35,7 @@ class Unite
     }
 
     /**
-     * @return array{0: string, 1: array}
+     * @return array{0: string, 1: UnitDefinition}
      */
     private function parse(string $string): array
     {
@@ -53,18 +54,17 @@ class Unite
         return [$quantity, $this->getUnit($unit)];
     }
 
-    private function getUnit(string $unit): array
+    private function getUnit(string $unit): UnitDefinition
     {
         return collect($this->units->all())
-            ->filter(fn ($u) => $unit === $u['symbol'] || __('unite::units.' . $unit) === $u['symbol'])
+            ->filter(fn ($u) => $unit === $u->symbol || __('unite::units.' . $unit) === $u->symbol)
             ->sole();
     }
 
     private function getConversionFactor(string $unit): string
     {
         [, $toUnit] = $this->parse($unit);
-        ['symbol' => $symbol] = $toUnit;
 
-        return $this->unit['to'][$symbol];
+        return $this->unit->to[$toUnit->symbol];
     }
 }

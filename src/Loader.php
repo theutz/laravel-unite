@@ -2,7 +2,9 @@
 
 namespace Theutz\Unite;
 
+use Illuminate\Support\Collection;
 use Symfony\Component\Yaml\Yaml;
+use Theutz\Unite\Definitions\UnitDefinition;
 
 class Loader
 {
@@ -12,8 +14,11 @@ class Loader
     ) {
     }
 
-    public function units(): array
+    public function units(): Collection
     {
-        return $this->yaml->parseFile($this->unitsPath);
+        $raw = $this->yaml->parseFile($this->unitsPath);
+
+        return collect($raw)
+            ->map([UnitDefinition::class, 'make']);
     }
 }

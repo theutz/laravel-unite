@@ -4,13 +4,18 @@ namespace Theutz\Unite;
 
 use function Pest\Laravel\mock;
 use Symfony\Component\Yaml\Yaml;
+use Theutz\Unite\Definitions\UnitDefinition;
 
 it('loads the units', function () {
     $expected = [
         [
             'symbol' => 'g',
-            'name' => 'gram|grams'
-        ]
+            'name' => 'gram|grams',
+            'aliases' => [],
+            'kind' => 'mass',
+            'systems' => ['si'],
+            'to' => [],
+        ],
     ];
     mock(Yaml::class)
         ->shouldReceive('parseFile')
@@ -20,5 +25,5 @@ it('loads the units', function () {
 
     $result = $sut->units();
 
-    expect($result)->toMatchArray($expected);
+    expect($result)->toMatchArray([UnitDefinition::make($expected[0])]);
 });

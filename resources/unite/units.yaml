@@ -10,6 +10,7 @@
   aliases: [lbs]
   kind: mass
   systems: [us, uk]
+  to: []
 - symbol: oz
   name: ounce|ounces
   aliases: []
@@ -20,3 +21,4 @@
   name: ton|tons
   aliases: []
   kind: mass
+  to: []

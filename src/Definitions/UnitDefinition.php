@@ -12,7 +12,7 @@ class UnitDefinition
         public readonly array $to
     ) {}
 
-    public function make(array $data) {
+    public static function make(array $data) {
         return new static(
             symbol: $data['symbol'],
             name: $data['name'],
