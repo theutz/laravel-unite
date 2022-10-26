@@ -25,10 +25,10 @@ parameters:
             reportUnmatched: false
             paths:
                 - tests/*
-        # -
-        #     message: '#Call to an undefined method Pest\\Expectation<Closure>::throws\(\)#'
-        #     paths:
-        #         - tests/*
+        -
+            message: '#Call to an undefined method Pest\\Expectation<Closure>::[\w\-_]*\(\)#'
+            paths:
+                - tests/*
     #checkOctaneCompatibility: true
     #checkModelProperties: true
     checkMissingIterableValueType: false

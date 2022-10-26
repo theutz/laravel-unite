@@ -2,10 +2,20 @@
 
 namespace Theutz\Unite\Collections;
 
-it('should load', function () {
-    $sut = app(UnitsCollection::class);
+use Theutz\Unite\Definitions\UnitDefinition;
 
-    expect($sut)->toBeIterable();
-    expect(count($sut))->toBeGreaterThanOrEqual(1);
-    expect($sut->where('symbol', 'g'))->toHaveCount(1);
-});
+beforeEach(fn () => $this->sut = app(UnitsCollection::class));
+
+it('should be iterable')
+    ->expect(fn () => $this->sut)
+    ->toBeIterable();
+
+it('should be countable')
+    ->expect(fn () => count($this->sut))
+    ->toBeGreaterThanOrEqual(1);
+
+it('should be a collection of unit definitions')
+    ->expect(fn () => $this->sut)
+    ->where('symbol', 'g')
+    ->sole()
+    ->toBeInstanceOf(UnitDefinition::class);
