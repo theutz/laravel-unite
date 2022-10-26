@@ -15,10 +15,12 @@
   name: ounce|ounces
   aliases: []
   kind: mass
+  systems: [us, uk]
   to:
     g: 2.83495e1
 - symbol: ton
   name: ton|tons
   aliases: []
   kind: mass
+  systems: [us, uk]
   to: []

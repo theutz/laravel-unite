@@ -9,15 +9,24 @@ class DefinitionLoader
 {
     public function __construct(
         private Yaml $yaml,
-        private string $unitsPath,
     ) {
     }
 
     public function units(): Collection
     {
-        $raw = $this->yaml->parseFile($this->unitsPath);
+        $raw = $this->yaml->parseFile(
+            config('unite.units')
+        );
 
         return collect($raw)
-            ->map([UnitDefinition::class, 'make']);
+            ->map(fn ($data) => new UnitDefinition(...$data));
+    }
+
+    public function prefixes(): Collection
+    {
+        $raw = $this->yaml->parseFile(config('unite.prefixes'));
+
+        return collect($raw)
+            ->map([PrefixDefinition::class, 'make']);
     }
 }
