@@ -13,9 +13,7 @@ class Units
 
     public function all(): array
     {
-        return collect($this->loader->units())
-            ->map(fn ($item, $key) => [...$item, 'symbol' => $key])
-            ->all();
+        return $this->loader->units();
     }
 
     public function generateLang(): array
@@ -26,15 +24,15 @@ class Units
     private function toLangAliases(array $units): array
     {
         return collect($units)
-            ->reduce(function ($carry, $unit, $symbol) {
-                $carry->put($symbol, $unit['name']);
+            ->reduce(function ($carry, $unit) {
+                $carry->put($unit['symbol'], $unit['name']);
 
                 collect($unit['aliases'])
                     ->merge($unit['name'])
                     ->each(
                         fn ($nameDef) => str($nameDef)
                             ->explode(self::PLURAL_SEPARATOR)
-                            ->each(fn ($name) => $carry->put($name, $symbol))
+                            ->each(fn ($name) => $carry->put($name, $unit['symbol']))
                     );
 
                 return $carry;

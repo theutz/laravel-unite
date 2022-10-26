@@ -56,7 +56,7 @@ class Unite
     private function getUnit(string $unit): array
     {
         return collect($this->units->all())
-            ->filter(fn ($_, $symbol) => $unit === $symbol || __('unite::units.'.$unit) === $symbol)
+            ->filter(fn ($u) => $unit === $u['symbol'] || __('unite::units.' . $unit) === $u['symbol'])
             ->sole();
     }
 

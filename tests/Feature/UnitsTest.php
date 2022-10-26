@@ -11,7 +11,8 @@ it('produces the units', function () {
         ->withSomeOfArgs('filename')
         ->once()
         ->andReturn([
-            'A' => [
+            [
+                'symbol' => 'A',
                 'name' => 'ampere|amperes',
                 'aliases' => ['amp|amps'],
             ],

@@ -6,7 +6,12 @@ use function Pest\Laravel\mock;
 use Symfony\Component\Yaml\Yaml;
 
 it('loads the units', function () {
-    $expected = ['g' => ['name' => 'gram|grams']];
+    $expected = [
+        [
+            'symbol' => 'g',
+            'name' => 'gram|grams'
+        ]
+    ];
     mock(Yaml::class)
         ->shouldReceive('parseFile')
         ->once()
