@@ -6,6 +6,7 @@ use Countable;
 use Illuminate\Support\Collection;
 use IteratorAggregate;
 use Theutz\Unite\Definitions\DefinitionLoader;
+use Theutz\Unite\Definitions\PrefixDefinition;
 use Theutz\Unite\Definitions\UnitDefinition;
 use Traversable;
 
@@ -44,31 +45,32 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function generateSiUnits(Collection $units): Collection
     {
         return $units->reduce(
-            function (Collection $carry, UnitDefinition $unit) {
-                $carry->push($unit);
+            function (Collection $units, UnitDefinition $unit) {
+                $units->push($unit);
 
                 if ($unit->systems->contains('si')) {
-                    $this->loader->prefixes()
-                        ->each(function ($prefix) use ($unit, $carry) {
-                            $aliases = $unit->aliases->map(fn ($alias) => $this->prefixPluralizedString($alias, $prefix->name));
-                            $to = [];
-
-                            $prefixedUnit = new UnitDefinition(
-                                symbol: $prefix->symbol . $unit->symbol,
-                                name: $this->prefixPluralizedString($unit->name, $prefix->name),
-                                kind: $unit->kind,
-                                systems: $unit->systems,
-                                aliases: $aliases,
-                                to: $to,
-                            );
-
-                            $carry->push($prefixedUnit);
-                        });
+                    $this->loader
+                        ->prefixes()
+                        ->each(fn ($prefix) => $units->push(
+                            $this->makePrefixedUnit($prefix, $unit)
+                        ));
                 }
 
-                return $carry;
+                return $units;
             },
             collect()
+        );
+    }
+
+    private function makePrefixedUnit(PrefixDefinition $prefix, UnitDefinition $unit): UnitDefinition
+    {
+        return new UnitDefinition(
+            symbol: $prefix->symbol . $unit->symbol,
+            name: $this->prefixPluralizedString($unit->name, $prefix->name),
+            kind: $unit->kind,
+            systems: $unit->systems,
+            aliases: $unit->aliases->map(fn ($alias) => $this->prefixPluralizedString($alias, $prefix->name)),
+            to: [],
         );
     }
 
