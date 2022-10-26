@@ -8,6 +8,8 @@ use Theutz\Unite\Definitions\DefinitionLoader;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
+    public $singletons = [DefinitionLoader::class];
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -19,18 +21,5 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile()
             ->hasTranslations();
-    }
-
-    public function packageRegistered(): void
-    {
-        $this->registerLoader();
-    }
-
-    private function registerLoader(): void
-    {
-        $this->app->singleton(DefinitionLoader::class);
-        $this->app->when(DefinitionLoader::class)
-            ->needs('$unitsPath')
-            ->giveConfig('unite.units');
     }
 }
