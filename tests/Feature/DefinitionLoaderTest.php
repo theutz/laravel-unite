@@ -20,7 +20,9 @@ it('loads the units', function () {
             aliases: [],
             kind: 'mass',
             systems: ['si'],
-            to: ['oz' => '0.0352739907']
+            to: [
+                ['symbol' => 'oz', 'factor' => '0.0352739907'],
+            ]
         )
     );
 });

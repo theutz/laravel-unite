@@ -2,17 +2,26 @@
 
 namespace Theutz\Unite\Definitions;
 
-use ErrorException;
+use Illuminate\Support\Collection;
 
 class UnitDefinition
 {
+    public readonly Collection $aliases;
+
+    public readonly Collection $systems;
+
+    public readonly Collection $to;
+
     public function __construct(
         public readonly string $symbol,
         public readonly string $name,
-        public readonly array $aliases,
+        array $aliases,
         public readonly string $kind,
-        public readonly array $systems,
-        public readonly array $to
+        array $systems,
+        array $to
     ) {
+        $this->aliases = collect($aliases);
+        $this->systems = collect($systems);
+        $this->to = collect($to);
     }
 }
