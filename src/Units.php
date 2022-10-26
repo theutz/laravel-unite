@@ -2,20 +2,21 @@
 
 namespace Theutz\Unite;
 
+use Illuminate\Support\Collection;
+use Theutz\Unite\Definitions\DefinitionLoader;
+
 class Units
 {
     const PLURAL_SEPARATOR = '|';
 
     public function __construct(
-        private Loader $loader
+        private DefinitionLoader $loader
     ) {
     }
 
-    public function all(): array
+    public function all(): Collection
     {
-        return collect($this->loader->units())
-            ->map(fn ($item, $key) => [...$item, 'symbol' => $key])
-            ->all();
+        return $this->loader->units();
     }
 
     public function generateLang(): array
@@ -23,18 +24,18 @@ class Units
         return $this->toLangAliases($this->all());
     }
 
-    private function toLangAliases(array $units): array
+    private function toLangAliases(Collection $units): array
     {
-        return collect($units)
-            ->reduce(function ($carry, $unit, $symbol) {
-                $carry->put($symbol, $unit['name']);
+        return $units
+            ->reduce(function ($carry, $unit) {
+                $carry->put($unit->symbol, $unit->name);
 
-                collect($unit['aliases'])
-                    ->merge($unit['name'])
+                collect($unit->aliases)
+                    ->merge($unit->name)
                     ->each(
                         fn ($nameDef) => str($nameDef)
                             ->explode(self::PLURAL_SEPARATOR)
-                            ->each(fn ($name) => $carry->put($name, $symbol))
+                            ->each(fn ($name) => $carry->put($name, $unit->symbol))
                     );
 
                 return $carry;

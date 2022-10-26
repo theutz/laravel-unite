@@ -1,22 +1,28 @@
-g:
+- symbol: g
   name: gram|grams
   aliases: []
   kind: mass
   systems: [si]
   to:
-    oz: 3.52739907e-2
-lb:
+    - symbol: oz
+      factor: "0.0352739907"
+- symbol: lb
   name: "pound|pounds"
   aliases: [lbs]
   kind: mass
   systems: [us, uk]
-oz:
+  to: []
+- symbol: oz
   name: ounce|ounces
   aliases: []
   kind: mass
+  systems: [us, uk]
   to:
-    g: 2.83495e1
-ton:
+    - symbol: g
+      factor: "2.83495e1"
+- symbol: ton
   name: ton|tons
   aliases: []
   kind: mass
+  systems: [us, uk]
+  to: []
