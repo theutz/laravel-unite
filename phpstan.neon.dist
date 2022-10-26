@@ -20,10 +20,11 @@ parameters:
             reportUnmatched: false
             paths:
                 - tests/*
-        # -
-        #     message: '#Access to an undefined property Pest\\Expectation\|Pest\\Support\\Extendable::\$[\w\-_]#'
-        #     paths:
-        #         - tests/*
+        -
+            message: '#Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::[\w\-_]*\(\)#'
+            reportUnmatched: false
+            paths:
+                - tests/*
         # -
         #     message: '#Call to an undefined method Pest\\Expectation<Closure>::throws\(\)#'
         #     paths:

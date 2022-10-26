@@ -4,11 +4,15 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\DefinitionLoader;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
-    public $singletons = [DefinitionLoader::class];
+    public $singletons = [
+        DefinitionLoader::class,
+        UnitsCollection::class,
+    ];
 
     public function configurePackage(Package $package): void
     {
