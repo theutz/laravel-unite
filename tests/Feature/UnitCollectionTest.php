@@ -48,3 +48,11 @@ it('should generate lang entries')
         'gram' => 'g',
         'grams' => 'g',
     ]);
+
+it('should generate symbol to name map')
+    ->expect($sut)
+    ->getSymbolToNameMap()
+    ->toMatchArray([
+        'g' => 'gram|grams',
+        'kg' => 'kilogram|kilograms',
+    ]);

@@ -72,6 +72,13 @@ class UnitsCollection implements IteratorAggregate, Countable
         )->all();
     }
 
+    public function getSymbolToNameMap(): array
+    {
+        return $this->collection
+            ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
+            ->all();
+    }
+
     private function generateSiUnits(Collection $units): Collection
     {
         return $units->reduce(
