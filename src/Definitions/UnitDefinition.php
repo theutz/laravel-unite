@@ -20,10 +20,10 @@ class UnitDefinition
     public function __construct(
         public readonly string $symbol,
         public readonly string $name,
-        array $aliases,
+        Collection|array $aliases,
         public readonly string $kind,
-        array $systems,
-        array $to
+        Collection|array $systems,
+        Collection|array $to
     ) {
         $this->aliases = collect($aliases);
         $this->systems = collect($systems);
