@@ -1,9 +1,8 @@
 <?php
 
-namespace Theutz\Unite\Console\Commands;
+namespace Theutz\Unite\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Theutz\Unite\Collections\UnitsCollection;
 
 class GenerateLangFiles extends Command
@@ -14,9 +13,9 @@ class GenerateLangFiles extends Command
 
     public function handle(UnitsCollection $units)
     {
-        $this->comment("Generating unite::units language file");
+        $this->comment('Generating unite::units language file');
 
-        $this->line("Collecting language data");
+        $this->line('Collecting language data');
         $lang = $units->toLang();
         $raw = var_export(value: $lang, return: true);
         $data = collect($raw)
@@ -24,17 +23,17 @@ class GenerateLangFiles extends Command
             ->push(';')
             ->all();
 
-        $filename = __DIR__.'/../../../resources/lang/en/units.php';
+        $filename = __DIR__ . '/../../resources/lang/en/units.php';
 
         $this->line("Printing translations to '{$filename}'");
         file_put_contents($filename, $data);
 
-        $this->line("Formatting translations...");
+        $this->line('Formatting translations...');
         `vendor/bin/pint $filename`;
 
-        $out = require($filename);
-        assert($out == $lang, "Printed language data does not match...");
+        $out = require $filename;
+        assert($out == $lang, 'Printed language data does not match...');
 
-        $this->info("Langauge files successfully generated!");
+        $this->info('Langauge files successfully generated!');
     }
 }

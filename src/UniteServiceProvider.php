@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
-use Theutz\Unite\Console\Commands\GenerateLangFiles;
+use Theutz\Unite\Commands\GenerateLangFiles;
 use Theutz\Unite\Definitions\DefinitionLoader;
 
 class UniteServiceProvider extends PackageServiceProvider
