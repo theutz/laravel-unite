@@ -3,9 +3,11 @@
 namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
+use Illuminate\Support\ItemNotFoundException;
 use RuntimeException;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Exceptions\UnitNotFoundException;
 
 class Unite
 {
@@ -57,6 +59,8 @@ class Unite
 
     private function getUnit(string $unit): UnitDefinition
     {
+        try {
+
         return $this->units
             ->filter(function ($u) use ($unit) {
                 $isASymbol = $u->symbol === $unit;
@@ -65,6 +69,9 @@ class Unite
                 return $isASymbol || $canMapToASymbol;
             })
             ->sole();
+        } catch (ItemNotFoundException $e) {
+            throw new UnitNotFoundException($unit);
+        }
     }
 
     private function getConversionFactor(string $unit): string
