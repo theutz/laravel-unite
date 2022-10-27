@@ -35,12 +35,18 @@ class UniteServiceProvider extends PackageServiceProvider
 
     private function registerPrivatePackageCommands(): void
     {
-        $isInTestBench = str(base_path())->contains('testbench-core');
-
-        if ($isInTestBench && $this->app->runningInConsole()) {
+        if (
+            $this->isRunningInTestbench() &&
+            $this->app->runningInConsole()
+        ) {
             $this->commands([
                 GenerateLangFiles::class,
             ]);
         }
+    }
+
+    private function isRunningInTestbench(): bool
+    {
+        return str(base_path())->contains('testbench-core');
     }
 }
