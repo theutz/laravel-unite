@@ -58,7 +58,12 @@ class Unite
     private function getUnit(string $unit): UnitDefinition
     {
         return $this->units
-            ->filter(fn ($u) => $unit === $u->symbol || __('unite::units.' . $unit) === $u->symbol)
+            ->filter(function ($u) use ($unit) {
+                $isASymbol = $u->symbol === $unit;
+                $canMapToASymbol = __('unite::symbols.' . $unit) === $u->symbol;
+
+                return $isASymbol || $canMapToASymbol;
+            })
             ->sole();
     }
 
