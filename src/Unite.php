@@ -4,6 +4,7 @@ namespace Theutz\Unite;
 
 use Brick\Math\BigDecimal;
 use RuntimeException;
+use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\UnitDefinition;
 
 class Unite
@@ -13,7 +14,7 @@ class Unite
     private UnitDefinition $unit;
 
     public function __construct(
-        private Units $units
+        private UnitsCollection $units
     ) {
     }
 
@@ -56,8 +57,8 @@ class Unite
 
     private function getUnit(string $unit): UnitDefinition
     {
-        return collect($this->units->all())
-            ->filter(fn ($u) => $unit === $u->symbol || __('unite::units.'.$unit) === $u->symbol)
+        return $this->units
+            ->filter(fn ($u) => $unit === $u->symbol || __('unite::units.' . $unit) === $u->symbol)
             ->sole();
     }
 
