@@ -40,5 +40,11 @@ it('should generate prefixed units')
         ]),
     ]);
 
-// it('should generate lang entries')
-//     ->expect($sut);
+it('should generate lang entries')
+    ->expect($sut)
+    ->toLang()
+    ->toMatchArray([
+        'g' => 'gram|grams',
+        'gram' => 'g',
+        'grams' => 'g',
+    ]);

@@ -27,6 +27,15 @@ class UnitsCollection implements IteratorAggregate, Countable
         );
     }
 
+    public function __call($name, $args)
+    {
+        if (method_exists($this->collection, $name)) {
+            return $this->collection->$name(...$args);
+        }
+
+        throw new \RuntimeException("'{$name}' is not a valid method.");
+    }
+
     public function getIterator(): Traversable
     {
         return $this->collection;
@@ -37,11 +46,30 @@ class UnitsCollection implements IteratorAggregate, Countable
         return $this->collection->count();
     }
 
-    public function __call($name, $args)
+    public function toLang(): array
     {
-        if (method_exists($this->collection, $name)) {
-            return $this->collection->$name(...$args);
-        }
+        $sep = config('unite.plural_separator');
+
+        return $this->collection->reduce(
+            function ($carry, $unit) use ($sep) {
+                $carry->put($unit->symbol, $unit->name);
+
+                // Push all names and aliases as keys, with
+                // the symbol as the value for future lookups.
+                $unit->aliases
+                    ->merge($unit->name)
+                    ->map(
+                        fn ($n) => str($n)
+                            ->explode($sep)
+                            ->all()
+                    )
+                    ->flatten()
+                    ->each(fn ($n) => $carry->put($n, $unit->symbol));
+
+                return $carry;
+            },
+            collect()
+        )->all();
     }
 
     private function generateSiUnits(Collection $units): Collection
