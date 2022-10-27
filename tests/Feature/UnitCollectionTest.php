@@ -40,19 +40,18 @@ it('should generate prefixed units')
         ]),
     ]);
 
-it('should generate lang entries')
-    ->expect($sut)
-    ->toLang()
-    ->toMatchArray([
-        'g' => 'gram|grams',
-        'gram' => 'g',
-        'grams' => 'g',
-    ]);
-
 it('should generate symbol to name map')
     ->expect($sut)
     ->getSymbolToNameMap()
     ->toMatchArray([
         'g' => 'gram|grams',
         'kg' => 'kilogram|kilograms',
+    ]);
+
+it('should generate a names to symbol map')
+    ->expect($sut)
+    ->getNamesToSymbolMap()
+    ->toMatchArray([
+        'gram' => 'g',
+        'grams' => 'g',
     ]);
