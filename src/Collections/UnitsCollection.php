@@ -93,7 +93,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function makePrefixedUnit(PrefixDefinition $prefix, UnitDefinition $unit): UnitDefinition
     {
         return new UnitDefinition(
-            symbol: $prefix->symbol . $unit->symbol,
+            symbol: $prefix->symbol.$unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
             systems: $unit->systems,
@@ -113,7 +113,7 @@ class UnitsCollection implements IteratorAggregate, Countable
 
         return str($base)
             ->explode($sep)
-            ->map(fn ($piece) => $prefix . $piece)
+            ->map(fn ($piece) => $prefix.$piece)
             ->join($sep);
     }
 }
