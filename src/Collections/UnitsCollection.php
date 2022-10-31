@@ -59,9 +59,7 @@ class UnitsCollection implements IteratorAggregate, Countable
             ->reduce(function ($carry, $unit) {
                 $unit->aliases
                     ->merge($unit->name)
-                    ->map(fn ($name) => str($name)
-                        ->explode('|')
-                        ->all())
+                    ->map(fn ($name) => str($name)->explode('|'))
                     ->flatten()
                     ->each(fn ($name) => $carry->put($name, $unit->symbol));
 
@@ -93,7 +91,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function makePrefixedUnit(PrefixDefinition $prefix, UnitDefinition $unit): UnitDefinition
     {
         return new UnitDefinition(
-            symbol: $prefix->symbol.$unit->symbol,
+            symbol: $prefix->symbol . $unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
             systems: $unit->systems,
@@ -110,8 +108,8 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function prefixPluralizedString(string $base, string $prefix): string
     {
         return str($base)
-            ->explode("|")
-            ->map(fn ($piece) => $prefix.$piece)
-            ->join("|");
+            ->explode('|')
+            ->map(fn ($piece) => $prefix . $piece)
+            ->join('|');
     }
 }
