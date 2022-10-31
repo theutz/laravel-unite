@@ -24,7 +24,7 @@ class UniteServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-unite')
-            ->hasConfigFile()
+            ->hasConfigFile(['unite', 'unite-prefixes', 'unite-units'])
             ->hasTranslations();
     }
 
