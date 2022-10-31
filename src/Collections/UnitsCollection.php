@@ -46,6 +46,13 @@ class UnitsCollection implements IteratorAggregate, Countable
         return $this->collection->count();
     }
 
+    /**
+     * Generates an array to be consumed by Laravel's localization
+     * mechanisms in order to get a correctly pluralized name from
+     * a Unite `symbol`.
+     *
+     * @return array<string, string>
+     */
     public function getSymbolToNameMap(): array
     {
         return $this->collection
@@ -53,6 +60,13 @@ class UnitsCollection implements IteratorAggregate, Countable
             ->all();
     }
 
+    /**
+     * Generates an array to be consumed by Laravel's localization
+     * mechanisms in order to get the Unite `symbol` from a name
+     * or alias.
+     *
+     * @return array<string, string>
+     */
     public function getNamesToSymbolMap(): array
     {
         return $this->collection
@@ -91,7 +105,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function makePrefixedUnit(PrefixDefinition $prefix, UnitDefinition $unit): UnitDefinition
     {
         return new UnitDefinition(
-            symbol: $prefix->symbol . $unit->symbol,
+            symbol: $prefix->symbol.$unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
             systems: $unit->systems,
@@ -109,7 +123,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     {
         return str($base)
             ->explode('|')
-            ->map(fn ($piece) => $prefix . $piece)
+            ->map(fn ($piece) => $prefix.$piece)
             ->join('|');
     }
 }
