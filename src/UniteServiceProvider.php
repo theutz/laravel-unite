@@ -37,8 +37,8 @@ class UniteServiceProvider extends PackageServiceProvider
     private function configureDefinitions()
     {
         $definintions = collect([
-            __DIR__ . '/../config/unite-prefixes.php' => 'unite-prefixes',
-            __DIR__ . '/../config/unite-units.php' => 'unite-units',
+            __DIR__.'/../config/unite-prefixes.php' => 'unite-prefixes',
+            __DIR__.'/../config/unite-units.php' => 'unite-units',
         ]);
 
         // Register files for publishing
@@ -52,7 +52,7 @@ class UniteServiceProvider extends PackageServiceProvider
         // of merging values in.
         $definintions
             ->each(function ($configKey, $configPath) {
-                if (!file_exists(config_path($configKey . '.php'))) {
+                if (! file_exists(config_path($configKey.'.php'))) {
                     config([$configKey => require $configPath]);
                 }
             });

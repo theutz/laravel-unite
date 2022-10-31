@@ -60,15 +60,14 @@ class Unite
     private function getUnit(string $unit): UnitDefinition
     {
         try {
+            return $this->units
+                ->filter(function ($u) use ($unit) {
+                    $isASymbol = $u->symbol === $unit;
+                    $canMapToASymbol = __('unite::symbols.'.$unit) === $u->symbol;
 
-        return $this->units
-            ->filter(function ($u) use ($unit) {
-                $isASymbol = $u->symbol === $unit;
-                $canMapToASymbol = __('unite::symbols.'.$unit) === $u->symbol;
-
-                return $isASymbol || $canMapToASymbol;
-            })
-            ->sole();
+                    return $isASymbol || $canMapToASymbol;
+                })
+                ->sole();
         } catch (ItemNotFoundException $e) {
             throw new UnitNotFoundException($unit);
         }
