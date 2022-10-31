@@ -60,7 +60,7 @@ class UnitsCollection implements IteratorAggregate, Countable
                 $unit->aliases
                     ->merge($unit->name)
                     ->map(fn ($name) => str($name)
-                        ->explode(config('unite.plural_separator'))
+                        ->explode('|')
                         ->all())
                     ->flatten()
                     ->each(fn ($name) => $carry->put($name, $unit->symbol));
@@ -109,11 +109,9 @@ class UnitsCollection implements IteratorAggregate, Countable
 
     private function prefixPluralizedString(string $base, string $prefix): string
     {
-        $sep = config('unite.plural_separator');
-
         return str($base)
-            ->explode($sep)
+            ->explode("|")
             ->map(fn ($piece) => $prefix.$piece)
-            ->join($sep);
+            ->join("|");
     }
 }

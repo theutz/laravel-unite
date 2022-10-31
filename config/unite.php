@@ -8,18 +8,12 @@ return [
     /**
      * The file path where the unit definitions are stored.
      */
-    'units' => __DIR__.'/../resources/unite/units.yaml',
+    'units' => __DIR__ . '/../resources/unite/units.yaml',
 
     /**
      * The file path where prefix definitions are stored.
      */
-    'prefixes' => __DIR__.'/../resources/unite/prefixes.yaml',
-
-    /**
-     * The separation character used when defining plural terms. Defaults
-     * to Laravel's default: the pipe `|` character.
-     */
-    'plural_separator' => '|',
+    'prefixes' => __DIR__ . '/../resources/unite/prefixes.yaml',
 
     /**
      * A list of supported measurement systems. These values also represent
