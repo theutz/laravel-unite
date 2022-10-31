@@ -46,30 +46,28 @@ class UnitsCollection implements IteratorAggregate, Countable
         return $this->collection->count();
     }
 
-    public function toLang(): array
+    public function getSymbolToNameMap(): array
     {
-        $sep = config('unite.plural_separator');
+        return $this->collection
+            ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
+            ->all();
+    }
 
-        return $this->collection->reduce(
-            function ($carry, $unit) use ($sep) {
-                $carry->put($unit->symbol, $unit->name);
-
-                // Push all names and aliases as keys, with
-                // the symbol as the value for future lookups.
+    public function getNamesToSymbolMap(): array
+    {
+        return $this->collection
+            ->reduce(function ($carry, $unit) {
                 $unit->aliases
                     ->merge($unit->name)
-                    ->map(
-                        fn ($n) => str($n)
-                            ->explode($sep)
-                            ->all()
-                    )
+                    ->map(fn ($name) => str($name)
+                        ->explode(config('unite.plural_separator'))
+                        ->all())
                     ->flatten()
-                    ->each(fn ($n) => $carry->put($n, $unit->symbol));
+                    ->each(fn ($name) => $carry->put($name, $unit->symbol));
 
                 return $carry;
-            },
-            collect()
-        )->all();
+            }, collect())
+            ->all();
     }
 
     private function generateSiUnits(Collection $units): Collection
