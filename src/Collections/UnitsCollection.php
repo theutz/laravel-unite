@@ -20,7 +20,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private Collection $collection;
 
     public function __construct(
-        private DefinitionLoader $loader
+        private DefinitionLoader $loader,
     ) {
         $this->collection = $this->generateSiUnits(
             $loader->units()
@@ -44,42 +44,6 @@ class UnitsCollection implements IteratorAggregate, Countable
     public function count(): int
     {
         return $this->collection->count();
-    }
-
-    /**
-     * Generates an array to be consumed by Laravel's localization
-     * mechanisms in order to get a correctly pluralized name from
-     * a Unite `symbol`.
-     *
-     * @return array<string, string>
-     */
-    public function getSymbolToNameMap(): array
-    {
-        return $this->collection
-            ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
-            ->all();
-    }
-
-    /**
-     * Generates an array to be consumed by Laravel's localization
-     * mechanisms in order to get the Unite `symbol` from a name
-     * or alias.
-     *
-     * @return array<string, string>
-     */
-    public function getNamesToSymbolMap(): array
-    {
-        return $this->collection
-            ->reduce(function ($carry, $unit) {
-                $unit->aliases
-                    ->merge($unit->name)
-                    ->map(fn ($name) => str($name)->explode('|'))
-                    ->flatten()
-                    ->each(fn ($name) => $carry->put($name, $unit->symbol));
-
-                return $carry;
-            }, collect())
-            ->all();
     }
 
     private function generateSiUnits(Collection $units): Collection
