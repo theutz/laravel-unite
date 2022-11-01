@@ -1,5 +1,5 @@
 <?php
 
-use Theutz\Unite\Collections\UnitsCollection;
+use Theutz\Unite\Lang\Generator;
 
-return app(UnitsCollection::class)->getNamesToSymbolMap();
+return app(Generator::class)->namesToSymbols();

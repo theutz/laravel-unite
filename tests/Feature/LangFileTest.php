@@ -1,11 +1,11 @@
 <?php
 
 use Mockery\MockInterface;
-use Theutz\Unite\Collections\UnitsCollection;
+use Theutz\Unite\Lang\Generator;
 
 it('does not load the units more than once', function () {
-    $this->mock(UnitsCollection::class, function (MockInterface $mock) {
-        $mock->shouldReceive('getSymbolToNameMap')
+    $this->mock(Generator::class, function (MockInterface $mock) {
+        $mock->shouldReceive('symbolsToNames')
             ->once()
             ->andReturn(['g' => 'gram|grams']);
     });
@@ -17,8 +17,8 @@ it('does not load the units more than once', function () {
 });
 
 it('does not load the symobls more than once', function () {
-    $this->mock(UnitsCollection::class, function (MockInterface $mock) {
-        $mock->shouldReceive('getNamesToSymbolMap')
+    $this->mock(Generator::class, function (MockInterface $mock) {
+        $mock->shouldReceive('namesToSymbols')
             ->once()
             ->andReturn(['grams' => 'g']);
     });

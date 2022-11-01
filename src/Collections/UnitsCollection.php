@@ -10,6 +10,7 @@ use Theutz\Unite\Definitions\ConversionDefinition;
 use Theutz\Unite\Definitions\DefinitionLoader;
 use Theutz\Unite\Definitions\PrefixDefinition;
 use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Lang\Generator;
 use Traversable;
 
 /**
