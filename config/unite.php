@@ -4,16 +4,15 @@
  * Config for laravel-unite
  */
 return [
+    /**
+     * Define the units that will be used throughout the system.
+     */
+    'units' => require __DIR__.'/unite/units.php',
 
     /**
-     * The file path where the unit definitions are stored.
+     * Define the metric prefixes to be used in the system.
      */
-    'units' => __DIR__.'/../resources/unite/units.yaml',
-
-    /**
-     * The file path where prefix definitions are stored.
-     */
-    'prefixes' => __DIR__.'/../resources/unite/prefixes.yaml',
+    'prefixes' => require __DIR__.'/unite/prefixes.php',
 
     /**
      * A list of supported measurement systems. These values also represent

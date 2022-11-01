@@ -25,31 +25,19 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile('unite')
             ->hasTranslations();
-        $this->configureDefinitions();
     }
 
-    private function configureDefinitions()
+    public function packageBooted()
     {
-        $definintions = collect([
-            __DIR__.'/../config/unite-prefixes.php' => 'unite-prefixes',
-            __DIR__.'/../config/unite-units.php' => 'unite-units',
-        ]);
+        $this->setupExtraConfigFiles();
+    }
 
-        // Register files for publishing
-        $publishes = $definintions
-            ->map(fn ($configKey) => config_path("{$configKey}.php"))->all();
-
-        $this->publishes($publishes, 'unite-config');
-
-        // Read from published files instead of package files, if they've been
-        // published. This is in contrast to the more default behavior
-        // of merging values in.
-        $definintions
-            ->each(function ($configKey, $configPath) {
-                if (! file_exists(config_path($configKey.'.php'))) {
-                    config([$configKey => require $configPath]);
-                }
-            });
+    private function setupExtraConfigFiles()
+    {
+        $this->publishes([
+            __DIR__.'/../config/unite/prefixes.php' => config_path('unite/prefixes.php'),
+            __DIR__.'/../config/unite/units.php' => config_path('unite/units.php'),
+        ], 'unite-config');
     }
 
     private function isRunningInTestbench(): bool
