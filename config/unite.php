@@ -16,12 +16,6 @@ return [
     'prefixes' => __DIR__.'/../resources/unite/prefixes.yaml',
 
     /**
-     * The separation character used when defining plural terms. Defaults
-     * to Laravel's default: the pipe `|` character.
-     */
-    'plural_separator' => '|',
-
-    /**
      * A list of supported measurement systems. These values also represent
      * keys used in further configuration collections and translation keys.
      */

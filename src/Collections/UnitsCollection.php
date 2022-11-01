@@ -20,7 +20,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private Collection $collection;
 
     public function __construct(
-        private DefinitionLoader $loader
+        private DefinitionLoader $loader,
     ) {
         $this->collection = $this->generateSiUnits(
             $loader->units()
@@ -44,30 +44,6 @@ class UnitsCollection implements IteratorAggregate, Countable
     public function count(): int
     {
         return $this->collection->count();
-    }
-
-    public function getSymbolToNameMap(): array
-    {
-        return $this->collection
-            ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
-            ->all();
-    }
-
-    public function getNamesToSymbolMap(): array
-    {
-        return $this->collection
-            ->reduce(function ($carry, $unit) {
-                $unit->aliases
-                    ->merge($unit->name)
-                    ->map(fn ($name) => str($name)
-                        ->explode(config('unite.plural_separator'))
-                        ->all())
-                    ->flatten()
-                    ->each(fn ($name) => $carry->put($name, $unit->symbol));
-
-                return $carry;
-            }, collect())
-            ->all();
     }
 
     private function generateSiUnits(Collection $units): Collection
@@ -109,11 +85,9 @@ class UnitsCollection implements IteratorAggregate, Countable
 
     private function prefixPluralizedString(string $base, string $prefix): string
     {
-        $sep = config('unite.plural_separator');
-
         return str($base)
-            ->explode($sep)
+            ->explode('|')
             ->map(fn ($piece) => $prefix.$piece)
-            ->join($sep);
+            ->join('|');
     }
 }

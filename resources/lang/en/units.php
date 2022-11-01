@@ -1,28 +1,5 @@
 <?php
 
-return [
-    'g' => 'gram|grams',
-    'Yg' => 'yottagram|yottagrams',
-    'Zg' => 'zettagram|zettagrams',
-    'Eg' => 'exagram|exagrams',
-    'Pg' => 'petagram|petagrams',
-    'Tg' => 'teragram|teragrams',
-    'Gg' => 'gigagram|gigagrams',
-    'Mg' => 'megagram|megagrams',
-    'kg' => 'kilogram|kilograms',
-    'hg' => 'hectogram|hectograms',
-    'dag' => 'dekagram|dekagrams',
-    'dg' => 'decigram|decigrams',
-    'cg' => 'centigram|centigrams',
-    'mg' => 'milligram|milligrams',
-    'μg' => 'microgram|micrograms',
-    'ng' => 'nanogram|nanograms',
-    'pg' => 'picogram|picograms',
-    'fg' => 'femtogram|femtograms',
-    'ag' => 'attogram|attograms',
-    'zg' => 'zeptogram|zeptograms',
-    'yg' => 'yottogram|yottograms',
-    'lb' => 'pound|pounds',
-    'oz' => 'ounce|ounces',
-    'ton' => 'ton|tons',
-];
+use Theutz\Unite\Lang\Generator;
+
+return app(Generator::class)->symbolsToNames();
