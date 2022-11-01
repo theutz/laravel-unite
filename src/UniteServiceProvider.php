@@ -5,7 +5,6 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
-use Theutz\Unite\Commands\GenerateLangFiles;
 use Theutz\Unite\Definitions\DefinitionLoader;
 
 class UniteServiceProvider extends PackageServiceProvider
@@ -27,11 +26,6 @@ class UniteServiceProvider extends PackageServiceProvider
             ->hasConfigFile('unite')
             ->hasTranslations();
         $this->configureDefinitions();
-    }
-
-    public function packageBooted()
-    {
-        $this->registerPrivatePackageCommands();
     }
 
     private function configureDefinitions()
@@ -56,18 +50,6 @@ class UniteServiceProvider extends PackageServiceProvider
                     config([$configKey => require $configPath]);
                 }
             });
-    }
-
-    private function registerPrivatePackageCommands(): void
-    {
-        if (
-            $this->isRunningInTestbench() &&
-            $this->app->runningInConsole()
-        ) {
-            $this->commands([
-                GenerateLangFiles::class,
-            ]);
-        }
     }
 
     private function isRunningInTestbench(): bool

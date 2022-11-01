@@ -39,4 +39,3 @@ it('should generate prefixed units')
             ),
         ]),
     ]);
-
