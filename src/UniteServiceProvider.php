@@ -6,7 +6,6 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\DefinitionLoader;
-use Theutz\Unite\Validators\PrefixesValidator;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -26,14 +25,6 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile('unite')
             ->hasTranslations();
-    }
-
-    public function packageRegistered()
-    {
-        $this->app
-            ->when(PrefixesValidator::class)
-            ->needs('$prefixes')
-            ->giveConfig('unite.prefixes');
     }
 
     public function packageBooted()

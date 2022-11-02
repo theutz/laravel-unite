@@ -4,27 +4,33 @@ namespace Theutz\Unite\Validators;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Theutz\Unite\Exceptions\InvalidConfigException;
 
 class PrefixesValidator
 {
-    public function __construct(
-        private array $prefixes
-    ) {
+    private const RULES = [
+        'required',
+        '*.symbol' => 'required|string|distinct',
+        '*.name' => 'required|string|distinct',
+        '*.factor' => 'required|numeric|distinct',
+    ];
+
+    private array $prefixes;
+
+    public function __construct()
+    {
+        $this->prefixes = config('unite.prefixes');
     }
 
     /**
-     * @throws InvalidConfigException
+     * @throws ValidationException
      */
     public function validate(): void
     {
-        try {
-            $validator = Validator::make($this->prefixes, [
-                'array',
-            ]);
-            $validator->validate();
-        } catch (ValidationException) {
-            throw new InvalidConfigException('unite.prefixes');
-        }
+        $validator = Validator::make(
+            $this->prefixes,
+            self::RULES
+        );
+
+        $validator->validate();
     }
 }
