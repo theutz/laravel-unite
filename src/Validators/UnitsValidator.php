@@ -5,12 +5,23 @@ namespace Theutz\Unite\Validators;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
+use RuntimeException;
 
+/**
+* @mixin ValidatorContract
+*/
 class UnitsValidator
 {
     private array $rules;
 
     private array $units;
+
+    private array $messages;
+
+    private array $attributes;
+
+    private ValidatorContract $validator;
 
     public function __construct()
     {
@@ -32,14 +43,27 @@ class UnitsValidator
             ],
             '*.to.*.factor' => 'required|numeric',
         ];
+        $this->messages = [];
+        $this->attributes = [];
+
+        $this->validator = Validator::make($this->units, $this->rules, $this->messages, $this->attributes);
     }
+
+    public function __call(string $name, array $args): mixed
+    {
+        if (method_exists(ValidatorContract::class, $name)) {
+            return $this->validator->$name(...$args);
+        }
+
+        throw new RuntimeException("{$name} method not found");
+    }
+
 
     /**
      * @throws ValidationException
      */
     public function validate(): void
     {
-        $validator = Validator::make($this->units, $this->rules);
-        $validator->validate();
+        $this->validator->validate();
     }
 }
