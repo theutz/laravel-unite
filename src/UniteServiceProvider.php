@@ -6,6 +6,10 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\DefinitionLoader;
+use Theutz\Unite\Validators\KindsValidator;
+use Theutz\Unite\Validators\PrefixesValidator;
+use Theutz\Unite\Validators\SystemsValidator;
+use Theutz\Unite\Validators\UnitsValidator;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -30,6 +34,8 @@ class UniteServiceProvider extends PackageServiceProvider
     public function packageBooted()
     {
         $this->setupExtraConfigFiles();
+
+        $this->validateConfig();
     }
 
     private function setupExtraConfigFiles()
@@ -43,5 +49,19 @@ class UniteServiceProvider extends PackageServiceProvider
     private function isRunningInTestbench(): bool
     {
         return str(base_path())->contains('testbench-core');
+    }
+
+    private function validateConfig()
+    {
+        if (config('app.env') !== 'production') {
+            foreach ([
+                UnitsValidator::class,
+                PrefixesValidator::class,
+                KindsValidator::class,
+                SystemsValidator::class
+            ] as $validator) {
+                app($validator)->validate();
+            }
+        }
     }
 }
