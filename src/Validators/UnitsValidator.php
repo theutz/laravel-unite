@@ -2,51 +2,41 @@
 
 namespace Theutz\Unite\Validators;
 
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use RuntimeException;
 
 /**
-* @mixin ValidatorContract
-*/
+ * @mixin ValidatorContract
+ */
 class UnitsValidator
 {
-    private array $rules;
-
-    private array $units;
-
-    private array $messages;
-
-    private array $attributes;
-
     private ValidatorContract $validator;
 
     public function __construct()
     {
-        $this->units = config('unite.units');
-        $this->rules = [
-            'required',
-            '*.symbol' => 'required',
-            '*.name' => 'required',
-            '*.aliases' => 'present',
-            '*.aliases.*' => 'string',
-            '*.kind' => ['required', Rule::in(config('unite.kinds'))],
-            '*.systems' => 'required',
-            '*.systems.*' => Rule::in(config('unite.systems')),
-            '*.to' => 'present',
-            '*.to.*.symbol' => [
+        $this->validator = Validator::make(
+            data: config('unite.units'),
+            rules: [
                 'required',
-                'distinct',
-                Rule::in(collect($this->units)->pluck('symbol')),
-            ],
-            '*.to.*.factor' => 'required|numeric',
-        ];
-        $this->messages = [];
-        $this->attributes = [];
-
-        $this->validator = Validator::make($this->units, $this->rules, $this->messages, $this->attributes);
+                '*.symbol' => 'required',
+                '*.name' => 'required',
+                '*.aliases' => 'present',
+                '*.aliases.*' => 'string',
+                '*.kind' => ['required', Rule::in(config('unite.kinds'))],
+                '*.systems' => 'required',
+                '*.systems.*' => Rule::in(config('unite.systems')),
+                '*.to' => 'present',
+                '*.to.*.symbol' => [
+                    'required',
+                    'distinct',
+                    Rule::in(collect(config('unite.units'))->pluck('symbol')),
+                ],
+                '*.to.*.factor' => 'required|numeric',
+            ]
+        );
     }
 
     public function __call(string $name, array $args): mixed
@@ -56,14 +46,5 @@ class UnitsValidator
         }
 
         throw new RuntimeException("{$name} method not found");
-    }
-
-
-    /**
-     * @throws ValidationException
-     */
-    public function validate(): void
-    {
-        $this->validator->validate();
     }
 }

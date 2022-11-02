@@ -4,16 +4,13 @@ namespace Theutz\Unite\Validators;
 
 use Illuminate\Validation\ValidationException;
 
-beforeEach(function () {
-    $this->setConfig = fn ($val) => config(['unite.units' => $val]);
-    $this->action = fn () => app(UnitsValidator::class)->validate();
-});
-
 it('throws a validation exception', function ($data, $message) {
     config(['unite.units' => $data]);
+    $sut = app(UnitsValidator::class);
 
-    expect(fn () => app(UnitsValidator::class)->validate())
-        ->toThrow(ValidationException::class, $message);
+    $action = fn () => $sut->validate();
+
+    expect($action)->toThrow(ValidationException::class, $message);
 })
     ->with([
         'empty array' => [[], 'The 0 field is required'],
