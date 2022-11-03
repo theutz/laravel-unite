@@ -16,7 +16,8 @@ it('loads the prefixes')
     ->toBeCollection()
     ->toHaveCount(20)
     ->each->toBeInstanceOf(PrefixDefinition::class)
-    ->load()->firstWhere('symbol', 'k')->toEqual(new PrefixDefinition(
+    ->load()
+    ->firstWhere('symbol', 'k')->toEqual(new PrefixDefinition(
         symbol: 'k',
         name: 'kilo',
         factor: '1e3'

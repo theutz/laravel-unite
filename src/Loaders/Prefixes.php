@@ -11,7 +11,7 @@ class Prefixes
 
     public function load(): Collection
     {
-        if (!isset($this->collection)) {
+        if (! isset($this->collection)) {
             $raw = config('unite.prefixes');
             $this->collection = $this->mapToDefinitions($raw);
         }
