@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 use IteratorAggregate;
 use Theutz\Unite\Definitions\Prefix;
 use Theutz\Unite\Definitions\Unit;
-use Theutz\Unite\Loaders\Units as UnitsLoader;
 use Traversable;
 
 /**
@@ -17,11 +16,10 @@ class UnitsCollection implements IteratorAggregate, Countable
 {
     private Collection $collection;
 
-    public function __construct(
-        private UnitsLoader $unitsLoader,
-    ) {
+    public function __construct()
+    {
         $this->collection = $this->generateSiUnits(
-            $this->unitsLoader->load()
+            config('unite.units')
         );
     }
 
@@ -66,7 +64,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function makePrefixedUnit(Prefix $prefix, Unit $unit): Unit
     {
         return new Unit(
-            symbol: $prefix->symbol.$unit->symbol,
+            symbol: $prefix->symbol . $unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
             systems: $unit->systems,
@@ -80,7 +78,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     {
         return str($base)
             ->explode('|')
-            ->map(fn ($piece) => $prefix.$piece)
+            ->map(fn ($piece) => $prefix . $piece)
             ->join('|');
     }
 }

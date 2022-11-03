@@ -5,12 +5,10 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
-use Theutz\Unite\Loaders\Units;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
     public $singletons = [
-        Units::class,
         UnitsCollection::class,
     ];
 
@@ -35,7 +33,7 @@ class UniteServiceProvider extends PackageServiceProvider
     private function setupExtraConfigFiles()
     {
         $this->publishes([
-            __DIR__.'/../config/unite' => config_path('unite'),
+            __DIR__ . '/../config/unite' => config_path('unite'),
         ], 'unite-config');
     }
 }
