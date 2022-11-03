@@ -6,10 +6,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\DefinitionLoader;
-use Theutz\Unite\Validators\KindsValidator;
-use Theutz\Unite\Validators\PrefixesValidator;
-use Theutz\Unite\Validators\SystemsValidator;
-use Theutz\Unite\Validators\UnitsValidator;
+use Theutz\Unite\Validators\ConfigValidator;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -54,14 +51,7 @@ class UniteServiceProvider extends PackageServiceProvider
     private function validateConfig()
     {
         if (config('app.env') !== 'production') {
-            foreach ([
-                UnitsValidator::class,
-                PrefixesValidator::class,
-                KindsValidator::class,
-                SystemsValidator::class,
-            ] as $validator) {
-                app($validator)->validate();
-            }
+            app(ConfigValidator::class)->validate();
         }
     }
 }

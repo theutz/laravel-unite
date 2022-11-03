@@ -16,6 +16,6 @@ class KindsValidator extends AbstractValidator
 
     protected function rules(): array
     {
-        return ['required', 'string'];
+        return ['required', '*' => 'string'];
     }
 }
