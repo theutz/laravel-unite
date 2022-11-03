@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 /**
  * @property Collection<int, string> $aliases
  * @property Collection<int, string> $systems
- * @property Collection<int, Conversion> $to
  */
 class Unit
 {
@@ -15,19 +14,14 @@ class Unit
 
     public readonly Collection $systems;
 
-    public readonly Collection $to;
-
     public function __construct(
         public readonly string $symbol,
         public readonly string $name,
         Collection|array $aliases,
         public readonly string $kind,
         Collection|array $systems,
-        Collection|array $to
     ) {
         $this->aliases = collect($aliases);
         $this->systems = collect($systems);
-        $this->to = collect($to)
-            ->map(fn ($data) => new Conversion(...$data));
     }
 }

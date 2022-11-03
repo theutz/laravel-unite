@@ -2,20 +2,12 @@
 
 namespace Theutz\Unite\Definitions;
 
-use ArrayIterator;
-use IteratorAggregate;
-use Traversable;
-
-class Conversion implements IteratorAggregate
+class Conversion
 {
     public function __construct(
-        public readonly string $symbol,
+        public readonly string $from,
+        public readonly string $to,
         public readonly string $factor,
     ) {
-    }
-
-    public function getIterator(): Traversable
-    {
-        return new ArrayIterator((array) $this);
     }
 }
