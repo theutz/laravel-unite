@@ -2,7 +2,6 @@
 
 namespace Theutz\Unite\Collections;
 
-use Theutz\Unite\Definitions\Conversion;
 use Theutz\Unite\Definitions\Unit;
 
 beforeEach(fn () => $this->sut = app(UnitsCollection::class));
@@ -32,10 +31,4 @@ it('should generate prefixed units')
         'name' => 'kilogram|kilograms',
         'aliases' => collect(),
         'kind' => 'mass',
-        'to' => collect([
-            new Conversion(
-                symbol: 'oz',
-                factor: '35.2739907'
-            ),
-        ]),
     ]);

@@ -2,11 +2,9 @@
 
 namespace Theutz\Unite\Collections;
 
-use Brick\Math\BigDecimal;
 use Countable;
 use Illuminate\Support\Collection;
 use IteratorAggregate;
-use Theutz\Unite\Definitions\Conversion;
 use Theutz\Unite\Definitions\Prefix;
 use Theutz\Unite\Definitions\Unit;
 use Theutz\Unite\Loaders\Units as UnitsLoader;
@@ -75,10 +73,6 @@ class UnitsCollection implements IteratorAggregate, Countable
             aliases: $unit->aliases->map(
                 fn ($alias) => $this->prefixPluralizedString($alias, $prefix->name)
             ),
-            to: $unit->to->map(fn (Conversion $conv) => new Conversion(
-                symbol: $conv->symbol,
-                factor: str(BigDecimal::of($conv->factor)->multipliedBy($prefix->factor))->rtrim(0)
-            )),
         );
     }
 

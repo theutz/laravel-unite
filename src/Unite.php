@@ -77,6 +77,9 @@ class Unite
     {
         [, $toUnit] = $this->parse($unit);
 
-        return $this->unit->to->firstWhere('symbol', $toUnit->symbol)->factor;
+        return collect(config('unite.conversions'))
+            ->where('from', $this->unit->symbol)
+            ->where('to', $toUnit->symbol)
+            ->sole();
     }
 }

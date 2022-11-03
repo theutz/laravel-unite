@@ -3,7 +3,6 @@
 namespace Theutz\Unite\Loaders;
 
 use Exception;
-use Theutz\Unite\Definitions\Conversion;
 use Theutz\Unite\Definitions\Unit;
 
 $sut = fn () => app(Units::class);
@@ -24,8 +23,4 @@ it('loads the units')
         aliases: [],
         kind: 'mass',
         systems: ['si'],
-        to: [new Conversion(
-            symbol: 'oz',
-            factor: '0.0352739907'
-        )]
     ));
