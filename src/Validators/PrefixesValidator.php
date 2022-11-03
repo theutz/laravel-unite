@@ -4,10 +4,11 @@ namespace Theutz\Unite\Validators;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
 class PrefixesValidator
 {
-    private const RULES = [
+    private array $rules = [
         'required',
         '*.symbol' => 'required|string|distinct',
         '*.name' => 'required|string|distinct',
@@ -16,9 +17,15 @@ class PrefixesValidator
 
     private array $prefixes;
 
+    private ValidatorContract $validator;
+
     public function __construct()
     {
         $this->prefixes = config('unite.prefixes');
+        $this->validator = Validator::make(
+            data: $this->prefixes,
+            rules: $this->rules
+        );
     }
 
     /**
@@ -26,11 +33,14 @@ class PrefixesValidator
      */
     public function validate(): void
     {
-        $validator = Validator::make(
-            $this->prefixes,
-            self::RULES
-        );
+        try {
+            $this->validator->validate();
+        } catch (ValidationException) {
+            $messages = collect($this->validator->errors()->all())
+                ->map(fn ($m) => "[laravel-unite]: Invalid Prefix Config | {$m}")
+                ->all();
 
-        $validator->validate();
+            throw ValidationException::withMessages($messages);
+        }
     }
 }

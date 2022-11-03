@@ -13,7 +13,7 @@ it('throws a validation exception', function ($data, $message) {
     config(['unite.prefixes' => $data]);
 
     expect(fn () => app(PrefixesValidator::class)->validate())
-        ->toThrow(ValidationException::class, $message);
+        ->toThrow(ValidationException::class, "[laravel-unite]: Invalid Prefix Config | {$message}");
 })
     ->with([
         'empty array' => [[], 'The 0 field is required'],
