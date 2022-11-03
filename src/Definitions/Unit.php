@@ -7,9 +7,9 @@ use Illuminate\Support\Collection;
 /**
  * @property Collection<int, string> $aliases
  * @property Collection<int, string> $systems
- * @property Collection<int, ConversionDefinition> $to
+ * @property Collection<int, Conversion> $to
  */
-class UnitDefinition
+class Unit
 {
     public readonly Collection $aliases;
 
@@ -28,6 +28,6 @@ class UnitDefinition
         $this->aliases = collect($aliases);
         $this->systems = collect($systems);
         $this->to = collect($to)
-            ->map(fn ($data) => new ConversionDefinition(...$data));
+            ->map(fn ($data) => new Conversion(...$data));
     }
 }

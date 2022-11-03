@@ -2,8 +2,8 @@
 
 namespace Theutz\Unite\Collections;
 
-use Theutz\Unite\Definitions\ConversionDefinition;
-use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Definitions\Conversion;
+use Theutz\Unite\Definitions\Unit;
 
 beforeEach(fn () => $this->sut = app(UnitsCollection::class));
 
@@ -21,7 +21,7 @@ it('should be a collection of unit definitions')
     ->expect($sut)
     ->where('symbol', 'g')
     ->sole()
-    ->toBeInstanceOf(UnitDefinition::class);
+    ->toBeInstanceOf(Unit::class);
 
 it('should generate prefixed units')
     ->expect($sut)
@@ -33,7 +33,7 @@ it('should generate prefixed units')
         'aliases' => collect(),
         'kind' => 'mass',
         'to' => collect([
-            new ConversionDefinition(
+            new Conversion(
                 symbol: 'oz',
                 factor: '35.2739907'
             ),

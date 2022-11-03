@@ -6,7 +6,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-class ConversionDefinition implements IteratorAggregate
+class Conversion implements IteratorAggregate
 {
     public function __construct(
         public readonly string $symbol,

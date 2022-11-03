@@ -3,7 +3,7 @@
 namespace Theutz\Unite\Loaders;
 
 use Illuminate\Support\Collection;
-use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Definitions\Unit;
 
 class Units
 {
@@ -17,6 +17,6 @@ class Units
     private function mapToDefinitions(array $raw): Collection
     {
         return collect($raw)
-            ->map(fn ($u) => new UnitDefinition(...$u));
+            ->map(fn ($u) => new Unit(...$u));
     }
 }

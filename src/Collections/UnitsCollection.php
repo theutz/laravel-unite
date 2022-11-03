@@ -6,10 +6,10 @@ use Brick\Math\BigDecimal;
 use Countable;
 use Illuminate\Support\Collection;
 use IteratorAggregate;
-use Theutz\Unite\Definitions\ConversionDefinition;
+use Theutz\Unite\Definitions\Conversion;
 use Theutz\Unite\Definitions\DefinitionLoader;
-use Theutz\Unite\Definitions\PrefixDefinition;
-use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Definitions\Prefix;
+use Theutz\Unite\Definitions\Unit;
 use Traversable;
 use Theutz\Unite\Loaders\Units as UnitsLoader;
 use Theutz\Unite\Loaders\Prefixes as PrefixesLoader;
@@ -52,7 +52,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function generateSiUnits(Collection $units): Collection
     {
         return $units->reduce(
-            function (Collection $units, UnitDefinition $unit) {
+            function (Collection $units, Unit $unit) {
                 $units->push($unit);
 
                 if ($unit->systems->contains('si')) {
@@ -69,9 +69,9 @@ class UnitsCollection implements IteratorAggregate, Countable
         );
     }
 
-    private function makePrefixedUnit(PrefixDefinition $prefix, UnitDefinition $unit): UnitDefinition
+    private function makePrefixedUnit(Prefix $prefix, Unit $unit): Unit
     {
-        return new UnitDefinition(
+        return new Unit(
             symbol: $prefix->symbol.$unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
@@ -79,7 +79,7 @@ class UnitsCollection implements IteratorAggregate, Countable
             aliases: $unit->aliases->map(
                 fn ($alias) => $this->prefixPluralizedString($alias, $prefix->name)
             ),
-            to: $unit->to->map(fn (ConversionDefinition $conv) => new ConversionDefinition(
+            to: $unit->to->map(fn (Conversion $conv) => new Conversion(
                 symbol: $conv->symbol,
                 factor: str(BigDecimal::of($conv->factor)->multipliedBy($prefix->factor))->rtrim(0)
             )),

@@ -6,14 +6,14 @@ use Brick\Math\BigDecimal;
 use Illuminate\Support\ItemNotFoundException;
 use RuntimeException;
 use Theutz\Unite\Collections\UnitsCollection;
-use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Definitions\Unit;
 use Theutz\Unite\Exceptions\UnitNotFoundException;
 
 class Unite
 {
     private string $quantity;
 
-    private UnitDefinition $unit;
+    private Unit $unit;
 
     public function __construct(
         private UnitsCollection $units
@@ -38,7 +38,7 @@ class Unite
     }
 
     /**
-     * @return array{0: string, 1: UnitDefinition}
+     * @return array{0: string, 1: Unit}
      */
     private function parse(string $string): array
     {
@@ -57,13 +57,13 @@ class Unite
         return [$quantity, $this->getUnit($unit)];
     }
 
-    private function getUnit(string $unit): UnitDefinition
+    private function getUnit(string $unit): Unit
     {
         try {
             return $this->units
                 ->filter(function ($u) use ($unit) {
                     $isASymbol = $u->symbol === $unit;
-                    $canMapToASymbol = __('unite::symbols.'.$unit) === $u->symbol;
+                    $canMapToASymbol = __('unite::symbols.' . $unit) === $u->symbol;
 
                     return $isASymbol || $canMapToASymbol;
                 })

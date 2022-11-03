@@ -3,8 +3,8 @@
 namespace Theutz\Unite\Loaders;
 
 use Exception;
-use Theutz\Unite\Definitions\ConversionDefinition;
-use Theutz\Unite\Definitions\UnitDefinition;
+use Theutz\Unite\Definitions\Conversion;
+use Theutz\Unite\Definitions\Unit;
 
 $sut = fn () => app(Units::class);
 
@@ -15,16 +15,16 @@ it('can be instantiated')
 it('loads the units')
     ->expect($sut(...))->load()
     ->toBeCollection()
-    ->each->toBeInstanceOf(UnitDefinition::class)
+    ->each->toBeInstanceOf(Unit::class)
     ->load()
     ->firstWhere('symbol', 'g')
-    ->toEqualCanonicalizing(new UnitDefinition(
+    ->toEqualCanonicalizing(new Unit(
         symbol: 'g',
         name: 'gram|grams',
         aliases: [],
         kind: 'mass',
         systems: ['si'],
-        to: [new ConversionDefinition(
+        to: [new Conversion(
             symbol: 'oz',
             factor: '0.0352739907'
         )]

@@ -3,7 +3,7 @@
 namespace Theutz\Unite\Loaders;
 
 use Illuminate\Support\Collection;
-use Theutz\Unite\Definitions\PrefixDefinition;
+use Theutz\Unite\Definitions\Prefix;
 
 class Prefixes
 {
@@ -22,6 +22,6 @@ class Prefixes
     private function mapToDefinitions(array $raw): Collection
     {
         return collect($raw)
-            ->map(fn ($p) => new PrefixDefinition(...$p));
+            ->map(fn ($p) => new Prefix(...$p));
     }
 }

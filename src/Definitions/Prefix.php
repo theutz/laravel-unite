@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Definitions;
 
-class PrefixDefinition
+class Prefix
 {
     public function __construct(
         public readonly string $symbol,
