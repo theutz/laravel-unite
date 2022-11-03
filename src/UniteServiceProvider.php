@@ -38,14 +38,8 @@ class UniteServiceProvider extends PackageServiceProvider
     private function setupExtraConfigFiles()
     {
         $this->publishes([
-            __DIR__.'/../config/unite/prefixes.php' => config_path('unite/prefixes.php'),
-            __DIR__.'/../config/unite/units.php' => config_path('unite/units.php'),
+            __DIR__ . '/../config/unite' => config_path('unite'),
         ], 'unite-config');
-    }
-
-    private function isRunningInTestbench(): bool
-    {
-        return str(base_path())->contains('testbench-core');
     }
 
     private function validateConfig()
