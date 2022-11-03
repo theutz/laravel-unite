@@ -11,6 +11,8 @@ use Theutz\Unite\Definitions\DefinitionLoader;
 use Theutz\Unite\Definitions\PrefixDefinition;
 use Theutz\Unite\Definitions\UnitDefinition;
 use Traversable;
+use Theutz\Unite\Loaders\Units as UnitsLoader;
+use Theutz\Unite\Loaders\Prefixes as PrefixesLoader;
 
 /**
  * @mixin Collection
@@ -20,10 +22,11 @@ class UnitsCollection implements IteratorAggregate, Countable
     private Collection $collection;
 
     public function __construct(
-        private DefinitionLoader $loader,
+        private UnitsLoader $unitsLoader,
+        private PrefixesLoader $prefixesLoader
     ) {
         $this->collection = $this->generateSiUnits(
-            $loader->units()
+            $this->unitsLoader->load()
         );
     }
 
@@ -53,8 +56,8 @@ class UnitsCollection implements IteratorAggregate, Countable
                 $units->push($unit);
 
                 if ($unit->systems->contains('si')) {
-                    $this->loader
-                        ->prefixes()
+                    $this->prefixesLoader
+                        ->load()
                         ->each(fn ($prefix) => $units->push(
                             $this->makePrefixedUnit($prefix, $unit)
                         ));
