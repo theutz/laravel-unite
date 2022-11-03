@@ -4,7 +4,7 @@ namespace Theutz\Unite\Collections;
 
 use Theutz\Unite\Definitions\Unit;
 
-beforeEach(fn () => $this->sut = app(UnitsCollection::class));
+beforeEach(fn () => $this->sut = app(Units::class));
 
 $sut = fn () => $this->sut;
 

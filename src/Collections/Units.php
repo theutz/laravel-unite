@@ -12,7 +12,7 @@ use Traversable;
 /**
  * @mixin Collection
  */
-class UnitsCollection implements IteratorAggregate, Countable
+class Units implements IteratorAggregate, Countable
 {
     private Collection $collection;
 

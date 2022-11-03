@@ -2,7 +2,7 @@
 
 namespace Theutz\Unite\Lang;
 
-use Theutz\Unite\Collections\UnitsCollection;
+use Theutz\Unite\Collections\Units;
 
 class Generator
 {
@@ -11,7 +11,7 @@ class Generator
     private array $symbolsToNames;
 
     public function __construct(
-        protected UnitsCollection $units
+        protected Units $units
     ) {
     }
 
@@ -24,7 +24,7 @@ class Generator
      */
     public function symbolsToNames(): array
     {
-        if (! isset($this->symbolsToNames)) {
+        if (!isset($this->symbolsToNames)) {
             $this->symbolsToNames = $this->units
                 ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
                 ->all();
@@ -42,7 +42,7 @@ class Generator
      */
     public function namesToSymbols(): array
     {
-        if (! isset($this->namesToSymbols)) {
+        if (!isset($this->namesToSymbols)) {
             $this->namesToSymbols = $this->units
                 ->reduce(function ($carry, $unit) {
                     $unit->aliases

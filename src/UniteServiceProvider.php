@@ -4,12 +4,13 @@ namespace Theutz\Unite;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Theutz\Unite\Collections\UnitsCollection;
+use Theutz\Unite\Collections\Conversions;
+use Theutz\Unite\Collections\Units;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
     public $singletons = [
-        UnitsCollection::class,
+        Units::class,
     ];
 
     public function configurePackage(Package $package): void
@@ -23,6 +24,16 @@ class UniteServiceProvider extends PackageServiceProvider
             ->name('laravel-unite')
             ->hasConfigFile('unite')
             ->hasTranslations();
+    }
+
+    public function packageRegistered(): void
+    {
+        $this->app->when(Units::class)
+            ->needs('$units')
+            ->giveConfig('unite.units');
+        $this->app->when(Conversions::class)
+            ->needs('$conversions')
+            ->giveConfig('unite.conversions');
     }
 
     public function packageBooted()

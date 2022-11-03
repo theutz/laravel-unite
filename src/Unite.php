@@ -5,7 +5,7 @@ namespace Theutz\Unite;
 use Brick\Math\BigDecimal;
 use Illuminate\Support\ItemNotFoundException;
 use RuntimeException;
-use Theutz\Unite\Collections\UnitsCollection;
+use Theutz\Unite\Collections\Units;
 use Theutz\Unite\Definitions\Unit;
 use Theutz\Unite\Exceptions\ConversionNotAvailableException;
 use Theutz\Unite\Exceptions\UnitNotFoundException;
@@ -17,7 +17,7 @@ class Unite
     private Unit $unit;
 
     public function __construct(
-        private UnitsCollection $units
+        private Units $units
     ) {
     }
 
