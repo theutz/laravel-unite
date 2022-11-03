@@ -7,12 +7,10 @@ use Countable;
 use Illuminate\Support\Collection;
 use IteratorAggregate;
 use Theutz\Unite\Definitions\Conversion;
-use Theutz\Unite\Definitions\DefinitionLoader;
 use Theutz\Unite\Definitions\Prefix;
 use Theutz\Unite\Definitions\Unit;
-use Traversable;
 use Theutz\Unite\Loaders\Units as UnitsLoader;
-use Theutz\Unite\Loaders\Prefixes as PrefixesLoader;
+use Traversable;
 
 /**
  * @mixin Collection
@@ -23,7 +21,6 @@ class UnitsCollection implements IteratorAggregate, Countable
 
     public function __construct(
         private UnitsLoader $unitsLoader,
-        private PrefixesLoader $prefixesLoader
     ) {
         $this->collection = $this->generateSiUnits(
             $this->unitsLoader->load()
@@ -56,8 +53,7 @@ class UnitsCollection implements IteratorAggregate, Countable
                 $units->push($unit);
 
                 if ($unit->systems->contains('si')) {
-                    $this->prefixesLoader
-                        ->load()
+                    collect(config('unite.prefixes'))
                         ->each(fn ($prefix) => $units->push(
                             $this->makePrefixedUnit($prefix, $unit)
                         ));
@@ -72,7 +68,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     private function makePrefixedUnit(Prefix $prefix, Unit $unit): Unit
     {
         return new Unit(
-            symbol: $prefix->symbol.$unit->symbol,
+            symbol: $prefix->symbol . $unit->symbol,
             name: $this->prefixPluralizedString($unit->name, $prefix->name),
             kind: $unit->kind,
             systems: $unit->systems,
@@ -90,7 +86,7 @@ class UnitsCollection implements IteratorAggregate, Countable
     {
         return str($base)
             ->explode('|')
-            ->map(fn ($piece) => $prefix.$piece)
+            ->map(fn ($piece) => $prefix . $piece)
             ->join('|');
     }
 }
