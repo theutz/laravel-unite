@@ -7,12 +7,17 @@ return [
     /**
      * Define the units that will be used throughout the system.
      */
-    'units' => require __DIR__.'/unite/units.php',
+    'units' => require __DIR__ . '/unite/units.php',
 
     /**
      * Define the metric prefixes to be used in the system.
      */
-    'prefixes' => require __DIR__.'/unite/prefixes.php',
+    'prefixes' => require __DIR__ . '/unite/prefixes.php',
+
+    /**
+     * Define the conversion rates/formulas between units
+     */
+    'conversions' => require __DIR__ . '/unite/conversions.php',
 
     /**
      * A list of supported measurement systems. These values also represent
