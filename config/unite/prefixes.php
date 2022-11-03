@@ -64,41 +64,41 @@ return [
     [
         'symbol' => 'm',
         'name' => 'milli',
-        'factor' => '1e-6',
+        'factor' => '1e-3',
     ],
     [
         'symbol' => 'μ',
         'name' => 'micro',
-        'factor' => '1e-9',
+        'factor' => '1e-6',
     ],
     [
         'symbol' => 'n',
         'name' => 'nano',
-        'factor' => '1e-12',
+        'factor' => '1e-9',
     ],
     [
         'symbol' => 'p',
         'name' => 'pico',
-        'factor' => '1e-15',
+        'factor' => '1e-12',
     ],
     [
         'symbol' => 'f',
         'name' => 'femto',
-        'factor' => '1e-18',
+        'factor' => '1e-15',
     ],
     [
         'symbol' => 'a',
         'name' => 'atto',
-        'factor' => '1e-21',
+        'factor' => '1e-18',
     ],
     [
         'symbol' => 'z',
         'name' => 'zepto',
-        'factor' => '1e-24',
+        'factor' => '1e-21',
     ],
     [
         'symbol' => 'y',
-        'name' => 'yotto',
+        'name' => 'yocto',
         'factor' => '1e-24',
     ],
 ];
