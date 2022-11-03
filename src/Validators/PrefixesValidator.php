@@ -6,41 +6,26 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
-class PrefixesValidator
+class PrefixesValidator extends AbstractValidator
 {
-    private array $rules = [
+    protected function rules(): array
+    {
+        return [
+
         'required',
         '*.symbol' => 'required|string|distinct',
         '*.name' => 'required|string|distinct',
         '*.factor' => 'required|numeric|distinct',
-    ];
-
-    private array $prefixes;
-
-    private ValidatorContract $validator;
-
-    public function __construct()
-    {
-        $this->prefixes = config('unite.prefixes');
-        $this->validator = Validator::make(
-            data: $this->prefixes,
-            rules: $this->rules
-        );
+        ];
     }
 
-    /**
-     * @throws ValidationException
-     */
-    public function validate(): void
+    protected function configKey(): string
     {
-        try {
-            $this->validator->validate();
-        } catch (ValidationException) {
-            $messages = collect($this->validator->errors()->all())
-                ->map(fn ($m) => "[laravel-unite]: Invalid Prefix Config | {$m}")
-                ->all();
+        return 'prefixes';
+    }
 
-            throw ValidationException::withMessages($messages);
-        }
+    protected function errorPrefix(): string
+    {
+        return 'Invalid Prefix Config';
     }
 }

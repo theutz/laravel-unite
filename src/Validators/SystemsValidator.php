@@ -2,30 +2,20 @@
 
 namespace Theutz\Unite\Validators;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-
-class SystemsValidator
+class SystemsValidator extends AbstractValidator
 {
-    private array $rules;
-
-    private array $systems;
-
-    public function __construct()
+    protected function rules(): array
     {
-        $this->systems = config('unite.systems');
-        $this->rules = [
-            'required',
-            '*' => 'string',
-        ];
+        return ['required', '*' => 'string'];
     }
 
-    /**
-     * @throws ValidationException
-     */
-    public function validate()
+    protected function configKey(): string
     {
-        $validator = Validator::make($this->systems, $this->rules);
-        $validator->validate();
+        return 'systems';
+    }
+
+    protected function errorPrefix(): string
+    {
+        return 'Invalid Systems Config';
     }
 }

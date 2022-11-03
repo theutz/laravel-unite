@@ -5,24 +5,20 @@ namespace Theutz\Unite\Validators;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class KindsValidator
+class KindsValidator extends AbstractValidator
 {
-    private array $rules;
-
-    private array $kinds;
-
-    public function __construct()
+    protected function configKey(): string
     {
-        $this->kinds = config('unite.kinds');
-        $this->rules = ['required', 'string'];
+        return 'kinds';
     }
 
-    /**
-     * @throws ValidationException
-     */
-    public function validate()
+    protected function errorPrefix(): string
     {
-        $validator = Validator::make($this->kinds, $this->rules);
-        $validator->validate();
+        return 'Invalid Kinds Config';
+    }
+
+    protected function rules(): array
+    {
+        return ['required', 'string'];
     }
 }
