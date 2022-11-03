@@ -38,7 +38,7 @@ class UniteServiceProvider extends PackageServiceProvider
     private function setupExtraConfigFiles()
     {
         $this->publishes([
-            __DIR__ . '/../config/unite' => config_path('unite'),
+            __DIR__.'/../config/unite' => config_path('unite'),
         ], 'unite-config');
     }
 

@@ -42,7 +42,7 @@ class UnitsValidator extends AbstractValidator
         return [
             '*.kind.in' => "The value ':input' at :attribute must be one of: :values.",
             '*.to.*.symbol.in' => "The value ':input' at :attribute must correspond to another unit in the config.",
-            '*.systems.*.in' => "The value ':input' at :attribute is not one of: :values."
+            '*.systems.*.in' => "The value ':input' at :attribute is not one of: :values.",
         ];
     }
 }
