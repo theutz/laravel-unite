@@ -51,7 +51,7 @@ it('throws a validation exception', function ($data, $message) {
                 'aliases' => [],
                 'kind' => 'juniper bush',
             ],
-        ], 'The selected 0.kind is invalid'],
+        ], "The value 'juniper bush' at 0.kind must be one of: "],
         'missing systems' => [[
             [
                 'symbol' => 'g',
@@ -75,9 +75,9 @@ it('throws a validation exception', function ($data, $message) {
                 'name' => 'gram|grams',
                 'aliases' => [],
                 'kind' => 'mass',
-                'systems' => ['bluberry cotton'],
+                'systems' => ['blueberry cotton'],
             ],
-        ], 'The selected 0.systems.0 is invalid'],
+        ], "The value 'blueberry cotton' at 0.systems.0 is not one of: "],
         'missing to' => [[
             [
                 'symbol' => 'g',
@@ -132,7 +132,7 @@ it('throws a validation exception', function ($data, $message) {
                     'factor' => '123',
                 ]],
             ],
-        ], 'The selected 0.to.0.symbol is invalid'],
+        ], "The value 'blerue' at 0.to.0.symbol must correspond to another unit in the config."],
         'conversion factor non-numeric' => [[
             [
                 'symbol' => 'g',

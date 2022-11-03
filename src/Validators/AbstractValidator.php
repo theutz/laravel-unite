@@ -18,7 +18,9 @@ abstract class AbstractValidator
     {
         $this->validator = Validator::make(
             data: config("unite.{$this->configKey()}"),
-            rules: $this->rules()
+            rules: $this->rules(),
+            messages: $this->messages(),
+            customAttributes: $this->customAttributes(),
         );
     }
 
@@ -51,4 +53,14 @@ abstract class AbstractValidator
     abstract protected function configKey(): string;
 
     abstract protected function rules(): array;
+
+    protected function messages(): array
+    {
+        return [];
+    }
+
+    protected function customAttributes(): array
+    {
+        return [];
+    }
 }
