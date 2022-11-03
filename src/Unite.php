@@ -63,7 +63,7 @@ class Unite
             return $this->units
                 ->filter(function ($u) use ($unit) {
                     $isASymbol = $u->symbol === $unit;
-                    $canMapToASymbol = __('unite::symbols.' . $unit) === $u->symbol;
+                    $canMapToASymbol = __('unite::symbols.'.$unit) === $u->symbol;
 
                     return $isASymbol || $canMapToASymbol;
                 })

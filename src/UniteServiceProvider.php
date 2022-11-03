@@ -6,7 +6,6 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Loaders\Units;
-use Theutz\Unite\Validators\ConfigValidator;
 
 class UniteServiceProvider extends PackageServiceProvider
 {
@@ -36,7 +35,7 @@ class UniteServiceProvider extends PackageServiceProvider
     private function setupExtraConfigFiles()
     {
         $this->publishes([
-            __DIR__ . '/../config/unite' => config_path('unite'),
+            __DIR__.'/../config/unite' => config_path('unite'),
         ], 'unite-config');
     }
 }
