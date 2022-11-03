@@ -58,7 +58,7 @@ class UniteServiceProvider extends PackageServiceProvider
                 UnitsValidator::class,
                 PrefixesValidator::class,
                 KindsValidator::class,
-                SystemsValidator::class
+                SystemsValidator::class,
             ] as $validator) {
                 app($validator)->validate();
             }

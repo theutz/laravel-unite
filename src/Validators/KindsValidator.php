@@ -2,9 +2,6 @@
 
 namespace Theutz\Unite\Validators;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
-
 class KindsValidator extends AbstractValidator
 {
     protected function configKey(): string

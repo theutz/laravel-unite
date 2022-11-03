@@ -2,7 +2,6 @@
 
 namespace Theutz\Unite\Validators;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class UnitsValidator extends AbstractValidator
