@@ -8,9 +8,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use RuntimeException;
 
-/**
- * @mixin ValidatorContract
- */
 class UnitsValidator
 {
     private ValidatorContract $validator;
@@ -46,5 +43,20 @@ class UnitsValidator
         }
 
         throw new RuntimeException("{$name} method not found");
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function validate()
+    {
+        try {
+            $this->validator->validate();
+        } catch (ValidationException) {
+            $messages = collect($this->validator->errors()->all())
+                ->map(fn ($m) => "[laravel-unite]: Invalid Unit Config | {$m}")
+                ->all();
+            throw ValidationException::withMessages($messages);
+        }
     }
 }

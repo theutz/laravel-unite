@@ -10,7 +10,7 @@ it('throws a validation exception', function ($data, $message) {
 
     $action = fn () => $sut->validate();
 
-    expect($action)->toThrow(ValidationException::class, $message);
+    expect($action)->toThrow(ValidationException::class, "[laravel-unite]: Invalid Unit Config | {$message}");
 })
     ->with([
         'empty array' => [[], 'The 0 field is required'],
