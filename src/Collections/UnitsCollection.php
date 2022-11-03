@@ -42,9 +42,9 @@ class UnitsCollection implements IteratorAggregate, Countable
         return $this->collection->count();
     }
 
-    private function generateSiUnits(Collection $units): Collection
+    private function generateSiUnits(iterable $units): Collection
     {
-        return $units->reduce(
+        return collect($units)->reduce(
             function (Collection $units, Unit $unit) {
                 $units->push($unit);
 

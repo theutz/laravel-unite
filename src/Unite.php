@@ -7,6 +7,7 @@ use Illuminate\Support\ItemNotFoundException;
 use RuntimeException;
 use Theutz\Unite\Collections\UnitsCollection;
 use Theutz\Unite\Definitions\Unit;
+use Theutz\Unite\Exceptions\ConversionNotAvailableException;
 use Theutz\Unite\Exceptions\UnitNotFoundException;
 
 class Unite
@@ -63,7 +64,7 @@ class Unite
             return $this->units
                 ->filter(function ($u) use ($unit) {
                     $isASymbol = $u->symbol === $unit;
-                    $canMapToASymbol = __('unite::symbols.'.$unit) === $u->symbol;
+                    $canMapToASymbol = __('unite::symbols.' . $unit) === $u->symbol;
 
                     return $isASymbol || $canMapToASymbol;
                 })
@@ -77,9 +78,17 @@ class Unite
     {
         [, $toUnit] = $this->parse($unit);
 
-        return collect(config('unite.conversions'))
-            ->where('from', $this->unit->symbol)
-            ->where('to', $toUnit->symbol)
-            ->sole();
+        $from = $this->unit->symbol;
+        $to = $toUnit->symbol;
+
+        try {
+            return collect(config('unite.conversions'))
+                ->where('from', $from)
+                ->where('to', $to)
+                ->sole()
+                ->factor;
+        } catch (ItemNotFoundException) {
+            throw new ConversionNotAvailableException($from, $to);
+        }
     }
 }
