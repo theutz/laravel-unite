@@ -29,6 +29,10 @@ parameters:
             message: '#Call to an undefined method Pest\\Expectation<Closure>::[\w\-_]*\(\)#'
             paths:
                 - tests/*
+        -
+            message: '#Call to an undefined property Pest\\Expectation<Closure>::$[\w\-_]*\(\)#'
+            paths:
+                - tests/*
     #checkOctaneCompatibility: true
     #checkModelProperties: true
     checkMissingIterableValueType: false

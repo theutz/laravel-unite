@@ -5,6 +5,7 @@ namespace Theutz\Unite;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Theutz\Unite\Collections\Conversions;
+use Theutz\Unite\Collections\Prefixes;
 use Theutz\Unite\Collections\Units;
 
 class UniteServiceProvider extends PackageServiceProvider
@@ -34,6 +35,9 @@ class UniteServiceProvider extends PackageServiceProvider
         $this->app->when(Conversions::class)
             ->needs('$conversions')
             ->giveConfig('unite.conversions');
+        $this->app->when(Prefixes::class)
+            ->needs('$prefixes')
+            ->giveConfig('unite.prefixes');
     }
 
     public function packageBooted()
