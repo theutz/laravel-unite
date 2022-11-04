@@ -24,7 +24,7 @@ class Generator
      */
     public function symbolsToNames(): array
     {
-        if (!isset($this->symbolsToNames)) {
+        if (! isset($this->symbolsToNames)) {
             $this->symbolsToNames = $this->units
                 ->mapWithKeys(fn ($unit, $key) => [$unit->symbol => $unit->name])
                 ->all();
@@ -42,7 +42,7 @@ class Generator
      */
     public function namesToSymbols(): array
     {
-        if (!isset($this->namesToSymbols)) {
+        if (! isset($this->namesToSymbols)) {
             $this->namesToSymbols = $this->units
                 ->reduce(function ($carry, $unit) {
                     $unit->aliases
