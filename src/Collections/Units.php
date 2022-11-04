@@ -2,50 +2,26 @@
 
 namespace Theutz\Unite\Collections;
 
-use Countable;
 use Illuminate\Support\Collection;
-use IteratorAggregate;
 use Theutz\Unite\Definitions\Prefix;
 use Theutz\Unite\Definitions\Unit;
-use Traversable;
+use Theutz\Unite\Values\Unit as UnitValue;
 
 /**
  * @mixin Collection
  */
-class Units implements IteratorAggregate, Countable
+class Units extends AbstractCollection
 {
-    private Collection $collection;
-
-    public function __construct()
-    {
-        $this->collection = $this->generateSiUnits(
-            config('unite.units')
-        );
-    }
-
-    public function __call($name, $args)
-    {
-        if (method_exists($this->collection, $name)) {
-            return $this->collection->$name(...$args);
-        }
-
-        throw new \RuntimeException("'{$name}' is not a valid method.");
-    }
-
-    public function getIterator(): Traversable
-    {
-        return $this->collection;
-    }
-
-    public function count(): int
-    {
-        return $this->collection->count();
+    public function __construct(
+        array $units
+    ) {
+        $this->collection = $this->generateSiUnits($units);
     }
 
     private function generateSiUnits(iterable $units): Collection
     {
         return collect($units)->reduce(
-            function (Collection $units, Unit $unit) {
+            function (Collection $units, UnitValue $unit) {
                 $units->push($unit);
 
                 if ($unit->systems->contains('si')) {
@@ -61,7 +37,7 @@ class Units implements IteratorAggregate, Countable
         );
     }
 
-    private function makePrefixedUnit(Prefix $prefix, Unit $unit): Unit
+    private function makePrefixedUnit(Prefix $prefix, UnitValue $unit): Unit
     {
         return new Unit(
             symbol: $prefix->symbol . $unit->symbol,

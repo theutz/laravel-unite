@@ -4,10 +4,8 @@ namespace Theutz\Unite\Collections;
 
 use Illuminate\Support\Collection;
 
-class Conversions
+class Conversions extends AbstractCollection
 {
-    private Collection $collection;
-
     public function __construct(
         array $conversions,
     ) {
