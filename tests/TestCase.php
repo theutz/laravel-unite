@@ -3,17 +3,20 @@
 namespace Theutz\Unite\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Theutz\Unite\UniteServiceProvider;
 
 class TestCase extends Orchestra
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Theutz\\Unite\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Theutz\\Unite\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -28,9 +31,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-unite_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_unite_tables.php.stub';
         $migration->up();
-        */
     }
 }
