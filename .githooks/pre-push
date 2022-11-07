@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+vendor/bin/pint --test
+
+vendor/bin/phpstan
+
+vendor/bin/pest
