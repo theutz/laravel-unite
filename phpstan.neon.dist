@@ -13,4 +13,8 @@ parameters:
     checkOctaneCompatibility: true
     checkModelProperties: true
     checkMissingIterableValueType: false
-
+    ignoreErrors:
+        -
+            messages:
+                - '#Access to an undefined property Pest\\Expectation<Closure>::\$[\w\-_]*#'
+            path: tests/*
