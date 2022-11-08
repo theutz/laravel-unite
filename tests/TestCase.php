@@ -5,18 +5,23 @@ namespace Theutz\Unite\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Theutz\Unite\Database\Seeders\UniteSeeder;
 use Theutz\Unite\UniteServiceProvider;
 
 class TestCase extends Orchestra
 {
     use RefreshDatabase;
 
+    protected $seed = true;
+
+    protected $seeder = UniteSeeder::class;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Theutz\\Unite\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Theutz\\Unite\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

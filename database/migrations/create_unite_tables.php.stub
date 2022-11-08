@@ -16,7 +16,5 @@ return new class extends Migration
 
             $table->timestamps();
         });
-
-        DB::table('laravel_unite_units')->insert(['symbol' => 'g']);
     }
 };
